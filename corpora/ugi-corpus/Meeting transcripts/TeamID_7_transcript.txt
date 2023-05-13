@@ -1,0 +1,343 @@
+2.022:>>Person1>>So what's the most important you think
+10.213:>>Person2>>%HESITATION
+12.06:>>Person2>>personally I chose the two hundred no two one hundred pound tank of oxygen 
+12.06:>>Person2>>cuz I feel like 
+18.697:>>Person1>>yeah me too
+19.707:>>Person3>>yeah me too 
+19.707:>>Person3>>yeah yeah 
+20.918:>>Person2>>right so
+21.018:>>Person1>>okay so we are already got our first one
+22.684:>>Person2>>yup
+25.018:>>Person1>>yeah
+28.597:>>Person1>>and for the %HESITATION following 
+33.817:>>Person1>>third 
+35.71:>>Person1>>%HESITATION
+36.588:>>Person3>>I choose water as my second %HESITATION
+39.985:>>Person2>>I agree yeah so
+40.877:>>Person3>>wow
+44.446:>>Person1>>on the third one
+44.887:>>Person3>>what a coincidence 
+48.673:>>Person2>>%HESITATION I chose food concentrate 
+50.416:>>Person3>>Oo! yeah same as mine
+50.435:>>Person2>>Cool
+51.818:>>Person1>>%HESITATION I choose stellar map but %HESITATION yeah I 
+56.688:>>Person3>>yeah you can yeah you can explain your idea a little bit
+57.05:>>Person2>>yeah 
+57.825:>>Person3>>%HESITATION yes 
+59.762:>>Person1>>%HESITATION yes because I actually I think there is not much difference between
+67.248:>>Person1>>three to five 
+67.248:>>Person1>>%HESITATION since we already have enough 
+74.509:>>Person1>>%HESITATION but %HESITATION if 
+74.509:>>Person1>>but people can live without the 
+74.509:>>Person1>>without taking food for three days
+81.536:>>Person1>>so I since %HESITATION yeah but actually I I have accept the %HESITATION food concentrate and the
+81.735:>>Person2>>right
+90.435:>>Person3>>my argument will be if it is like a two hundred miles distance if we can just walk it probably take ten to twenty days I guess 
+100.376:>>Person2>>nice spots? no I think it's like two hundred miles from the point so I guess it's somewhere in the space rather than on the surface of the moon 
+100.398:>>Person1>>so we have to walk there 
+104.707:>>Person3>>we we 
+109.371:>>Person3>>mhm
+110.992:>>Person3>>oh so we move faster in the space? haha 
+111.004:>>Person1>>yes I I I guess 
+113.309:>>Person2>>%HESITATION I'm not clear about that
+116.568:>>Person3>> haha
+116.593:>>Person1>>we still have to take para some kind of 
+120.883:>>Person3>>do we have that? I don't know 
+121.018:>>Person1>>%HESITATION I'm not sure
+121.592:>>Person2>>%HESITATION
+124.61:>>Person3>>if we need to take ten to twenty days I need I think food is very important 
+124.77:>>Person2>>that's confusing
+125.037:>>Person1>>if walk yeah that very
+129.918:>>Person1>>yeah
+130.281:>>Person1>>okay then we just choose food
+130.668:>>Person3>>%HESITATION
+130.808:>>Person2>>yup so
+133.005:>>Person3>>okay
+133.036:>>Person2>>okay the third one is food
+133.36:>>Person1>>yeah and yeah 
+137.681:>>Person1>>yeah so what's the 
+141.088:>>Person1>>next one
+142.401:>>Person3>>the thing map is a very important right 
+142.401:>>Person3>>this stellar map
+144.773:>>Person1>>yeah otherwise we cannot get there 
+144.773:>>Person1>>without 
+147.333:>>Person3>>mhm I think stellar map is, serves as the same thing as the magnetic compass
+152.454:>>Person3>>which 
+154.306:>>Person2>>yeah I feel the same way but like for the stellar map I guess %HESITATION since we crashed on somewhere 
+154.306:>>Person2>>I assume the mothership will send someone to us so I don't feel like the map is really useful but the magnetic compass %HESITATION hopefully if you use in the moon or in the space and 
+154.306:>>Person2>>that's like something that we can use to %HESITATION like find our way back to the ship or something 
+162.48:>>Person1>>mhm
+166.705:>>Person1>>yes
+171.621:>>Person1>>uh huh
+175.207:>>Person1>>so I guess
+185.965:>>Person1>>so then yes do you know what do you think about the %HESITATION receiver transmitter 
+188.571:>>Person2>>or do you think about the 
+191.812:>>Person2>>yeah so I chose that the first one is we need to connect to the mothership 
+194.311:>>Person1>>okay
+194.717:>>Person3>>mhm
+198.263:>>Person1>>yeah 
+199.802:>>Person3>>yeah I think yeah I think both the stellar uh both the magnetic compass and the solar powered FM receiver transmitter is very important 
+204.669:>>Person1>>they should couple right yeah 
+204.669:>>Person1>>yeah yeah then we might get %HESITATION stellar map and %HESITATION solar powered FM receiver 
+207.394:>>Person2>>yeah 
+218.117:>>Person2>>%HESITATION
+218.475:>>Person3>>%HESITATION maybe it's a transmitter as four and %HESITATION magnetic compass as five 
+222.01:>>Person1>>yes I guess that's receiver transmitter should be %HESITATION more important 
+223.558:>>Person2>>I I agree
+228.183:>>Person1>>because they can like connect the ground and
+230.001:>>Person3>>mhm
+231.695:>>Person1>>even without the map we can yeah
+233.100:>>Person3>>mhm
+234.18:>>Person2>>yeah that's the fourth one I have a different opinion about the fifth one for the fifth one I chose the portable heating unit because I feel like in the space there's not much heat provided in %HESITATION that's also like one vital thing for humans to survive %HESITATION I didn't really choose that as one to four because I feel like food concentrate can also help us like provide some sort of heat so I chose portable heating as five
+234.4:>>Person1>>yeah 
+240.122:>>Person1>>mhm
+243.468:>>Person3>>okay
+243.613:>>Person1>>mhm
+248.869:>>Person3>>yeah 
+249.148:>>Person1>>mhm 
+253.664:>>Person3>>
+254.059:>>Person1>>okay yeah 
+268.838:>>Person3>>no actually I did that at first time
+268.879:>>Person1>>okay 
+270.518:>>Person2>>oh cool nice
+271.622:>>Person3>>as five yeah 
+271.622:>>Person3>>okay so we just choose portable heating unit as five 
+271.622:>>Person3>>and then comes to the...yes Is that okay? 
+277.273:>>Person1>>yeah the compass 
+279.869:>>Person1>>yes I think that's okay
+281.581:>>Person2>>pretty much yeah
+282.167:>>Person1>>so it is the five as heating unit right 
+282.167:>>Person1>>and the six is 
+288.251:>>Person3>>yeah
+288.389:>>Person2>>yup
+290.294:>>Person2>>six actually 
+291.422:>>Person1>>compass
+292.643:>>Person2>>I I sorry about that I chose the signal flares %HESITATION as the sixth one 
+299.168:>>Person1>>see %HESITATION what do you think the %HESITATION difference between the transmitter and signal flares oh signals flares is
+306.274:>>Person2>>Cause like you can signal like when they know like when they come near or come closer I don't feel like the solar transmitter are gonna serve %HESITATION as much as the signal flares so I feel like like cause we're we're trying to get back to the mother ship and I feel like signal flares 
+309.206:>>Person1>>oh 
+320.719:>>Person1>>ohh okay
+325.437:>>Person1>>mhm
+329.241:>>Person1>>okay so the signal flares is working as something it's not %HESITATION it is for communication within the group?
+329.735:>>Person2>>helpful I guess 
+341.626:>>Person1>>or it is %HESITATION like
+341.772:>>Person2>>%HESITATION 
+345.014:>>Person1>>or I don't know
+345.479:>>Person2>>with the mother ship 
+347.585:>>Person2>>like if they cause we 
+349.212:>>Person2>>crash at one place and if they come and trying to find us I feel like you send a signal flares is gonna like tell them exactly where you guys like where we located 
+349.71:>>Person1>>oh 
+351.542:>>Person1>>already with the mother ship
+364.614:>>Person1>>uh huh
+366.463:>>Person1>>yeah %HESITATION yes so it cannot tell the %HESITATION 
+366.463:>>Person1>>you all think which is more important the compass compass or the signal flares 
+378.102:>>Person1>>I think 
+378.124:>>Person3>>I don't know I'm hope for me there is these devices
+380.314:>>Person2>>yeah
+381.314:>>Person1>>the flares sounds seems like %HESITATION when you cannot communicate you just
+390.363:>>Person2>>flash right? yeah that also makes sense 
+391.033:>>Person1>>yeah yeah yes as a signal like oh I'm here like that 
+398.905:>>Person1>>%HESITATION 
+398.905:>>Person1>>and the compass is justa  %HESITATION for %HESITATION you looking for direction
+398.946:>>Person3>>ohhh 
+398.946:>>Person3>>I think maybe 
+403.926:>>Person2>>yeah 
+405.205:>>Person1>>one active and one passive
+405.327:>>Person3>>so are we are we discussing the difference between the flyers and the transmitter or the difference between the flyer and the compass
+410.193:>>Person2>>the flares and the com compass
+411.805:>>Person1>>compass 
+412.255:>>Person3>>okay okay 
+413.807:>>Person1>>yes 
+414.522:>>Person3>>ohh 
+415.245:>>Person1>>so that is one is active and one is passive so one is waiting for others and I think they both we need both
+415.245:>>Person1>>that's %HESITATION
+415.245:>>Person1>>yeah maybe just a six seven compass flares
+418.003:>>Person3>>ohh haha yeah yeah yeah 
+418.419:>>Person2>>mm nope
+423.607:>>Person3>>yeah definitely the rank
+427.597:>>Person3>>mhm
+427.946:>>Person2>>yeah 
+428.288:>>Person1>>or 
+430.995:>>Person3>>yeah maybe 
+431.193:>>Person2>>we can put like six to the magnetic compass and seven as the signal flares
+434.829:>>Person3>>yeah
+436.945:>>Person1>>yeah that's 
+441.498:>>Person1>>and then for the following
+447.24:>>Person3>>hmm
+447.844:>>Person1>>yeah anyone think 
+450.143:>>Person2>>the next one
+450.493:>>Person3>>oh I think I choose the first aid kit 
+450.901:>>Person2>>yes me too
+454.346:>>Person3>>yeah 
+454.427:>>Person1>>okay yes 
+458.05:>>Person1>>yeah I think yeah it is more important now than others 
+462.239:>>Person2>>in case someone hurts themselves 
+464.184:>>Person1>>yeah anyone think life raft?
+468.338:>>Person2>>which one is it? 
+469.233:>>Person1>>life raft it's %HESITATION sixth one from the 
+474.112:>>Person1>>the bottom 
+475.171:>>Person3>>it's like the coat? 
+477.314:>>Person1>>actually I'm not very sure about that but the it is I'm not sure that the function is similar to the first aid kit no 
+477.546:>>Person2>>me neither
+485.097:>>Person2>>I feel like it's for traveling or something like that like a raft transporter yes that's what I assume 
+485.068:>>Person3>>no 
+486.68:>>Person3>>what 
+488.99:>>Person3>>hahaha
+488.995:>>Person1>>%HESITATION it's in the water okay yeah yeah I'm actually I'm not sure what what it is
+496.743:>>Person1>>yeah 
+496.743:>>Person1>>and the and I also I'm not very sure about the %HESITATION caliber pistol 
+505.588:>>Person3>>it's a gun hahaha pong pong 
+505.722:>>Person2>>yeah it's like pistol gun
+508.777:>>Person1>>it's like okay then 
+509.454:>>Person3>>gun 
+509.493:>>Person2>>for shooting things for people or 
+509.493:>>Person2>>not you guys 
+512.657:>>Person3>>wow shooting who
+512.657:>>Person3>>no people there 
+512.689:>>Person1>>can bullet can bullet go very smoothly on in the space?
+517.621:>>Person3>>alien
+521.7:>>Person2>>I don't know maybe not because the gravity 
+523.828:>>Person1>>yeah then that's just not so maybe parachute silk?
+525.491:>>Person3>>haha
+526.595:>>Person2>>it's gonna float 
+530.187:>>Person2>>I feel like it's not useful like 
+534.835:>>Person1>>actually I also 
+535.647:>>Person2>>oh para parachute is like 
+538.867:>>Person2>>jumping like where you jump out of the plane yes 
+539.305:>>Person3>>ohh landing for landing
+539.308:>>Person1>>but what is silk what is wilk 
+544.077:>>Person2>>%HESITATION I guess it's the like the larger part of the parachute like the largest part it it can hold the air and to like lift people up 
+552.127:>>Person1>>ohh
+554.172:>>Person3>>Ooo 
+554.41:>>Person1>>okay at first I thought it might like %HESITATION do a like %HESITATION make your %HESITATION something we are traveling on 
+565.690:>>Person2>>oh
+565.758:>>Person1>>lower the speed when you reach the I thought it's something like that but I'm not sure so
+570.038:>>Person3>>ground 
+571.522:>>Person2>>yeah yes pretty much
+571.635:>>Person3>>uh huh
+575.432:>>Person3>>I don't know 
+575.467:>>Person1>>yes 
+575.467:>>Person1>>yeah the left the leftover these %HESITATION how many %HESITATION these %HESITATION
+575.467:>>Person1>>these seven actually
+575.467:>>Person1>>I don't think
+585.407:>>Person2>>yeah I don't think the order really matters
+587.963:>>Person1>>they are very essential 
+590.804:>>Person2>>the less useful thing that I chose is the %HESITATION
+593.065:>>Person1>>mhm
+596.79:>>Person2>>%HESITATION yeah the the stellar map and the matches 
+596.865:>>Person1>>%HESITATION
+599.366:>>Person1>>okay I think them yeah I think that matches the least 
+603.705:>>Person3>>oh maybe maybe it's a it's a gun it's the pistol 
+603.792:>>Person2>>yeah
+604.437:>>Person1>>%HESITATION yes so maybe we choose more important one from these seven 
+607.298:>>Person2>>that also works
+609.591:>>Person3>>I just don't understand
+614.582:>>Person2>>%HESITATION yup we can do it
+615.851:>>Person1>>mm maybe rope? 
+615.851:>>Person1>>rope or %HESITATION 
+620.923:>>Person1>>%HESITATION milk?
+621.504:>>Person3>>how come you use rope in space? 
+622.514:>>Person2>>yeah I I chose milk 
+623.716:>>Person1>>not sure 
+625.687:>>Person1>>milk yeah I guess milk yeah then milk just the nine
+625.861:>>Person2>>yeah dehydrated milk 
+626.514:>>Person3>>yeah we can choose milk 
+629.924:>>Person2>>yup nice 
+632.029:>>Person1>>yeah and %HESITATION 
+635.066:>>Person1>>how about the the life raft 
+638.959:>>Person1>>the 
+641.315:>>Person1>>and the 
+641.315:>>Person1>>yeah 
+644.464:>>Person3>>the map the food concentrate ah food concentrate already did sorry so it's only the live the raft the map 
+646.639:>>Person1>>yeah
+651.517:>>Person1>>yes map and the life raft 
+651.517:>>Person1>>parachute silk which one is  
+651.842:>>Person2>>%HESITATION
+652.427:>>Person3>>and the the parachute 
+659.663:>>Person3>>me- %HESITATION
+662.036:>>Person1>>%HESITATION kind of like %HESITATION life raft parachute silk is similar
+669.813:>>Person3>>I think I think probably parachute is important because we don't know how far or how fast we move in space so we reach the speech the speed of us change directly from the space to the ground. Maybe we should use a parachute.
+675.828:>>Person2>>yeah that also works
+678.571:>>Person1>>are you sure the function is
+683.194:>>Person1>>Ohh maybe okay
+685.272:>>Person3>>I don't know 
+686.688:>>Person3>>Ooo 
+688.193:>>then we just set parachute at tenth
+689.953:>>Person3>>yes
+691.598:>>Person1>>yeah 
+692.005:>>Person2>>that works
+693.728:>>Person1>>and the 
+696.314:>>Person1>>life raft 
+697.934:>>Person1>>or map 
+698.07:>>Person2>>%HESITATION 
+699.646:>>Person1>>or rope
+699.662:>>Person3>>
+701.578:>>Person3>>
+701.602:>>Person2>>I guess life raft yeah does that can help us move faster somehow I guess 
+705.545:>>Person3>>yeah maybe we can choose that one 
+705.913:>>Person1>>yes 
+707.987:>>Person1>>yes 
+711.265:>>Person1>>yes yes yeah the 
+715.348:>>Person2>>the 
+716.68:>>Person3>>the map and the matches 
+716.684:>>Person2>>the map 
+719.202:>>Person1>>%HESITATION raft and rope
+719.373:>>Person2>>what do we have left matches rope pistol and the map 
+725.387:>>Person1>>yes
+726.233:>>Person3>>so we choose map?
+728.261:>>Person1>>map yeah maybe map 
+728.298:>>Person2>>%HESITATION
+731.438:>>Person1>>somehow it might be 
+733.182:>>Person2>>I I don't feel like map is useful because like we're landing somewhere else other than the moon 
+735.772:>>Person3>>okay 
+738.665:>>Person1>>yes of the most  
+740.176:>>Person3>>so you prefer rope? 
+742.461:>>Person3>>matches? 
+742.473:>>Person1>>well 
+742.473:>>Person1>>I think rope is more important
+742.473:>>Person1>>because without oxygen we cannot light light matches 
+742.616:>>Person2>>I I prefer rope 
+751.025:>>Person2>>yeah I that's what I think 
+752.216:>>Person3>>yeah okay yes 
+752.405:>>Person1>>yeah 
+753.405:>>Person1>>yeah 
+753.959:>>Person3>>smart 
+755.518:>>Person3>>so we choose rope? It's fifty feet 
+756.518:>>Person3>>so it's quite long right
+758.331:>>Person1>>%HESITATION 
+760.435:>>Person1>>yeah then maybe rope as the twelfth?
+760.435:>>Person1>>and %HESITATION map has the  
+768.78:>>Person1>>as 
+770.838:>>Person1>>yeah 
+771.421:>>Person3>>so we will only have matches and pistol right 
+774.023:>>Person1>>yeah pistol
+774.326:>>Person3>>so maybe we can choose pistol first 
+776.546:>>Person1>>pistol okay yeah pistol the thirteenth 
+778.739:>>Person3>>in case of alien 
+778.739:>>Person3>>yeah 
+778.913:>>Person2>>right
+781.175:>>Person1>>and %HESITATION matches is the final right okay 
+781.91:>>Person3>>matches the last one 
+785.641:>>Person3>>nice 
+788.167:>>Person2>>cool
+788.665:>>Person1>>we're pretty quick 
+789.865:>>Person3>>yeah
+790.557:>>Person2>>I agree haha
+790.679:>>Person1>>to get the final yeah
+794.941:>>Person3>>do you want to like %HESITATION clarify the ranking from top to bottom
+795.108:>>Person1>>yeah
+798.06:>>Person1>>yes sure so the first is fifteenth okay fifteen three twelve ten five thirteen nine one fourteen eleven six two seven eight four 
+801.905:>>Person3>>you can just %HESITATION yeah just %HESITATION read
+812.337:>>Person2>>oh i missed
+824.312:>>Person3>>oh so the stellar map is the last one?824.312:>>Person3>>which one so %HESITATION where is the827.166:>>Person1>>well 
+827.166:>>Person1>>matches is the last one
+827.182:>>Person2>>the matches is the last one 
+829.658:>>Person3>>okay so the stellar map is
+832.692:>>Person1>>stellar map is fourteen 
+832.846:>>Person2>>fourteen 
+834.571:>>Person3>>okay it's fine
+836.215:>>Person1>>okay 
+842.243:>>Person2>>alright we're done 
+842.467:>>Person1>>yeah I guess we finished 
+844.896:>>Person2>>yup
+846.49:>>Person1>>yeah nice

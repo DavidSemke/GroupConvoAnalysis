@@ -1,0 +1,377 @@
+0.0:>>Person1>>Okay
+2.502:>>Person4>>alright %HESITATION 
+3.393:>>Person1>>Do you guys want to start from the bottom or from the top?
+6.38:>>Person4>>like from the bottom of the list of items you mean?
+6.46:>>Person3>>I think from the top
+8.889:>>Person1>>No, like, like ranking like did you want to start at fifteen or one?
+10.339:>>Person4>>oh okay
+10.471:>>Person3>>yeah the most important one so one
+12.552:>>Person1>>Okay. So what did you guys  
+13.34:>>Person2>>so did you guys take it as survival first or get to the place first?
+19.331:>>Person4>>I
+20.035:>>Person2>>I took it as survival first because you have to make it two hundred miles
+21.189:>>Person3>>yeah I took it as survival as well
+21.72:>>Person1>> I put survival
+23.791:>>Person4>>yeah that's what I did I kind of tried to keep both things in mind though not just surviving 
+29.718:>>Person2>>Yeah
+30.298:>>Person3>>yeah
+31.099:>>Person1>>So what do you guys put for number one?
+33.883:>>Person2>>I put water. The five gallons of water
+35.473:>>Person4>>yeah I put five gallons of water
+36.531:>>Person3>>yeah I put %HESITATION the poun- I mean the oxygen tanks as
+39.688:>>Person1>>I put the oxygen tanks too
+41.712:>>Person2>>That was close for me, yeah.
+41.773:>>Person3>>yeah
+44.417:>>Person4>>I put the oxygen tanks actually down 
+47.833:>>Person4>>five for me
+49.701:>>Person4>>why did you guys ran the oxygen tanks so high 
+52.519:>>Person1>>because you need to be able to breathe on the moon
+54.395:>>Person3>>yeah because I'm not really sure if the atmosphere there would be 
+57.214:>>Person4>>yeah that's true
+58.514:>>Person4>>and 
+58.572:>>Person3>>good for you because you could just go on for a couple of minutes if if you don't have enough oxygen so yeah
+62.033:>>Person1>>yeah 
+63.107:>>Person4>>I didn't I forgot about that %HESITATION good point %HESITATION 
+69.703:>>Person2>>I feel like that should be our number one
+72.401:>>Person1>>Okay. So does everyone agree that oxygen should be number one? Okay
+72.531:>>Person4>>yeah 
+74.255:>>Person3>>yeah
+74.423:>>Person2>>yeah 
+74.900:>>Person4>>makes sense
+77.705:>>Person1>>Yeah at first I wanted to put water but then I realized you can't breathe
+80.021:>>Person2>>I put I put water and food and then the oxygen tank
+80.28:>>Person4>>I forgot to put
+82.69:>>Person1>>So I put water for number two 
+85.86:>>Person4>>yeah I would put water for number two then 
+87.812:>>Person2>>yeah 
+89.305:>>Person3>>I put the stellar map as the second important one
+94.674:>>Person1>>Okay. Why?
+95.702:>>Person3>>just because you you probably I I would've put water but then you can't go without water but then
+101.32:>>Person3>>to get there you just need a basic %HESITATION idea or a guidance as to if you're even heading the right way 
+101.32:>>Person3>>so I just thought the stellar map would've been a way to get there, now you have something to survive
+101.32:>>Person3>>now you also need something to get there uh so the map would actually give you a better chance of getting there
+101.32:>>Person3>>as you survive
+125.415:>>Person1>>I guess that makes sense
+126.785:>>Person4>>I I personally would put the water higher because it's a far distance and so 
+131.843:>>Person1>>yeah 
+132.72:>>Person4>>I think I mean two hundred miles longer than I've done I think I have ever walked so 
+139.366:>>Person1>>I think the map should be high up there but I think that water is like crucial for survival too
+145.114:>>Person4>>what do you think 
+146.524:>>Person2>>I mean I marked water as number one I just I think like
+150.749:>>Person2>>like water is 
+152.401:>>Person2>>food and water because you have to survive first I guess
+156.024:>>Person4>>yeah that makes sense
+157.86:>>Person3>>yeah but I also %HESITATION I'm not really sure how thirsty you'd feel on the moon 
+162.322:>>Person3>>I mean you're in a completely different atmosphere because %HESITATION especially when I come I mean I'm I'm from India and then they come to the US I feel super less thirsty in the US and I'm really surprised 
+171.26:>>Person1>>Okay. That is interesting
+172.209:>>Person2>>that's that's interesting I I didn't even think about that 
+173.675:>>Person3>>it is just an observation that I made over the past one year
+177.993:>>Person3>>and so I just thought it wouldn't be as important as the map but yeah still two hundred miles is a long journey and yeah you're not going to do it in a single day or just two days 
+178.026:>>Person1>>Okay
+188.468:>>Person4>>yeah 
+189.911:>>Person2>>because you can survive what like two weeks without food and like 
+195.531:>>Person2>>less than three days without water or is it I don't I don't know don't like quote me on that 
+196.655:>>Person1>>Yeah I think that's
+199.350:>>Person3>>okay
+199.412:>>Person4>>I think you're right though
+201.081:>>Person1>>Yeah. So I think so are we going with water for number two and then
+204.82:>>Person3>>yeah I think we can go ahead with water yeah
+213.105:>>Person4>>all right
+213.782:>>Person1>>Um I put food for number three but I think the map is like 
+215.877:>>Person2>>I think we can prob-
+218.715:>>Person4>>yeah I would agree the map is probably
+218.857:>>Person1>>a solid 
+219.221:>>Person2>>or either the map or the compass 
+220.816:>>Person3>>yeah map or the compass I mean there was just one below the other on my list so
+222.033:>>Person4>>I've yeah I think if you have the map first it's more important than having the compass because the map gives you like more information 
+228.549:>>Person2>>yeah 
+230.694:>>Person2>>yeah 
+231.217:>>Person1>>Okay. So we'll go with map for number three. Um
+234.884:>>Person2>>because the food can be out there because you can survive longer without food than with water 
+235.192:>>Person4>>yeah that's what I was thinking too
+242.157:>>Person1>>%HESITATION and then for four I put the FM receiver 
+247.392:>>Person1>>Um
+247.454:>>Person4>>yeah I would I put it up there
+247.47:>>Person2>>I actually I actually ranked that really like that are really like low on my list or high 
+251.348:>>Person4>>really 
+252.967:>>Person4>>why 
+253.312:>>Person2>>because for me it was just like survival first so you've got to survive and then you got to think about how to get there so I ranked everything needed for survival like at the top and then after that I put everything to get to the rendezvous point
+254.532:>>Person1>>Why?
+267.925:>>Person4>>I think
+268.877:>>Person2>>but I feel like getting there because if you if you're just surviving 
+268.877:>>Person2>>there's only so much time you can have so if you make it to the point then you can get back to earth I guess in this simulation 
+278.112:>>Person3>>yeah even that that was a similar thought of mine if you because most of your equipment on board was damaged 
+284.999:>>Person3>>and your receiver's going to be connected with your equipment onboard and %HESITATION 
+291.118:>>Person3>>you if you even if you have the receiver you you can't really guide us nobody's going to say okay come ten miles and then take a left
+297.004:>>Person1>>okay that's a good point 
+297.781:>>Person3>>it just made more sense to me that way
+301.056:>>Person4>>uh
+301.094:>>Person3>>%HESITATION that you'd have to get that on your own 
+304.308:>>Person3>>and so I ranked that really low
+304.518:>>Person2>>I still think that would probably import it would be important to have at some point
+304.786:>>Person1>>Yeah
+308.948:>>Person4>>my reasoning was that I feel like 
+313.057:>>Person4>>we're ranking it to bring with us it probably works fine and so yeah and it's small so I mean it's not something that I feel it would be a big problem like two hundred pound tank of oxygen I mean yeah so I think having it is important because even if nothing's happening at some point during your journey it could work like transmitting to the people at the other base and they can tell you oh you're going the wrong way 
+316.745:>>Person2>>cause it's small
+324.86:>>Person1>>Yeah
+334.646:>>Person1>>Or it can provide a location so they could like maybe come closer to you 
+339.755:>>Person4>>yeah 
+342.162:>>Person3>>okay
+343.096:>>Person2>>I think we should rank that one next 
+345.438:>>Person2>>based on what you guys are saying
+347.951:>>Person1>>Okay. So does everyone feel good about putting that as number four?
+348.157:>>Person4>>I think it's pretty important yeah 
+350.732:>>Person2>>Yeah
+351.455:>>Person4>>what do you think?
+353.857:>>Person3>>yeah
+355.057:>>Person1>>I can't think of a better one 
+356.923:>>Person3>>yeah I I had the compass in mind but yeah if you have the map then it pretty much solves the purpose of direction
+364.351:>>Person3>>and then %HESITATION the FM receiver just gives you external help or 
+369.044:>>Person3>>just support rather than you being all alone
+372.591:>>Person3>>could make sense though it was really low on my list but yeah
+377.691:>>Person1>>So we good for that one?
+378.152:>>Person2>>yeah yeah 
+388.63:>>Person1>>Wow I spelled that wrong.
+394.291:>>Person1>>Um I had the heating unit for number five 
+394.443:>>Person2>>'cause the moon is cold
+398.896:>>Person1>>Yeah
+399.167:>>Person2>>I don't know where we are at the moon
+401.518:>>Person3>>it just says the 
+403.358:>>Person3>>but then 
+406.474:>>Person4>>I put the first aid kit before the heating unit 
+410.625:>>Person4>>because I don't know what might happen because it's long journey something could happen I don't know 
+416.561:>>Person2>>I mean I would put them next next to each other but I would put the heating unit first and then the first aid kit
+421.182:>>Person2>>I don't know 
+421.788:>>Person1>>I agree with that too because you can like guarantee that you're going to be cold but you don't like have a guarantee that you're going to get hurt 
+426.228:>>Person4>>yeah that's true actually that makes sense
+428.801:>>Person3>>would you rather put okay we have water oh okay
+431.812:>>Person3>>yeah makes sense
+431.915:>>Person1>>okay yeah we don't have food on their either so we definitely should consider that 
+432.035:>>Person4>>yeah honestly
+437.869:>>Person1>>Um
+439.533:>>Person4>>I I would put the heating unit and then the food I think
+440.036:>>Person3>>yeah 
+442.553:>>Person1>>Okay so we want to go heating unit for number five?
+444.122:>>Person3>>yeah I think heating unit
+444.85:>>Person2>>yeah 
+448.259:>>Person2>>and then the food that's probably a good one 
+451.061:>>Person1>>to follow up with the heating unit? 
+451.787:>>Person2>>yeah cause we already have the water and the food concentrate so you just add the water to the food concentrate
+456.776:>>Person3>>yeah
+457.322:>>Person1>>and then okay so food after heating unit I like that 
+465.486:>>Person2>>and then the first aid kit
+466.952:>>Person1>>yeah the first aid kit can go after food if you think that that's important 
+469.977:>>Person3>>I I would think the life raft uh
+473.811:>>Person4>>I put the
+474.06:>>Person3>>instead of the first aid kit 
+475.234:>>Person4>>really
+475.929:>>Person4>>what would you use the life raft for?
+477.566:>>Person2>>yeah that's what I was wondering 'cause there's no 'cause there's no 'cause there's no water on the moon 
+477.962:>>Person1>>yeah I ranked it super low on my list 
+479.312:>>Person4>>I ranked it like almost the bottom there's no water on the moon
+481.686:>>Person3>>I know but
+482.912:>>Person2>>you can dump out your five gallons of water 
+483.913:>>Person3>>yeah 
+483.934:>>Person1>>make a river
+487.628:>>Person4>>yeah I don't I don't know what I would use a life raft for 
+487.931:>>Person2>>I was wondering why there was a life raft
+487.942:>>Person3>>yeah makes sense
+491.928:>>Person1>>yeah I put the life raft like on the bottom
+493.162:>>Person3>>okay yeah never mind doesn't make sense yeah
+496.76:>>Person2>>I was also wondering what the pistols were for I ranked-
+498.818:>>Person1>>I put that at the bottom too 
+499.464:>>Person3>>yeah I put that on the last spot 
+500.369:>>Person4>>yeah I put that at the bottom
+502.683:>>Person4>>um
+502.746:>>Person1>>%HESITATION so what are we considering for after food? we're considering the first aid kit 
+509.029:>>Person2>>I think so
+512.392:>>Person4>>yeah I should think so
+512.952:>>Person1>>I think if we put the first aid kit we've covered like oxygen, water, food, heat, injury, and like contacting people 
+519.574:>>Person3>>but what about the rope?
+519.917:>>Person2>>
+522.56:>>Person2>>and the rope I ranks super high because like 
+525.271:>>Person3>>yeah that that would be helpful
+526.091:>>Person2>>because like my dad's a scout leader and you can do so much with the rope 
+529.532:>>Person3>>I mean it could just help you with the terrain and also help you with the terrain if you need to get up somewhere and it's
+531.25:>>Person2>>'cause you can tie all your you can tie all your stuff together 
+537.405:>>Person1>>okay which one the parachute silk or the safety the nylon rope okay 
+539.121:>>Person3>>%HESITATION the nylon tope
+539.143:>>Person2>>the rope the rope
+542.085:>>Person4>>so what are we saying for that that goes after food?
+542.603:>>Person3>>either that or 
+542.717:>>Person1>>I think so 
+544.443:>>Person2>>and then probably the first aid kit after that 
+547.584:>>Person3>>yeah 
+547.863:>>Person1>>that's true because you can also bandage like injuries with rope 
+549.729:>>Person2>>yeah with rope 
+550.830:>>Person4>>yeah that makes sense
+552.202:>>Person1>>so yeah the nylon rope 
+552.537:>>Person4>>yeah I'd all right
+552.773:>>Person2>>rope is so versatile. So that's seven and then 
+557.12:>>Person4>>so rope and then the first aid kit 
+557.719:>>Person1>>I think so yeah 
+560.545:>>Person3>>yeah
+567.075:>>Person4>>rope 
+568.245:>>Person2>>and then I think next we should probably look at the matches or the compass
+573.293:>>Person3>>I would say the signal flares
+575.073:>>Person2>>yeah yeah 
+575.359:>>Person4>>yeah I I would 
+576.074:>>Person1>>yeah you don't need matches to light a flare, right? you just like 
+578.748:>>Person4>>I don't think matches would even work in space so
+578.866:>>Person3>>yeah it is 
+581.499:>>Person2>>yeah that's actually a really good point 
+581.692:>>Person1>>That's a good point. Would flares work in space?
+583.996:>>Person4>>I think flares would work because they provide their own like heat like fuel source
+587.885:>>Person1>>They have - okay yeah I like the flares then, we'll go the flares 
+590.326:>>Person2>>yeah we should probably put matches last I didn't even think about 
+592.918:>>Person1>>yeah I didn't - that didn't occur to me either 
+595.568:>>Person4>>so after first aid kit, flares? Is that guys are
+596.111:>>Person2>>so yeah 
+596.244:>>Person1>>I think so 
+596.28:>>Person3>>yeah
+600.546:>>Person1>>yeah I forgot it was space.
+603.851:>>Person4>>I can't believe I forgot about oxygen but
+607.779:>>Person1>>I mean that's why I put oxygen first, I know you can't breathe in space but I forgot that matches need oxygen 
+613.893:>>Person3>>maybe the compass next
+615.071:>>Person2>>yeah yeah
+615.208:>>Person4>>yeah I would put the compass next
+615.339:>>Person1>>yeah. I think the compass should go next too 
+617.407:>>Person2>>that's number ten right?
+618.591:>>Person1>>%HESITATION I believe so 
+619.671:>>Person3>>yeah ten
+620.19:>>Person2>>okay cool. I can count.
+621.829:>>Person1>>%HESITATION and then I think that the life raft should go last because I can't 
+628.338:>>Person3>>yeah 
+628.644:>>Person2>>well I mean what you can also do is you can put all the stuff in the life raft to carry yeah and you got the rope and you could carry it 
+632.357:>>Person1>>oh and pull it. You have the rope
+632.759:>>Person3>>and then we'll let 
+635.846:>>Person1>>and if someone's injured you could put them in the life raft and pull them because you have a crew it's not just you 
+638.199:>>Person4>>it is easier to pull things on the moon so yeah 
+644.03:>>Person1>>I didn't know about the pistols like I just couldn't
+644.03:>>Person2>>what what what are you going to shoot like 
+644.600:>>Person1>>your crewmembers? to eat them if you got hungry?
+645.982:>>Person4>>yeah I would yeah 
+652.036:>>Person4>>yeah I don't know what I would use the guns for
+654.522:>>Person2>>but I think the life raft would probably be nice because you have five gallons of water and two hundred pound tanks of oxygen that 
+656.209:>>Person4>>life rafts would probably be more useful than the gun
+661.139:>>Person4>>yeah 
+661.643:>>Person2>>you have to somehow get to the rendezvous point
+664.284:>>Person1>>okay so do we want to put the life raft after the compass?
+669.461:>>Person1>>because even though it's not like 
+671.235:>>Person1>>I feel like it's more useful than everything else that we have left 
+671.597:>>Person2>>super  
+674.249:>>Person2>>yeah 
+675.511:>>Person2>>because everything else we have 
+675.596:>>Person3>>unless unless you need milk but yeah you have enough okay yeah even me
+677.906:>>Person1>>I put milk last
+677.915:>>Person4>>yeah I didn't need milk yeah 
+680.335:>>Person2>>the milk the pistols 
+682.713:>>Person2>>yeah nothing else is really like helpful
+685.289:>>Person1>>Yeah
+686.316:>>Person2>>I think the life raft is probably the most important thing that we have left
+689.225:>>Person3>>what what could you use the parachute silk for? 
+691.928:>>Person1>>Um it's the cord, right? Is that what they're talking about? Like the cord that holds parachutes together?
+695.997:>>Person2>>or is it I I took it as the parachute 
+699.813:>>Person1>>I guess you can use it to like 
+699.813:>>Person1>>like shelter like if you wanted to like build a shelter you can
+701.307:>>Person2>>to like fly
+703.034:>>Person4>>yeah like a tent
+703.171:>>Person2>>yeah because that's a probably more important than the life raft
+707.695:>>Person1>>so we could put the parachute and then the life raft 
+709.649:>>Person2>>yeah 
+710.782:>>Person4>>makes sense
+711.334:>>Person3>>okay
+711.642:>>Person2>>do you guys agree with that?
+714.023:>>Person3>>yeah
+714.751:>>Person1>>Or do you see a better option?
+717.916:>>Person4>>no I think that makes sense to me 
+720.640:>>Person3>>yeah 
+721.382:>>Person4>>that is what I kind of did in my thing anyway
+723.769:>>Person1>>that's how I did mine too so then the pressure and then the life raft 
+724.786:>>Person4>>yeah 
+728.281:>>Person2>>now we're getting to the stuff 
+729.659:>>Person2>>like 
+729.766:>>Person1>>yes so now we have the matches the pistols and the milk 
+732.685:>>Person3>>I'd say the milk 
+734.796:>>Person4>>parachute and the
+735.469:>>Person3>>the pistols and then the matches 
+737.153:>>Person1>>you think the matches should go last? 
+739.465:>>Person3>>I don't really see what I I'd use the matches for
+743.598:>>Person1>>that's a good point 
+743.608:>>Person3>>or even if they would work
+745.634:>>Person2>>yeah 
+746.561:>>Person1>>that's a good point so I guess matches can go last because we don't know if they would work 
+749.173:>>Person2>>the milk would probably be also useful. I mean because it's milk, you can drink it  
+752.752:>>Person1>>yeah 
+755.166:>>Person1>>so wait
+756.315:>>Person1>>do we want to do milk after the life raft
+758.405:>>Person4>>yeah I would I would bring the milk first before the other two things
+758.748:>>Person3>>yeah
+760.461:>>Person2>>yeah because the other two are useless
+760.822:>>Person1>>okay 
+762.361:>>Person1>>okay so we'll do milk
+762.442:>>Person4>>yeah 
+765.851:>>Person2>>I honestly think the matches would be more useful than the pistol
+767.769:>>Person1>>than the pistol, me too
+769.717:>>Person1>>yeah
+770.205:>>Person4>>wait so what what did you say 
+771.743:>>Person1>>I- we think the matches will be more useful than the pistols
+772.225:>>Person2>>so we put
+773.669:>>Person2>>so we have the matches and the pistol left, 
+775.759:>>Person2>>and I think
+775.837:>>Person3>>but the thing was the matches would probably not even work but the pistol could work
+778.176:>>Person2>>yeah
+778.726:>>Person2>>but
+779.556:>>Person2>>but what would you use it for?
+782.105:>>Person4>>we jumped it in the air shouldn't it so it you can go one way 
+783.098:>>Person3>>maybe getting a break shooting stuff off and going ahead
+786.835:>>Person1>>wait but like wouldn't the pistol not like how how would that work 
+791.026:>>Person4>>no it'll work because the gun fired gunpowder doesn't need oxygen 
+791.233:>>Person3>>yeah 
+794.387:>>Person1>>yeah but matches do, yeah. So we'll do
+794.477:>>Person3>>it doesn't need an atmosphere
+794.598:>>Person2>>what matches do
+796.995:>>Person4>>they can like open them up I don't know what you would do I feel like it's more useful as like a tool to have something 
+797.237:>>Person3>>yeah
+801.84:>>Person1>>will it fire in a vacuum like will that it'll go straight and everything?
+804.334:>>Person4>>yeah
+804.903:>>Person4>>no fire in
+804.942:>>Person2>>you could also I do not know portable heaters work but if you get the wood close enough to the portable heat I mean I guess you need oxygen to keep the fire alive 
+806.674:>>Person4>>it'll like 
+810.658:>>Person4>>the oxygen yeah
+810.933:>>Person1>>so we'll go pistols and then matches. Okay.
+814.483:>>Person4>>pistols and matches because you can still use them as like a hammer or something if something breaks you know
+815.432:>>Person2>>yeah
+817.486:>>Person1>>that's true. Hit someone with the pistol 
+819.314:>>Person2>> that's a
+821.323:>>Person3>>who's the someone? There's no someone I don't
+821.506:>>Person1>>
+822.647:>>Person1>>no you're with your crew you're like it says you're part of a space crew. I mean nowhere did it say they all died so 
+824.473:>>Person2>>are we 
+827.153:>>Person2>>oh I thought we were by ourselves 
+828.84:>>Person3>>oh
+832.702:>>Person1>>I think that 
+833.437:>>Person2>>I think the pistols and the matches
+834.837:>>Person1>>and then the matches 
+834.867:>>Person4>>pistol matches yeah
+839.023:>>Person4>>cool 
+841.366:>>Person4>>that's everything 
+841.558:>>Person1>>okay. yeah looking at the list of anyone disagree with anything that we like 
+846.499:>>Person4>>mmm 
+848.729:>>Person4>>no I mean it makes sense to me. A lot of things are actually in the same spot that I had them originally 
+850.601:>>Person2>>yeah
+853.452:>>Person1>>yeah I have some in the same spot
+856.859:>>Person4>>yeah
+857.547:>>Person1>>some of the ones I thought were less important. like hearing you guys talk about them it like made sense why you would want them 
+859.352:>>Person2>>yeah 
+859.389:>>Person4>>ended up being more
+863.265:>>Person2>>yeah
+863.584:>>Person4>>I don't know how I didn't think we need oxygen
+865.427:>>Person1>>how low did you put oxygen? 
+868.042:>>Person4>>I had it like halfway
+871.631:>>Person3>>just thought they were too heavy
+874.271:>>Person4>>I was like oh can't carry that
+875.144:>>Person1>>cool
+877.622:>>Person4>>all right cool
+882.918:>>Person1>>yeah 
+883.262:>>Person2>>yep
