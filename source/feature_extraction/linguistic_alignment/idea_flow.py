@@ -15,7 +15,7 @@ def idea_flows(convo, corpus):
     # filter out utterances not included in convo
     corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
 
-    # parse corpus
+    # define parser and parse corpus
     parser = TextParser()
     corpus = parser.transform(corpus)
 
@@ -29,16 +29,22 @@ def idea_flows(convo, corpus):
 
         expiration_tick(utt, idea_flows)
 
-        for tok_dict in utt.meta['parsed'][0]['toks']:
-            short_tag = tok_dict['tag'][0]
-            is_idea = short_tag == 'J' or short_tag == 'N' or short_tag == 'V'
+        first_word_not_found = True
+        for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
+                     for tok_dict in parsed_dict['toks']]:
+            # skip non-idea word that starts sentence and would otherwise
+            # be accepted due to capitalization (mistaken for proper noun)
+            if first_word_not_found and tok_dict['tok'].isalnum():
+                first_word_not_found = False
+                skip = skip_token(tok_dict, parser, True)
+            else:
+                skip = skip_token(tok_dict, parser, False)
             
-            if not is_idea: 
-                continue
+            if skip: continue
             
-            tok = lemmatize_idea_word(tok_dict, short_tag, lemmatizer)
-            
-            handle_idea_existence(tok, utt, convo, idea_flows[short_tag])
+            tok = lemmatize_idea_word(tok_dict, lemmatizer, utt)
+             
+            handle_idea_existence(tok, utt, convo, idea_flows[tok_dict['tag'][0]])
 
     # get rid of idea flows that failed (never included more than 1 participant)
     successful_idea_flows = {"J": [], "N": [], "V": []}
@@ -49,33 +55,63 @@ def idea_flows(convo, corpus):
     return successful_idea_flows
 
 
-def expiration_tick(utt, idea_flows):
+def expiration_tick(utt, idea_flows_dict):
     # only decrement toward expiration if the utts are from speakers
     # that did not introduce the idea
-    for key in idea_flows:
-        for idea_flow in idea_flows[key]:
+    for idea_flow in [idea_flow for key in idea_flows_dict 
+                      for idea_flow in idea_flows_dict[key]]:
+        # if first bool is true, total_participants = 1
+        if (idea_flow['utts_before_expiry'] > 0  
+            and idea_flow['participant_ids'][0] != utt.speaker.id):
             
-            # if true, total_participants = 1
-            if (idea_flow['utts_before_expiry'] > 0  
-                and idea_flow['participant_ids'][0] != utt.speaker.id):
-                
-                idea_flow['utts_before_expiry'] -= 1
+            idea_flow['utts_before_expiry'] -= 1
 
 
-def lemmatize_idea_word(tok_dict, one_letter_pos_tag, lemmatizer):
+def skip_token(tok_dict, parser, is_first_word):
+    tok = tok_dict['tok']
+
+    if is_first_word:
+        utt = parser.transform_utterance(tok.lower())
+        short_tag = utt.meta['parsed'][0]['toks'][0]['tag'][0]
+    else:
+        short_tag = tok_dict['tag'][0]
+
+    is_idea = short_tag == 'J' or short_tag == 'N' or short_tag == 'V'
+    
+    if not is_idea: return True
+
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+    contains_vowel = [letter for letter in tok if letter in vowels]
+    
+    if not contains_vowel: return True
+
+    return False
+
+# REMOVE UTT PARAM - FOR TESTING ONLY
+def lemmatize_idea_word(tok_dict, lemmatizer, utt):
     tok = tok_dict['tok']
     
+    # if proper noun, no need to lemmatize
     is_proper_noun = tok_dict['tag'] == "NNP"
     if is_proper_noun:
         return tok
 
-    tok = tok.lower()
+    # if proper noun plural, lemmatize but keep capitalization 
+    is_proper_noun_plural = tok_dict['tag'] == "NNPS"
+    if not is_proper_noun_plural:
+        tok = tok.lower()
     
     # lemmatize token
-    lemmatizing_tag = one_letter_pos_tag.lower()
+    short_tag = tok_dict['tag'][0]
+    lemmatizing_tag = short_tag.lower()
     if lemmatizing_tag == 'j':
         lemmatizing_tag = 'a'
-    return lemmatizer.lemmatize(tok, lemmatizing_tag)
+    
+    try:
+        return lemmatizer.lemmatize(tok, lemmatizing_tag)
+    except:
+        print(utt, tok, tok_dict['tag'])
+    
 
 
 def handle_idea_existence(tok, utt, convo, idea_flows_list):
