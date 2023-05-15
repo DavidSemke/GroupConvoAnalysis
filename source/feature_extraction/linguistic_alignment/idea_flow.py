@@ -22,7 +22,7 @@ def idea_flows(convo, corpus):
     lemmatizer = WordNetLemmatizer()
 
     # define banned verb ideas
-    banned_verb_ideas = ["be", "have", "do", "think"]
+    banned_verb_ideas = ["be", "have", "do"]
     
     # J = Adjective, N = Noun, V = Verb
     idea_flows = {"J": [], "N": [], "V": []}
