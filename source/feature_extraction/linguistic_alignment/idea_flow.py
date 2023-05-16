@@ -46,7 +46,6 @@ def idea_flows(convo, corpus):
             
             tok = lemmatize_idea_word(tok_dict, lemmatizer)
 
-            # discard primary auxiliary verbs
             if tok in banned_verb_ideas: continue
 
             handle_idea_existence(tok, utt, convo, idea_flows[tok_dict['tag'][0]])
@@ -74,8 +73,6 @@ def expiration_tick(utt, idea_flows_dict):
 
 def skip_token(tok_dict, parser, is_first_word):
     tok = tok_dict['tok']
-
-    # exclude be have do
 
     one_letter_tag = tok_dict['tag'][0]
     is_idea = one_letter_tag == 'J' or one_letter_tag == 'N' or one_letter_tag == 'V'
@@ -130,8 +127,6 @@ def lemmatize_idea_word(tok_dict, lemmatizer):
     
     return lemmatizer.lemmatize(tok, lemmatizing_tag)
     
-    
-
 
 def handle_idea_existence(tok, utt, convo, idea_flows_list):
     # idea_exists is true if idea is repeated
