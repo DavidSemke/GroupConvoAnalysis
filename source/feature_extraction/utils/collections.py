@@ -37,6 +37,13 @@ def within_cluster_variance(cluster):
     return sum_of_squares/size
 
 
+def variance(data_points):
+    total_data_points = len(data_points)
+    mean = sum(data_points)/total_data_points
+    return sum([(dp-mean)**2 for dp in data_points])/total_data_points
+
+
+
 
 
 
