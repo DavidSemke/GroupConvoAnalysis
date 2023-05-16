@@ -21,3 +21,23 @@ def binary_search(dict_list, compare_key, val_to_find):
     # element was not present
     # insert at low
     return (False, low)
+
+
+# uses Euclidean distance
+def within_cluster_variance(cluster):
+    size = len(cluster)
+    sum_of_squares = 0
+    for i in range(len(cluster)-1):
+        vector1 = cluster[i]
+        subcluster = cluster[i+1:]
+        for vector2 in subcluster:
+            for j in range(len(vector2)):
+                sum_of_squares += (vector1[j]-vector2[j])**2
+    
+    return sum_of_squares/size
+
+
+
+
+
+
