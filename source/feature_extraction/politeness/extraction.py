@@ -1,4 +1,6 @@
 from source.feature_extraction.utils.timestamps import convert_to_secs
+from source.feature_extraction.utils.collections import within_cluster_variance
+from source.feature_extraction.politeness.sentiment import speaker_sentiment_matrix_given_convo
 
 # relies on timestamp, End keys of utt (not Duration) 
 def avg_speech_overlap_period(convo):
@@ -22,10 +24,10 @@ def avg_speech_overlap_period(convo):
     return round(overlap_time/overlap_count, 1)
 
 
-def sentiment_ratio():
-    pass
+def contrast_in_formality(convo, corpus):
+    sentiment_matrix = speaker_sentiment_matrix_given_convo(convo, corpus)
+    return within_cluster_variance(sentiment_matrix)
 
-def contrast_in_formality():
-    # all_utts = convo.get_chronological_utterance_list()
-    pass
+
+
 
