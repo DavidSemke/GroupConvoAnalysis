@@ -1,5 +1,14 @@
-from sentiment import speaker_sentiment_matrix_given_convo
-from source.constants import gap_corpus
+from extraction import *
+from source.constants import gap_corpus, convos
 
-convo = gap_corpus.get_conversation('1.Pink.1')
-print(speaker_sentiment_matrix_given_convo(convo, gap_corpus))
+for convo in convos:
+    print()
+    print(convo.id.upper())
+    print()
+    print("Avg speech overlap len:", avg_speech_overlap_len(convo))
+    print("Contrast in formality (WCV):", contrast_in_formality(convo, gap_corpus))
+    print()
+
+
+
+
