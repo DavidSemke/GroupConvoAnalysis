@@ -64,4 +64,4 @@ def idea_distribution_score(convo, idea_flows_dict):
     max_var_data_points.append(100)
     max_var = variance(max_var_data_points)
 
-    return var/max_var
+    return round(var/max_var, 4)

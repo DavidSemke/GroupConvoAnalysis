@@ -2,6 +2,7 @@ from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from source.feature_extraction.utils.timestamps import add_timestamps
 from source.feature_extraction.utils.collections import binary_search
+from source.feature_extraction.utils.text import is_content_word
 
 """
 An idea flow is a string of utterances that contain a specific idea, where an idea is a(n)
@@ -34,15 +35,20 @@ def idea_flows(convo, corpus):
         first_word_not_found = True
         for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
                      for tok_dict in parsed_dict['toks']]:
+            # exclude adverbs; adverbs are not idea words
+            is_adverb = tok_dict['tag'][0:2] == 'RB'
+
             # skip non-idea word that starts sentence and would otherwise
             # be accepted due to capitalization (mistaken for proper noun)
             if first_word_not_found and tok_dict['tok'].isalnum():
                 first_word_not_found = False
-                skip = skip_token(tok_dict, parser, True)
+                is_idea = is_content_word(tok_dict, parser, True) if not is_adverb else False
+            elif is_adverb:
+                is_idea = False
             else:
-                skip = skip_token(tok_dict, parser, False)
+                is_idea = is_content_word(tok_dict, parser, False)
             
-            if skip: continue
+            if not is_idea: continue
             
             tok = lemmatize_idea_word(tok_dict, lemmatizer)
 
@@ -69,41 +75,6 @@ def expiration_tick(utt, idea_flows_dict):
             and idea_flow['participant_ids'][0] != utt.speaker.id):
             
             idea_flow['utts_before_expiry'] -= 1
-
-
-def skip_token(tok_dict, parser, is_first_word):
-    tok = tok_dict['tok']
-
-    one_letter_tag = tok_dict['tag'][0]
-    is_idea = one_letter_tag == 'J' or one_letter_tag == 'N' or one_letter_tag == 'V'
-    
-    if not is_idea: return True
-
-    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
-    contains_vowel = bool([letter for letter in tok if letter in vowels])
-    is_acronym = tok.isupper()
-
-    if not (contains_vowel or is_acronym): return True
-
-    is_proper_noun = tok_dict['tag'] == "NNP" 
-
-    # this check skips some words that are mistaken as
-    # proper nouns simply due to sentence capitalization
-    if is_first_word and is_proper_noun:
-        # get pos tag for word when not uppercased
-        # skip unless lowercase word is a noun/adj/verb/adverb
-        utt = parser.transform_utterance(tok.lower())
-        two_letter_tag = utt.meta['parsed'][0]['toks'][0]['tag'][0:2]
-        one_letter_tag = two_letter_tag[0:1]
-
-        is_passable_proper_noun = (one_letter_tag == "N"
-                       or one_letter_tag == "V"
-                       or one_letter_tag == "J"
-                       or two_letter_tag == "RB" )
-
-        if not is_passable_proper_noun: return True
-        
-    return False
 
 
 def lemmatize_idea_word(tok_dict, lemmatizer):
