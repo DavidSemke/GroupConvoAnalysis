@@ -1,8 +1,9 @@
 from source.feature_extraction.utils.timestamps import convert_to_secs
 from source.feature_extraction.utils.collections import within_cluster_variance
 from source.feature_extraction.politeness.sentiment import convo_sentiment_matrix
+from source.feature_extraction.utils.text import content_word_count, content_utterance_count
 
-# relies on timestamp, End keys of utt (not Duration) 
+# relies on timestamp and End keys of utt (not Duration) 
 def avg_speech_overlap_len(convo):
     all_utts = convo.get_chronological_utterance_list()
 
@@ -21,12 +22,39 @@ def avg_speech_overlap_len(convo):
             overlap_count +=1
             overlap_time += curr_end_time - next_start_time
 
-    return round(overlap_time/overlap_count, 1)
+    return round(overlap_time/overlap_count, 2)
 
 
-def contrast_in_formality(convo, corpus):
-    sentiment_matrix = convo_sentiment_matrix(convo, corpus)
-    return within_cluster_variance(sentiment_matrix)
+# calculates differences in politeness among speakers
+# if word_level=False, sentence level is used
+def contrast_in_formality(convo, corpus, word_level=False):
+    sentiment_matrix = convo_sentiment_matrix(convo, corpus, word_level)
+    return round(within_cluster_variance(sentiment_matrix), 2)
+
+
+# returns these ratios:
+# 1) (neg sentiment units) / (all units)
+# 2) (pos sentiment units) / (all units)
+# units are words if word_level=True, else sentences
+# all units = pos units + neg units + neutral units
+def sentiment_ratios(convo, corpus, word_level=False):
+    sentiment_matrix = convo_sentiment_matrix(convo, corpus, word_level)
+    # 21 columns
+    # HASPOSITIVE has col index 17
+    # HASNEGATIVE has col index 18
+    positive_units_vector = sentiment_matrix[:, 17]
+    negative_units_vector = sentiment_matrix[:, 18]
+
+    positive_unit_count = sum(positive_units_vector)
+    negative_unit_count = sum(negative_units_vector)
+
+    if word_level:
+        all_units = content_word_count(convo, corpus)
+    else:
+        all_units = content_utterance_count(convo, corpus)
+
+    return (round(positive_unit_count/all_units, 4), 
+            round(negative_unit_count/all_units, 4))
 
 
 
