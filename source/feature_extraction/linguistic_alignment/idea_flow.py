@@ -2,7 +2,7 @@ from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from source.feature_extraction.utils.timestamps import add_timestamps
 from source.feature_extraction.utils.collections import binary_search
-from source.feature_extraction.utils.text import is_content_word
+from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
 
 """
 An idea flow is a string of utterances that contain a specific idea, where an idea is a(n)
@@ -35,22 +35,23 @@ def idea_flows(convo, corpus):
         first_word_not_found = True
         for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
                      for tok_dict in parsed_dict['toks']]:
+            
             # exclude adverbs; adverbs are not idea words
             is_adverb = tok_dict['tag'][0:2] == 'RB'
-
-            # skip non-idea word that starts sentence and would otherwise
-            # be accepted due to capitalization (mistaken for proper noun)
-            if first_word_not_found and tok_dict['tok'].isalnum():
+            if is_adverb:
                 first_word_not_found = False
-                is_idea = is_content_word(tok_dict, parser, True) if not is_adverb else False
-            elif is_adverb:
                 is_idea = False
+            elif first_word_not_found and tok_dict['tok'].isalnum():
+                # skip non-idea word that starts sentence and would otherwise
+                # be accepted due to capitalization (mistaken for proper noun)
+                first_word_not_found = False
+                is_idea = is_content_word(tok_dict, parser, True)
             else:
                 is_idea = is_content_word(tok_dict, parser, False)
             
             if not is_idea: continue
             
-            tok = lemmatize_idea_word(tok_dict, lemmatizer)
+            tok = lemmatize_content_word(tok_dict, lemmatizer)
 
             if tok in banned_verb_ideas: continue
 
@@ -75,28 +76,6 @@ def expiration_tick(utt, idea_flows_dict):
             and idea_flow['participant_ids'][0] != utt.speaker.id):
             
             idea_flow['utts_before_expiry'] -= 1
-
-
-def lemmatize_idea_word(tok_dict, lemmatizer):
-    tok = tok_dict['tok']
-    
-    # if proper noun, no need to lemmatize
-    is_proper_noun = tok_dict['tag'] == "NNP"
-    if is_proper_noun:
-        return tok
-
-    # if proper noun plural, lemmatize but keep capitalization 
-    is_proper_noun_plural = tok_dict['tag'] == "NNPS"
-    if not is_proper_noun_plural:
-        tok = tok.lower()
-    
-    # lemmatize token
-    short_tag = tok_dict['tag'][0]
-    lemmatizing_tag = short_tag.lower()
-    if lemmatizing_tag == 'j':
-        lemmatizing_tag = 'a'
-    
-    return lemmatizer.lemmatize(tok, lemmatizing_tag)
     
 
 def handle_idea_existence(tok, utt, convo, idea_flows_list):

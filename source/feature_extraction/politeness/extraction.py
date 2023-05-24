@@ -1,7 +1,7 @@
 from source.feature_extraction.utils.timestamps import convert_to_secs
 from source.feature_extraction.utils.collections import within_cluster_variance
 from source.feature_extraction.politeness.sentiment import convo_sentiment_matrix
-from source.feature_extraction.utils.text import content_word_count, content_utterance_count
+from source.feature_extraction.utils.content_token import content_word_count, content_utterance_count
 
 # relies on timestamp and End keys of utt (not Duration) 
 def avg_speech_overlap_len(convo):
@@ -35,7 +35,7 @@ def contrast_in_formality(convo, corpus, word_level=False):
 # returns these ratios:
 # 1) (neg sentiment units) / (all units)
 # 2) (pos sentiment units) / (all units)
-# units are words if word_level=True, else sentences
+# units are content words if word_level=True, else content sentences
 # all units = pos units + neg units + neutral units
 def sentiment_ratios(convo, corpus, word_level=False):
     sentiment_matrix = convo_sentiment_matrix(convo, corpus, word_level)
