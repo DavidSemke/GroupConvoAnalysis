@@ -12,7 +12,7 @@ def is_content_word(tok_dict, parser, started_sent):
 
     if not (contains_vowel or is_acronym): return False
 
-    is_proper_noun = tok_dict['tag'] == "NNP" 
+    is_proper_noun = tok_dict['tag'][0:3] == 'NNP' 
 
     # this check skips some words that are mistaken as
     # proper nouns simply due to sentence capitalization
@@ -94,11 +94,42 @@ def content_utterance_count(convo, corpus):
             count+=1
     
     return count
+
+
+# assumes word is a content word
+def lemmatize_content_word(tok_dict, lemmatizer):
+    tok = tok_dict['tok']
     
+    # if proper noun, no need to lemmatize
+    is_proper_noun = tok_dict['tag'] == "NNP"
+    if is_proper_noun:
+        return tok
 
+    # if proper noun plural, remember capitalized letters
+    # so they can be added back after lemmatization
+    is_proper_noun_plural = tok_dict['tag'] == "NNPS"
+    if is_proper_noun_plural:
+        upper_indexes = [i for i in range(len(tok)) if tok[i].isupper()]
 
+    tok = tok.lower()
+    
+    # lemmatize token
+    two_letter_tag = tok_dict['tag'][0:2]
+    one_letter_tag = two_letter_tag[0]
 
+    if two_letter_tag == 'RB':
+        lemmatizing_tag = 'r'
+    elif one_letter_tag == 'J':
+        lemmatizing_tag = 'a'
+    else:
+        lemmatizing_tag = one_letter_tag.lower()
+    
+    lemma = lemmatizer.lemmatize(tok, lemmatizing_tag)
 
+    if is_proper_noun_plural:
+        l = lambda char, i: char.upper() if i in upper_indexes else char
+        lemma_list = [l(lemma[i], i) for i in range(len(lemma))]
+        
+        lemma = "".join(lemma_list)
 
-
-
+    return lemma
