@@ -2,6 +2,36 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import numpy as np
+
+def avg_ratings(ratings):
+    # cols and rows labels; each starts listing at col/row 0
+    # 2 columns: propy_score_total, propy_word_total
+    # 4 rows: aoa, cnc, fam, img
+    psych_prop_matrix = np.zeros((4, 2), dtype=int)
+    
+    for rating in ratings:
+        # index 0 is the word
+        aoa = rating[1]
+        cnc = rating[2]
+        fam = rating[3]
+        img = rating[4]
+
+        props = [aoa, cnc, fam, img]
+        for i in range(len(props)):
+            
+            if props[i] == '-': continue
+
+            psych_prop_matrix[i][0] += int(props[i])
+            psych_prop_matrix[i][1] += 1
+    
+    avgs = []
+    for i in range(len(props)):
+        avg = round(psych_prop_matrix[i][0]/psych_prop_matrix[i][1])
+        avgs.append(avg)
+
+    return avgs
+
 
 # returns list of lists, where a sublist has the following format:
 # [word, age_of_acquisition, concreteness, familiarity, imageability]

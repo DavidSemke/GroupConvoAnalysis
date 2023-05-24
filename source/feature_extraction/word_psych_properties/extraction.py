@@ -1,8 +1,7 @@
 from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
-from mrc_psych_db import query_mrc_db
+from mrc_psych_db import query_mrc_db, avg_ratings
 from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
-import numpy as np
 
 """
 aoa = age of acquisition
@@ -48,35 +47,6 @@ def speaker_psych_property_scores(speaker, convo, corpus):
     ratings = query_mrc_db(words)
 
     return avg_ratings(ratings)
-
-
-def avg_ratings(ratings):
-    # cols and rows labels; each starts listing at col/row 0
-    # 2 columns: propy_score_total, propy_word_total
-    # 4 rows: aoa, cnc, fam, img
-    psych_prop_matrix = np.zeros((4, 2), dtype=int)
-    
-    for rating in ratings:
-        # index 0 is the word
-        aoa = rating[1]
-        cnc = rating[2]
-        fam = rating[3]
-        img = rating[4]
-
-        props = [aoa, cnc, fam, img]
-        for i in range(len(props)):
-            
-            if props[i] == '-': continue
-
-            psych_prop_matrix[i][0] += int(props[i])
-            psych_prop_matrix[i][1] += 1
-    
-    avgs = []
-    for i in range(len(props)):
-        avg = round(psych_prop_matrix[i][0]/psych_prop_matrix[i][1])
-        avgs.append(avg)
-
-    return avgs
 
 
 

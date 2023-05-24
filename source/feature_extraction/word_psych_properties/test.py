@@ -1,4 +1,4 @@
-from extraction import speaker_psych_property_scores
+from extraction import *
 from source.constants import gap_corpus, convos
 
 for convo in convos:
