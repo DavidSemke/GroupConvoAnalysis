@@ -27,7 +27,7 @@ def avg_ratings(ratings):
     
     avgs = []
     for i in range(len(props)):
-        avg = round(psych_prop_matrix[i][0]/psych_prop_matrix[i][1])
+        avg = psych_prop_matrix[i][0]/psych_prop_matrix[i][1]
         avgs.append(avg)
 
     return avgs
@@ -36,8 +36,13 @@ def avg_ratings(ratings):
 # returns list of lists, where a sublist has the following format:
 # [word, age_of_acquisition, concreteness, familiarity, imageability]
 # '-' indicates no such psych value exists for the given word
+# ratings do not include duplicate words 
 def query_mrc_db(word_list):
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    
+    driver = webdriver.Chrome(options=options)
     driver.get('https://websites.psychology.uwa.edu.au/school/mrcdatabase/uwa_mrc.htm')
 
     # input to DB on main page

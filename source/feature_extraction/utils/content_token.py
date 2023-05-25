@@ -12,7 +12,7 @@ def is_content_word(tok_dict, parser, started_sent):
 
     if not (contains_vowel or is_acronym): return False
 
-    is_proper_noun = tok_dict['tag'][0:3] == 'NNP' 
+    is_proper_noun = tok_dict['tag'][0:3] == 'NNP'
 
     # this check skips some words that are mistaken as
     # proper nouns simply due to sentence capitalization

@@ -8,8 +8,21 @@ for convo in convos:
 
     print('Speaker psych prop scores:')
 
-    for id in convo.get_speaker_ids():
-        speaker = convo.get_speaker(id)
-        print(f'\t{id}:', speaker_psych_property_scores(speaker, convo, gap_corpus))
+    ratings_matrix = []
+    for speaker in convo.iter_speakers():
+        scores = speaker_psych_property_scores(speaker, convo, gap_corpus)
+        ratings_matrix.append(scores)
+        rounded_scores = [round(s) for s in scores] 
+        print(f'\t{speaker.id}:', rounded_scores)
     
     print()
+    print('Psych property variances:')
+    
+    vars = psych_property_score_variances(ratings_matrix)
+    print(f'\tAOA:', vars[0])
+    print(f'\tCNC:', vars[1])
+    print(f'\tFAM:', vars[2])
+    print(f'\tIMG:', vars[3])
+
+    print()
+
