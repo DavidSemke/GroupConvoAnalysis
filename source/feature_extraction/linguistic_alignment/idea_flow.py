@@ -1,7 +1,7 @@
 from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from source.feature_extraction.utils.timestamps import add_timestamps
-from source.feature_extraction.utils.collections import binary_search
+from source.feature_extraction.utils.search import binary_search
 from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
 
 """

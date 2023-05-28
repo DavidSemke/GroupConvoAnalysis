@@ -3,7 +3,7 @@ from nltk.stem import WordNetLemmatizer
 import numpy as np
 from source.feature_extraction.word_psych_properties.mrc_psych_db import query_mrc_db, avg_ratings
 from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
-from source.feature_extraction.utils.collections import variance
+from source.feature_extraction.utils.stats import variance
 
 """
 aoa = age of acquisition
@@ -18,7 +18,7 @@ def psych_property_score_variances(ratings_matrix):
     
     vars = []
     for i in range(len(ratings_matrix[0])):
-        vars.append(round(variance(ratings_matrix[:, i])))
+        vars.append(round(variance(ratings_matrix[:, i], 2)))
     
     return vars
 

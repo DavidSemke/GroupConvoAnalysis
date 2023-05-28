@@ -1,5 +1,5 @@
 from source.feature_extraction.utils.timestamps import convert_to_secs
-from source.feature_extraction.utils.collections import variance
+from source.feature_extraction.utils.stats import variance
 
 # returns seconds
 # median is used to avoid influence of outliers
