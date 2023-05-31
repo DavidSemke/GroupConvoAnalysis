@@ -1,7 +1,7 @@
 import prosodic as pro
-from source.feature_extraction.utils.timestamps import convert_to_secs
-from source.feature_extraction.utils.stats import median
-from source.feature_extraction.utils.filter_utterances import convo_frame
+from src.feature_extraction.utils.timestamps import convert_to_secs
+from src.feature_extraction.utils.stats import median
+from src.feature_extraction.utils.filter_utterances import convo_frame
 
 def speaker_median_speech_rate(speaker, convo, frame):
     

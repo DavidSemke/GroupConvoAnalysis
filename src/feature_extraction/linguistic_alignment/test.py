@@ -1,6 +1,6 @@
 from extraction import *
 from idea_flow import idea_flows
-from source.constants import gap_corpus, convos
+from src.constants import gap_corpus, convos
 
 for convo in convos:
     # print()

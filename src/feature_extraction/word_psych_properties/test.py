@@ -1,5 +1,5 @@
 from extraction import *
-from source.constants import gap_corpus, convos
+from src.constants import gap_corpus, convos
 
 for convo in convos:
     print()

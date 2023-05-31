@@ -1,5 +1,5 @@
 import numpy as np
-from source.feature_extraction.utils.stats import variance
+from src.feature_extraction.utils.stats import variance
 
 """
 aoa = age of acquisition

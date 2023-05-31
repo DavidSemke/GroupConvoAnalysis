@@ -221,7 +221,7 @@
 578.866:>>Person3>>yeah it is 
 581.499:>>Person2>>yeah that's actually a really good point 
 581.692:>>Person1>>That's a good point. Would flares work in space?
-583.996:>>Person4>>I think flares would work because they provide their own like heat like fuel source
+583.996:>>Person4>>I think flares would work because they provide their own like heat like fuel src
 587.885:>>Person1>>They have - okay yeah I like the flares then, we'll go the flares 
 590.326:>>Person2>>yeah we should probably put matches last I didn't even think about 
 592.918:>>Person1>>yeah I didn't - that didn't occur to me either 

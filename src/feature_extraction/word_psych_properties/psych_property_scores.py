@@ -1,7 +1,7 @@
 from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
-from source.feature_extraction.word_psych_properties.mrc_psych_db import query_mrc_db, avg_ratings
-from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
+from src.feature_extraction.word_psych_properties.mrc_psych_db import query_mrc_db, avg_ratings
+from src.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
 
 # uses speaker vocabulary to calculate scores
 def speaker_psych_property_scores(speaker, convo, corpus):

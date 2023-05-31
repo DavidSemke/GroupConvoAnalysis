@@ -1,9 +1,9 @@
 import csv
-from source.feature_extraction.linguistic_alignment.idea_flow import idea_flows
-from source.feature_extraction.linguistic_alignment.extraction import *
-from source.feature_extraction.politeness.extraction import *
-from source.feature_extraction.word_psych_properties.extraction import *
-from source.constants import gap_corpus
+from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
+from src.feature_extraction.linguistic_alignment.extraction import *
+from src.feature_extraction.politeness.extraction import *
+from src.feature_extraction.word_psych_properties.extraction import *
+from src.constants import gap_corpus
 
 def main():
     extraction_funcs = [

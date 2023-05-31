@@ -193,7 +193,7 @@
 445.699:>>Person1>>mm and it was ten okay
 451.924:>>Person3>>mhm
 457.629:>>Person2>>alright
-457.658:>>Person1>>do we go for the other source of food the milk
+457.658:>>Person1>>do we go for the other src of food the milk
 463.356:>>Person3>>milk is %HESITATION if we already have the food with us I think %HESITATION I mean yeah like what do you all think of the box of matches 
 463.477:>>Person2>>yeah 
 467.385:>>Person1>>but like if you run out like 

@@ -240,7 +240,7 @@ yeah yeah same
 495.187:>>Person2>>we'd have to use a match to light them though 
 497.766:>>Person5>>what about the milk?
 499.074:>>Person1>>%HESITATION milk is useless because we have water and water will keep you alive 
-503.231:>>Person3>>I had milk with food because it's a good source of calories and protein things that will keep your muscles warm and mobilizing 
+503.231:>>Person3>>I had milk with food because it's a good src of calories and protein things that will keep your muscles warm and mobilizing 
 509.879:>>Person2>want to put it 
 513.56:>>Person1>>honestly five gallons of water isn't gonna last you that long so like if you really need 
 517.881:>>Person2>>but if it's dehydrated milk then we'd have to hydrate it with the water instead of hydrating ourselves
@@ -252,7 +252,7 @@ yeah yeah same
 529.779:>>Person3>>as an added 
 532.757:>>Person1>>help as you staying life 
 535.33:>>Person3>>water by itself I agree but as because we have water we can also use the milk sort of
-541.346:>>Person3>>along with the food as another source of energy
+541.346:>>Person3>>along with the food as another src of energy
 547.061:>>Person2>>because it's like easier to break down and stuff 
 547.611:>>Person1>>so number eleven 
 551.481:>>Person5>>I feel like if you put that next it't not like super high up on the list but it's still something that is not determined 

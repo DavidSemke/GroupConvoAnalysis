@@ -49,7 +49,7 @@
 98.19:>>Person1>>Yeah, yeah the food concentrate.
 99.74:>>Person3>>Alright.
 101.51:>>Person1>>I don't understand the milk.
-103.91:>>Person3>>See, I feel like the milk is just a waste of resources because it's dehydrated so you'd have, you'd need water to make it, yeah.
+103.91:>>Person3>>See, I feel like the milk is just a waste of resrcs because it's dehydrated so you'd have, you'd need water to make it, yeah.
 106.55:>>Person1>>Yeah.
 108.84:>>Person2>>So you'd need water to actually use it.
 111.62:>>Person1>>Yeah.
@@ -354,7 +354,7 @@
 818.52:>>Person4>>Okay, that's the-
 821.11:>>Person4>>That's the hardest question.
 822.87:>>Person3>>Okay.
-824.25:>>Person3>>Parachute silk's weird just because we don't know what it's like, and dehydrated milk just sounds like a waste of resources because you'd have to use water to make the milk.
+824.25:>>Person3>>Parachute silk's weird just because we don't know what it's like, and dehydrated milk just sounds like a waste of resrcs because you'd have to use water to make the milk.
 826.86:>>Person2>>Yeah.
 829.66:>>Person1>>(Laughter)
 831.75:>>Person1>>Yeah.
@@ -366,7 +366,7 @@
 841.34:>>Person2>>Yeah.
 842.42:>>Person3>>I mean-
 844.08:>>Person1>>Is there any condition we can think of that we must use one of them?
-844.2:>>Person2>>Sacrificing one resource.
+844.2:>>Person2>>Sacrificing one resrc.
 848.46:>>Person4>>We don't have much, we only have five gallons of water. That's not going to last like, say, five days.
 854.01:>>Person2>>I feel like I'd rather take a gamble on whatever parachute silk is, than with dehydrated milk.
 859.54:>>Person3>>Well let's think about it this way. If we have five gallons of water, and we have food concentrate and then we also have dehydrated milk. If we have water that we can turn into dehydrated milk without wasting any of the water, right, by just rehydrating it to make a new type of liquid, we also the nutrition of the dehydrated milk.

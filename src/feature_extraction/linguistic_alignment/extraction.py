@@ -1,7 +1,7 @@
 from convokit import Coordination
-from source.feature_extraction.utils.timestamps import convert_to_secs
-from source.feature_extraction.utils.stats import variance, median
-from source.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
+from src.feature_extraction.utils.timestamps import convert_to_secs
+from src.feature_extraction.utils.stats import variance, median
+from src.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
 
 # returns seconds
 # median is used to avoid influence of outliers

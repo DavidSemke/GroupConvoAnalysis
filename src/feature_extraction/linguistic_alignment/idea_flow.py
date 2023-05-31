@@ -1,8 +1,8 @@
 from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
-from source.feature_extraction.utils.timestamps import add_timestamps
-from source.feature_extraction.utils.search import binary_search
-from source.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
+from src.feature_extraction.utils.timestamps import add_timestamps
+from src.feature_extraction.utils.search import binary_search
+from src.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
 
 """
 An idea flow is a string of utterances that contain a specific idea, where an idea is a(n)
