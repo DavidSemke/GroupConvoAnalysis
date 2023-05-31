@@ -1,5 +1,6 @@
 import csv
 from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
+from src.feature_extraction.word_psych_properties.psych_property_scores import speaker_psych_property_scores
 from src.feature_extraction.linguistic_alignment.extraction import *
 from src.feature_extraction.politeness.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
@@ -65,7 +66,7 @@ def polite_features(convo, corpus):
     sent_pos_ratio, sent_neg_ratio = sentiment_ratios(convo, corpus)
     
     feats = {
-        'avg sol': avg_speech_overlap_len(convo),
+        'sop': speech_overlap_percentage(convo),
         'cf-s': contrast_in_formality(convo, corpus),
         'cf-w': contrast_in_formality(convo, corpus, True),
         'psr-s': sent_pos_ratio,
