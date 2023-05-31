@@ -3,11 +3,12 @@ from idea_flow import idea_flows
 from source.constants import gap_corpus, convos
 
 for convo in convos:
-    print()
-    print(convo.id.upper())
-    print()
-
+    # print()
+    # print(convo.id.upper())
+    # print()
+    
     idea_flows_dict = idea_flows(convo, gap_corpus)
+    
     print("Idea flows:")
     for key in idea_flows_dict:
         for flow in idea_flows_dict[key]:
@@ -23,7 +24,12 @@ for convo in convos:
     print('Median idea discussion time:', median_idea_discussion_time(idea_flows_dict), 'secs')
     print('Average idea participation percentage:', avg_idea_participation_percentage(convo, idea_flows_dict), '%')
     print('Idea distribution score:', idea_distribution_score(convo, idea_flows_dict))
+    print('Speech rate convergence (frame = 10%):', speech_rate_convergence(convo, 10))
+    print('Speech rate convergence (frame = 5%):', speech_rate_convergence(convo, 5))
+    print('Coordination variances (to, from):', coordination_variances(convo, gap_corpus))
     print()
+
+
 
 
 

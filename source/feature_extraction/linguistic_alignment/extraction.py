@@ -1,5 +1,7 @@
+from convokit import Coordination
 from source.feature_extraction.utils.timestamps import convert_to_secs
-from source.feature_extraction.utils.stats import variance
+from source.feature_extraction.utils.stats import variance, median
+from source.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
 
 # returns seconds
 # median is used to avoid influence of outliers
@@ -7,16 +9,8 @@ def median_idea_discussion_time(idea_flows_dict):
     times = [convert_to_secs(idea_flow['time_spent']) 
              for key in idea_flows_dict 
              for idea_flow in idea_flows_dict[key]]
-    times.sort()
-
-    if len(times) % 2 == 0:
-        mid_right = len(times) // 2
-        mid_left = mid_right - 1
-        median = round((mid_left + mid_right)/2, 1)
-    else:
-        median = len(times) // 2
     
-    return median
+    return median(times)
 
 
 def avg_idea_participation_percentage(convo, idea_flows_dict):
@@ -65,3 +59,51 @@ def idea_distribution_score(convo, idea_flows_dict):
     max_var = variance(max_var_data_points)
 
     return round(var/max_var, 4)
+
+
+# frame is the first and last x% of utterances considered
+# early variance comes from speaker speech rate variance in first x%
+# late variance is variance in the last x%
+# negative value implies divergence, positive implies convergence
+# returns (early_var - late_var)
+def speech_rate_convergence(convo, frame):
+    
+    early_medians = []
+    late_medians = []
+    for speaker in convo.iter_speakers():
+        
+        medians = speaker_median_speech_rate(speaker, convo, frame)
+        early_medians.append(medians[0])
+        late_medians.append(medians[1])
+    
+    early_var = variance(early_medians)
+    late_var = variance(late_medians)
+
+    return round(early_var - late_var, 4)
+
+
+# coordination scores for speakers are calculated, where a speaker
+# has a score for
+#   1) how much they coordinate to the other speakers
+#   2) how much other speakers coordinate to them
+# returns variance for both sets of scores
+def coordination_variances(convo, corpus):
+    
+    corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
+
+    coord = Coordination()
+    coord.fit(corpus)
+    corpus = coord.transform(corpus)
+
+    coord_from_dict = coord.summarize(corpus, focus="targets").averages_by_speaker()
+    coord_from_var = variance(list(coord_from_dict.values()))
+
+    coord_to_dict = coord.summarize(corpus).averages_by_speaker()
+    coord_to_var = variance(list(coord_to_dict.values()))
+
+    return round(coord_to_var, 6), round(coord_from_var, 6)
+
+
+
+
+
