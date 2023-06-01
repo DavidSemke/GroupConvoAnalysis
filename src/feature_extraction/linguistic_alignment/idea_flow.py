@@ -2,10 +2,11 @@ from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from src.feature_extraction.utils.timestamps import add_timestamps
 from src.feature_extraction.utils.search import binary_search
-from src.feature_extraction.utils.content_token import is_content_word, lemmatize_content_word
+from src.feature_extraction.utils.token import is_word, is_content_word, lemmatize_word
 
 """
-An idea flow is a string of utterances that contain a specific idea, where an idea is a(n)
+An idea flow is a string of utterances that contain a specific idea, 
+where an idea is a(n)
     1. noun
     2. verb
     3. adjective
@@ -13,7 +14,9 @@ An idea flow is a string of utterances that contain a specific idea, where an id
 
 def idea_flows(convo, corpus):
     # filter out utterances not included in convo
-    corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
+    corpus = corpus.filter_utterances_by(
+        lambda u: u.conversation_id == convo.id
+    )
 
     # define parser and parse corpus
     parser = TextParser()
@@ -33,15 +36,19 @@ def idea_flows(convo, corpus):
         expiration_tick(utt, idea_flows)
 
         first_word_not_found = True
-        for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
-                     for tok_dict in parsed_dict['toks']]:
+        for tok_dict in [
+            tok_dict for parsed_dict in utt.meta['parsed'] 
+            for tok_dict in parsed_dict['toks']
+        ]:
+            
+            if not is_word(tok_dict): continue
             
             # exclude adverbs; adverbs are not idea words
             is_adverb = tok_dict['tag'][0:2] == 'RB'
             if is_adverb:
                 first_word_not_found = False
                 is_idea = False
-            elif first_word_not_found and tok_dict['tok'].isalnum():
+            elif first_word_not_found:
                 # skip non-idea word that starts sentence and would otherwise
                 # be accepted due to capitalization (mistaken for proper noun)
                 first_word_not_found = False
@@ -51,17 +58,21 @@ def idea_flows(convo, corpus):
             
             if not is_idea: continue
             
-            tok = lemmatize_content_word(tok_dict, lemmatizer)
+            tok = lemmatize_word(tok_dict, lemmatizer)
 
             if tok in banned_verb_ideas: continue
 
-            handle_idea_existence(tok, utt, convo, idea_flows[tok_dict['tag'][0]])
+            handle_idea_existence(
+                tok, utt, convo, idea_flows[tok_dict['tag'][0]]
+            )
 
     # get rid of idea flows that failed (never included more than 1 participant)
     successful_idea_flows = {"J": [], "N": [], "V": []}
     for key in successful_idea_flows:
-        successful_idea_flows[key] = [idea_flow for idea_flow in idea_flows[key] 
-                                      if idea_flow['total_participants'] > 1]
+        successful_idea_flows[key] = [
+            idea_flow for idea_flow in idea_flows[key] 
+            if idea_flow['total_participants'] > 1
+        ]
 
     return successful_idea_flows
 
@@ -69,8 +80,10 @@ def idea_flows(convo, corpus):
 def expiration_tick(utt, idea_flows_dict):
     # only decrement toward expiration if the utts are from speakers
     # that did not introduce the idea
-    for idea_flow in [idea_flow for key in idea_flows_dict 
-                      for idea_flow in idea_flows_dict[key]]:
+    for idea_flow in [
+        idea_flow for key in idea_flows_dict 
+        for idea_flow in idea_flows_dict[key]
+    ]:
         # if first bool is true, total_participants = 1
         if (idea_flow['utts_before_expiry'] > 0  
             and idea_flow['participant_ids'][0] != utt.speaker.id):
@@ -98,10 +111,14 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list):
             # reset expiry countdown since idea was reintroduced
             idea_flow['utts_before_expiry'] = len(convo.get_speaker_ids())
         elif curr_speaker_is_participant:
-            idea_flow['time_spent'] = add_timestamps(idea_flow['time_spent'], utt.meta['Duration'])
+            idea_flow['time_spent'] = add_timestamps(
+                idea_flow['time_spent'], utt.meta['Duration']
+            )
             idea_flow['utt_ids'].append(utt.id)
         else:
-            idea_flow['time_spent'] = add_timestamps(idea_flow['time_spent'], utt.meta['Duration'])
+            idea_flow['time_spent'] = add_timestamps(
+                idea_flow['time_spent'], utt.meta['Duration']
+            )
             idea_flow['utt_ids'].append(utt.id)
             idea_flow['participant_ids'].append(utt.speaker.id)
             idea_flow['total_participants'] += 1

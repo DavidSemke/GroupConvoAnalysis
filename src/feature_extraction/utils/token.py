@@ -1,16 +1,30 @@
 from convokit import TextParser
 
+def is_word(tok_dict):
+    
+    tok = tok_dict['tok']
+
+    if not tok.isalnum(): return False
+
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+    contains_vowel = bool(
+        [letter for letter in tok if letter in vowels]
+    )
+    is_acronym = tok.isupper()
+
+    if not (contains_vowel or is_acronym): return False
+
+    return True
+
+
 # True if word in tok_dict is verb, noun, adjective, adverb 
 def is_content_word(tok_dict, parser, started_sent):
+    
+    if not is_word(tok_dict): return False
     
     if not is_content_tag(tok_dict['tag']): return False
 
     tok = tok_dict['tok']
-    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
-    contains_vowel = bool([letter for letter in tok if letter in vowels])
-    is_acronym = tok.isupper()
-
-    if not (contains_vowel or is_acronym): return False
 
     is_proper_noun = tok_dict['tag'][0:3] == 'NNP'
 
@@ -96,8 +110,7 @@ def content_utterance_count(convo, corpus):
     return count
 
 
-# assumes word is a content word
-def lemmatize_content_word(tok_dict, lemmatizer):
+def lemmatize_word(tok_dict, lemmatizer):
     tok = tok_dict['tok']
     
     # if proper noun, no need to lemmatize

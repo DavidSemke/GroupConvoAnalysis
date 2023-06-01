@@ -1,5 +1,7 @@
 import numpy as np
-from src.feature_extraction.utils.stats import variance
+from src.feature_extraction.word_psych_properties.liwc import personality_matrix
+from src.feature_extraction.utils.stats import variance, within_cluster_variance
+
 
 """
 aoa = age of acquisition
@@ -14,6 +16,11 @@ def psych_property_score_variances(ratings_matrix):
     
     vars = []
     for i in range(len(ratings_matrix[0])):
-        vars.append(round(variance(ratings_matrix[:, i], 2)))
+        vars.append(round(variance(ratings_matrix[:, i]), 2))
     
     return vars
+
+
+def constrast_in_personality(convo, corpus):
+    p_matrix = personality_matrix(convo, corpus)
+    return round(within_cluster_variance(p_matrix), 2)
