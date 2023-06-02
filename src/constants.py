@@ -8,6 +8,11 @@ convos = [gap_corpus.get_conversation('1.Pink.1'),
           gap_corpus.get_conversation('12.Blue.1')]
 
 
+""" UGI Corpora Constants """
+
+ugi_rankings_path = r'corpora\Post_Task_Rankings.xlsx'
+
+
 """ Lexical Constants """
 
 first_pronouns_sing = ['i','me','my','mine','myself']
