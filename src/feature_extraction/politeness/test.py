@@ -1,7 +1,7 @@
 from extraction import *
-from src.constants import gap_corpus, convos
+from src.constants import gap_corpus, gap_convos
 
-for convo in convos:
+for convo in gap_convos:
     print()
     print(convo.id.upper())
     print()

@@ -1,8 +1,8 @@
 from src.feature_extraction.word_psych_properties.psych_property_scores import speaker_psych_property_scores
 from extraction import *
-from src.constants import gap_corpus, convos
+from src.constants import gap_corpus, gap_convos
 
-for convo in convos:
+for convo in gap_convos:
     print()
     print(convo.id.upper())
     print()

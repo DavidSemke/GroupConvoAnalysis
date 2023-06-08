@@ -32,4 +32,4 @@ from src.constants import *
 
 # print(gap_corpus.get_utterance('1.Pink.1'))
 
-print(convos[0].meta['Meeting Length in Minutes'] * 60)
+print(gap_convos[0].meta['Meeting Length in Minutes'] * 60)

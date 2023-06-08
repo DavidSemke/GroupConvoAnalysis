@@ -1,8 +1,8 @@
 import numpy as np
 from convokit import TextParser, PolitenessStrategies
 from nltk.stem import WordNetLemmatizer
-from src.feature_extraction.utils.timestamps import convert_to_secs
-from src.feature_extraction.utils.token import is_content_word, is_word, lemmatize_word
+from src.utils.timestamps import convert_to_secs
+from src.utils.token import is_content_word, is_word, lemmatize_word
 import src.constants as const
 
 """

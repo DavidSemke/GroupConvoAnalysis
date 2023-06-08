@@ -1,6 +1,6 @@
 from convokit import Coordination
-from src.feature_extraction.utils.timestamps import convert_to_secs
-from src.feature_extraction.utils.stats import variance, median
+from src.utils.timestamps import convert_to_secs
+from src.utils.stats import variance, median
 from src.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
 
 # returns seconds

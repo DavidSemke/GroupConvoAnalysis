@@ -1,19 +1,26 @@
 from convokit import Corpus
 
-""" GAP Corpora Constants """
+# Shared Corpus Constants
+
+speaker_colors = ['Pink', 'Blue', 'Green', 'Orange', 'Yellow']
+
+
+# GAP Corpus Constants
 
 gap_corpus = Corpus('corpora/gap-corpus', utterance_end_index=890)
 
-convos = [gap_corpus.get_conversation('1.Pink.1'),
+gap_convos = [gap_corpus.get_conversation('1.Pink.1'),
           gap_corpus.get_conversation('12.Blue.1')]
 
 
-""" UGI Corpora Constants """
+# UGI Corpus Constants
 
-ugi_rankings_path = r'corpora\Post_Task_Rankings.xlsx'
+ugi_corpus = Corpus('corpora/ugi-corpus/convokit_v2', utterance_end_index=100)
+
+ugi_convos = [ugi_corpus.get_conversation('1.Blue.1')]
 
 
-""" Lexical Constants """
+# Lexical Constants
 
 first_pronouns_sing = ['i','me','my','mine','myself']
 

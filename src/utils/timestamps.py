@@ -4,6 +4,11 @@ def convert_to_secs(timestamp):
     return int(mins) * 60 + float(secs)
 
 
+def convert_to_minutes(timestamp):
+    mins, secs = timestamp.split(':')
+    return int(mins) + float(secs)/60
+
+
 def convert_to_timestamp(secs):
     secs = round(float(secs), 1)
     split = str(secs).split('.')

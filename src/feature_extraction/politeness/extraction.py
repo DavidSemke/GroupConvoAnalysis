@@ -1,7 +1,7 @@
-from src.feature_extraction.utils.timestamps import convert_to_secs
-from src.feature_extraction.utils.stats import within_cluster_variance
+from src.utils.timestamps import convert_to_secs
+from src.utils.stats import within_cluster_variance
 from src.feature_extraction.politeness.sentiment import convo_sentiment_matrix
-from src.feature_extraction.utils.token import content_word_count, content_utterance_count
+from src.utils.token import content_word_count, content_utterance_count
 
 def speech_overlap_percentage(convo):
     
@@ -59,7 +59,3 @@ def sentiment_ratios(convo, corpus, word_level=False):
 
     return (round(positive_unit_count/all_units, 4), 
             round(negative_unit_count/all_units, 4))
-
-
-
-

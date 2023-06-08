@@ -1,6 +1,6 @@
 import numpy as np
 from src.feature_extraction.word_psych_properties.liwc import personality_matrix
-from src.feature_extraction.utils.stats import variance, within_cluster_variance
+from src.utils.stats import variance, within_cluster_variance
 
 
 """

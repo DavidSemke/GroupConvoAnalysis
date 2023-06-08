@@ -1,4 +1,4 @@
-from src.feature_extraction.utils.timestamps import convert_to_secs
+from src.utils.timestamps import convert_to_secs
 
 def speech_pause_percentage(convo):
     

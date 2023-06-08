@@ -1,21 +1,63 @@
-import pandas as pd
-from src.constants import ugi_rankings_path 
+from src.utils.timestamps import convert_to_timestamp, convert_to_minutes
+import src.constants as const
+import re
 
-ugi_expert_ranking = [15,4,6,8,13,11,12,1,3,9,14,2,10,7,5]
+def convo_metadata(df, expert_ranking, transcripts_path):
+    convo_meta = {}
+    group_id = 0
 
-def ugi_rankings_df():
-    # UGI dataset stores ranking info in an excel sheet
-    df = pd.read_excel(ugi_rankings_path, skiprows=1).drop(
-        ['Not Ranked', 'Not Ranked.1', 'Q3 Desc'], axis=1
-    )
+    ags_dict = ags_all(df, expert_ranking)
 
-    return df    
+    for group_id in ags_dict:
+        txt_path = (
+            transcripts_path 
+            + rf'\TeamID_{group_id}_transcript.txt'
+        )
+
+        with open(txt_path, 'r') as file:
+            lines = file.readlines()
+        
+        lines = [l.strip() for l in lines if l.strip()]
+        last_line = lines[-1]
+        secs_match = re.search('^[0-9]+(\.[0-9]+)?', last_line)
+        secs = secs_match.group()
+        timestamp = convert_to_timestamp(secs)
+        mins = round(convert_to_minutes(timestamp), 2)
+
+        for line in lines:
+            person_match = re.search('[pP]erson[1-5]', line)
+
+            if not person_match: continue
+
+            splitter = person_match.group()
+            tail = line.split(splitter)[1]
+            text = re.sub('[^ \w]', '', tail)
+            text = re.sub(' ?HESITATION| ?LAUGHTER', '', text)
+            text = text.strip()
+
+            if not text: continue
+
+            person_id = int(splitter[-1])
+            color = const.speaker_colors[person_id-1]
+            speaker_id = f'{group_id}.{color}'
+            convo_id = f'{speaker_id}.1'
+
+            break
+
+    
+        convo_meta[convo_id] = {
+            'Group Number': group_id,
+            'Meeting Size': ags_dict[group_id]['Meeting Size'],
+            'Meeting Length in Minutes': mins,
+            'AGS': ags_dict[group_id]['AGS']
+        }
+    
+    return convo_meta
 
 
-def ugi_ags_all():
-
-    df = ugi_rankings_df()
-
+# returns a dict of dicts
+# each inner dict has format {ags, meeting_size}
+def ags_all(df, expert_ranking):
     # get cols reserved for group rankings
     only_groups_df = df.iloc[:, 18:33]
 
@@ -73,36 +115,19 @@ def ugi_ags_all():
                 g_ranking.append(modes[0])
             
             else:
-                mode = min(modes, key=lambda x:abs(x-ugi_expert_ranking[j]))
+                mode = min(modes, key=lambda x:abs(x-expert_ranking[j]))
                 g_ranking.append(mode)
         
         ags = sum(
-            [abs(g_ranking[j]-ugi_expert_ranking[j]) for j in range(len(g_ranking))]
+            [abs(g_ranking[j]-expert_ranking[j]) for j in range(len(g_ranking))]
         )
         
-        ags_dict[group_id] = ags
+        ags_dict[group_id] = {
+            'AGS': ags, 
+            'Meeting Size': last_group_index-first_group_index+1
+        }
         
         group_id = next_group_id
         first_group_index = last_group_index+1
             
     return ags_dict
-
-
-def ugi_ais_all():
-    
-    df = ugi_rankings_df()
-    ais_dict = {}
-
-    for i in range(df.shape[0]):
-        ais = 0
-        
-        for j in range(len(ugi_expert_ranking)):
-            i_rank = df.iloc[i, 3+j]
-            
-            # add abs diff between expert rank and individ rank
-            if not pd.isna(i_rank):
-                ais += abs(i_rank - ugi_expert_ranking[j])
-        
-        ais_dict[f'{df.iloc[i, 0]}-{df.iloc[i, 1]}'] = ais
-    
-    return ais_dict
