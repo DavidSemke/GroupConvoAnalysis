@@ -1,35 +1,35 @@
-import prosodic as pro
-from convokit import TextParser
-from src.constants import *
+from meter import speaker_meter_affinity
+import src.constants as const
 
+convo = const.gap_convos[0]
 
-# convo = convos[0]
-# for speaker in convo.iter_speakers():
+print()
+print('SPEAKER METERS')
+print()
 
-#     corpus = corpus.filter_utterances_by(lambda u: u.     conversation_id == convo.id and u.speaker.id == speaker.id)
+for s in convo.iter_speakers():
+    print(s.id, ':')
+    dist = speaker_meter_affinity(s, convo)
+
+    for m in const.meters:
+        print('\t', m, ':', dist[m], '%')
     
-#     for utt in corpus.iter_utterances():
-        
-#         parsed = pro.Text(utt.text)
+    print()
 
-# a = "clandestine operations always end poorly"
-# b = "anyone who knew the details would understand the decision"
-# c = "Mr Schloopendorf hates skiing"
+# meter_dict = {
+#     'a': {'stress': 0, 'vc': 2, 'vcc': 1},
+#     'b': {'stress': 0, 'vc': 1, 'vcc': 2},
+#     'c': {'stress': 0, 'vc': 4, 'vcc': 1},
+#     'd': {'stress': 0, 'vc': 9, 'vcc': 2}
+# }
 
-# t = pro.Text(a)
-# sylls = t.syllables()
+# meter_triples = [
+#         (
+#             meter_dict[k]['vc'],
+#             meter_dict[k]['vcc'],  
+#             k
+#         )  
+#         for k in meter_dict
+# ]
 
-# t.parse()
-
-# print(t.scansion())
-
-# print(t.report())
-
-# for parse in t.bestParses():
-#     print()
-#     print(parse)
-#     print()
-
-# print(gap_corpus.get_utterance('1.Pink.1'))
-
-print(gap_convos[0].meta['Meeting Length in Minutes'] * 60)
+# print(meter_triples)

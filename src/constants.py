@@ -20,6 +20,25 @@ ugi_corpus = Corpus('corpora/ugi-corpus/convokit_v2', utterance_end_index=100)
 ugi_convos = [ugi_corpus.get_conversation('1.Blue.1')]
 
 
+# Prosodic Constants
+
+meters = [
+    # 'iambic_pentameter',
+    # 'iambic_pentameter2',
+    # 'iambic_pentameter3',
+    'kiparskyhanson_hopkins',
+    # 'kiparskyhanson_shakespeare',
+    # 'litlab',
+    'meter_arto',
+    'meter_ryan'
+    # 'meter_ryan_categorical',
+    # 'prose_rhythm_iambic',
+    # 'prose_rhythm_iambic_inviolable',
+    # 'prose_rhythm_iambic_violable',
+    # 'strength_and_resolution',
+    # 'strength_only'
+]
+
 # Lexical Constants
 
 first_pronouns_sing = ['i','me','my','mine','myself']

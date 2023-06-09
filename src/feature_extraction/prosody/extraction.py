@@ -22,3 +22,6 @@ def speech_pause_percentage(convo):
     return round(pause_time/total_time, 2)
 
 
+
+
+

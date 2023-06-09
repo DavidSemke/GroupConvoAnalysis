@@ -3,9 +3,9 @@ from idea_flow import idea_flows
 from src.constants import gap_corpus, gap_convos
 
 for convo in gap_convos:
-    # print()
-    # print(convo.id.upper())
-    # print()
+    print()
+    print(convo.id.upper())
+    print()
     
     idea_flows_dict = idea_flows(convo, gap_corpus)
     
