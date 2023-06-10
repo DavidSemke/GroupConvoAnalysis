@@ -31,7 +31,7 @@ def extract_utterances(lines, group_id, utt_metadata):
     patt1 = '[pP]erson[1-5]'
     patt2 = '^[0-9]+(\.[0-9]+)?'
     patt3 = '[^ \w]' # for removing punctuation
-    patt4 = ' ?HESITATION| ?LAUGHTER'
+    patt4 = 'HESITATION|LAUGHTER'
     
     while line_index < len(lines):
         line = lines[line_index]
@@ -103,9 +103,3 @@ def extract_utterances(lines, group_id, utt_metadata):
         line_index += 1
 
     print(f"Utts for group {group_id} finished")
-
-
-s = '>>Person1>>Ill tell you what if you can hit me >>Person2>>you can die'
-
-if not re.findall('Person6', s):
-    print('empty is false')
