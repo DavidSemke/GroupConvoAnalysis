@@ -7,11 +7,7 @@ def speech_overlap_percentage(convo):
     all_utts = convo.get_chronological_utterance_list()
     overlap_time = 0
     
-    for i in range(len(all_utts)):
-        
-        if i == len(all_utts)-1:
-            break
-
+    for i in range(len(all_utts)-1):
         curr = all_utts[i]
         next = all_utts[i+1]
         curr_end_time = convert_to_secs(curr.meta["End"])
