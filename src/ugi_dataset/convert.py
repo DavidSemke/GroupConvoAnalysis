@@ -1,12 +1,18 @@
 import pandas as pd
-from src.dataset.ugi_utterance import utterance_metadata
-from src.dataset.ugi_convo import convo_metadata
-from src.dataset.ugi_speaker import speaker_metadata
+from src.ugi_dataset.utterance import utterance_metadata
+from src.ugi_dataset.convo import convo_metadata
+from src.ugi_dataset.speaker import speaker_metadata
 
 def main():
     transcripts_path = r'corpora\ugi-corpus\transcripts'
+    patts = {
+        'p_match': '[pP]erson[1-5]',
+        'ts': '^[0-9]+(\.[0-9]+)?',
+        'punct': '[^ \w]',
+        'nonverbal': 'HESITATION|LAUGHTER'
+    }
 
-    utt_meta = utterance_metadata(transcripts_path)
+    utt_meta = utterance_metadata(transcripts_path, patts)
     
     metadata_path = r'corpora\ugi-corpus\UGI_Metadata.xlsx'
     df = pd.read_excel(metadata_path, skiprows=1).drop(
@@ -16,7 +22,9 @@ def main():
     
     speaker_meta = speaker_metadata(df, expert_ranking)
 
-    convo_meta = convo_metadata(df, expert_ranking, transcripts_path)
+    convo_meta = convo_metadata(
+        df, expert_ranking, transcripts_path, patts
+    )
 
     create_utterances_jsonl(utt_meta)
 

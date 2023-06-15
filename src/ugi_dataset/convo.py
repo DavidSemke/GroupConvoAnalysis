@@ -1,14 +1,13 @@
-from src.utils.timestamps import convert_to_timestamp, convert_to_minutes
-import src.constants as const
 import re
+from src.ugi_dataset.line_processing import process_text
+import src.constants as const
 
-def convo_metadata(df, expert_ranking, transcripts_path):
+def convo_metadata(df, expert_ranking, transcripts_path, patts):
     convo_meta = {}
-    group_id = 0
 
-    ags_dict = ags_all(df, expert_ranking)
+    grp_stats_dict = group_stats(df, expert_ranking)
 
-    for group_id in ags_dict:
+    for group_id in grp_stats_dict:
         txt_path = (
             transcripts_path 
             + rf'\TeamID_{group_id}_transcript.txt'
@@ -18,22 +17,20 @@ def convo_metadata(df, expert_ranking, transcripts_path):
             lines = file.readlines()
         
         lines = [l.strip() for l in lines if l.strip()]
+
         last_line = lines[-1]
-        secs_match = re.search('^[0-9]+(\.[0-9]+)?', last_line)
+        secs_match = re.search(patts['ts'], last_line)
         secs = secs_match.group()
-        timestamp = convert_to_timestamp(secs)
-        mins = round(convert_to_minutes(timestamp), 2)
+        mins = round(secs / 60, 2)
 
         for line in lines:
-            person_match = re.search('[pP]erson[1-5]', line)
+            person_match = re.search(patts['p_match'], line)
 
             if not person_match: continue
 
             splitter = person_match.group()
             tail = line.split(splitter)[1]
-            text = re.sub('[^ \w]', '', tail)
-            text = re.sub(' ?HESITATION| ?LAUGHTER', '', text)
-            text = text.strip()
+            text = process_text(tail, patts)
 
             if not text: continue
 
@@ -43,13 +40,12 @@ def convo_metadata(df, expert_ranking, transcripts_path):
             convo_id = f'{speaker_id}.1'
 
             break
-
-    
+        
         convo_meta[convo_id] = {
             'Group Number': group_id,
-            'Meeting Size': ags_dict[group_id]['Meeting Size'],
+            'Meeting Size': grp_stats_dict[group_id]['Meeting Size'],
             'Meeting Length in Minutes': mins,
-            'AGS': ags_dict[group_id]['AGS']
+            'AGS': grp_stats_dict[group_id]['AGS']
         }
     
     return convo_meta
@@ -57,7 +53,7 @@ def convo_metadata(df, expert_ranking, transcripts_path):
 
 # returns a dict of dicts
 # each inner dict has format {ags, meeting_size}
-def ags_all(df, expert_ranking):
+def group_stats(df, expert_ranking):
     # get cols reserved for group rankings
     only_groups_df = df.iloc[:, 18:33]
 
@@ -78,7 +74,7 @@ def ags_all(df, expert_ranking):
     first_group_index = 0
     last_group_index = 0
     more_groups = True
-    ags_dict = {}
+    group_stats_dict = {}
 
     while more_groups: 
         
@@ -115,14 +111,17 @@ def ags_all(df, expert_ranking):
                 g_ranking.append(modes[0])
             
             else:
-                mode = min(modes, key=lambda x:abs(x-expert_ranking[j]))
+                mode = min(
+                    modes, key=lambda x:abs(x-expert_ranking[j])
+                )
                 g_ranking.append(mode)
         
         ags = sum(
-            [abs(g_ranking[j]-expert_ranking[j]) for j in range(len(g_ranking))]
+            [abs(g_ranking[j]-expert_ranking[j]) 
+             for j in range(len(g_ranking))]
         )
         
-        ags_dict[group_id] = {
+        group_stats_dict[group_id] = {
             'AGS': ags, 
             'Meeting Size': last_group_index-first_group_index+1
         }
@@ -130,4 +129,4 @@ def ags_all(df, expert_ranking):
         group_id = next_group_id
         first_group_index = last_group_index+1
             
-    return ags_dict
+    return group_stats_dict

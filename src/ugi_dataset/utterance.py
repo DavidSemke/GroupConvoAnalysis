@@ -1,8 +1,9 @@
-from src.utils.timestamps import convert_to_timestamp
-import src.constants as const
 import re
+from src.utils.timestamps import convert_to_timestamp
+from src.ugi_dataset.line_processing import process_text
+import src.constants as const
 
-def utterance_metadata(transcripts_path):
+def utterance_metadata(transcripts_path, patts):
     utt_metadata = {}
 
     for group_id in range(1, 23):
@@ -14,28 +15,20 @@ def utterance_metadata(transcripts_path):
         with open(txt_path, 'r') as file:
             lines = file.readlines()
         
-        extract_utterances(
-            lines,
-            group_id,
-            utt_metadata
-        )
+        extract_utterances(lines, group_id, utt_metadata, patts)
     
     return utt_metadata
 
 
-def extract_utterances(lines, group_id, utt_metadata):
+def extract_utterances(lines, group_id, utt_metadata, patts):
     lines = [l.strip() for l in lines if l.strip()]
     colored_utts = {}
     first_loop = True
     line_index = 0
-    patt1 = '[pP]erson[1-5]'
-    patt2 = '^[0-9]+(\.[0-9]+)?'
-    patt3 = '[^ \w]' # for removing punctuation
-    patt4 = 'HESITATION|LAUGHTER'
     
     while line_index < len(lines):
         line = lines[line_index]
-        person_matches = re.findall(patt1, line)
+        person_matches = re.findall(patts['p_match'], line)
 
         if not person_matches:
             raise Exception(f'Line is missing person ID:\n\n{line}\n')
@@ -46,15 +39,13 @@ def extract_utterances(lines, group_id, utt_metadata):
         splitter = person_matches[0]
         head, tail = line.split(splitter)
 
-        text = re.sub(patt3, '', tail)
-        text = re.sub(patt4, '', text)
-        text = text.strip()
+        text = process_text(tail, patts)
 
         if not text:
             line_index += 1
             continue
         
-        secs_match = re.search(patt2, head)
+        secs_match = re.search(patts['ts'], head)
         
         if not secs_match:
             raise Exception(f'Line is missing secs:\n\n{line}\n')
@@ -64,15 +55,12 @@ def extract_utterances(lines, group_id, utt_metadata):
         
         if (
             line_index+1 < len(lines)
-            and not re.search(patt1, lines[line_index+1])
-            and not re.search(patt2, lines[line_index+1])
+            and not re.search(patts['p_match'], lines[line_index+1])
+            and not re.search(patts['ts'], lines[line_index+1])
         ):
-            next_line = lines[line_index+1]
-            next_line_text = re.sub(patt3, '', next_line)
-            next_line_text = re.sub(patt4, '', next_line_text)
-            next_line_text = next_line_text.strip()
-
-            text += ' ' + next_line_text if next_line_text else ''
+            next_line_text = process_text(lines[line_index+1], patts)
+            text += ' ' + next_line_text
+            text = text.strip()
             del lines[line_index+1]
         
         person_id = int(splitter[-1])
