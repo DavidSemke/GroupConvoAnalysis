@@ -9,10 +9,10 @@ print()
 
 for s in convo.iter_speakers():
     print(s.id, ':')
-    dist = speaker_meter_affinity(s, convo)
+    affinity_vector = speaker_meter_affinity(s, convo)
 
     for m in const.meters:
-        print('\t', m, ':', dist[m], '%')
+        print('\t', m, ':', affinity_vector[m], '%')
     
     print()
 

@@ -4,9 +4,9 @@ from src.feature_extraction.politeness.sentiment import convo_sentiment_matrix
 from src.utils.token import content_word_count, content_utterance_count
 
 def speech_overlap_percentage(convo):
-    
     all_utts = convo.get_chronological_utterance_list()
     overlap_time = 0
+    
     for i in range(len(all_utts)):
         
         if i == len(all_utts)-1:
@@ -28,7 +28,6 @@ def speech_overlap_percentage(convo):
 # calculates differences in politeness among speakers
 # if word_level=False, sentence level is used
 def contrast_in_formality(convo, corpus, word_level=False):
-    
     sentiment_matrix = convo_sentiment_matrix(convo, corpus, word_level)
     
     return round(within_cluster_variance(sentiment_matrix), 2)
@@ -54,6 +53,7 @@ def sentiment_ratios(convo, corpus, word_level=False):
 
     if word_level:
         all_units = content_word_count(convo, corpus)
+        
     else:
         all_units = content_utterance_count(convo, corpus)
 

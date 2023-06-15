@@ -24,10 +24,15 @@ def speech_pause_percentage(convo):
     return round(pause_time/total_time, 2)
 
 
-def contrast_in_meter(convo):
-    meter_matrix = []
+def contrast_in_meter_affinity(convo):
+    affinity_matrix = []
+
     for speaker in convo.iter_speakers():
-        meter_matrix.append(speaker_meter_affinity(speaker, convo))
+        affinity_matrix.append(speaker_meter_affinity(speaker, convo))
+
+    return within_cluster_variance(affinity_matrix)
+    
+
     
     
 
