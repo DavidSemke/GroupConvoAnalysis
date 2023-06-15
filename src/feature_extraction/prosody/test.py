@@ -16,6 +16,7 @@ for s in convo.iter_speakers():
     
     print()
 
+
 # meter_dict = {
 #     'a': {'stress': 0, 'vc': 2, 'vcc': 1},
 #     'b': {'stress': 0, 'vc': 1, 'vcc': 2},

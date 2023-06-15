@@ -1,6 +1,6 @@
+import numpy as np
 from convokit import Coordination
 from src.utils.timestamps import convert_to_secs
-from src.utils.stats import variance, median
 from src.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
 
 # returns seconds
@@ -10,7 +10,7 @@ def median_idea_discussion_time(idea_flows_dict):
              for key in idea_flows_dict 
              for idea_flow in idea_flows_dict[key]]
     
-    return median(times)
+    return np.median(times)
 
 
 def avg_idea_participation_percentage(convo, idea_flows_dict):
@@ -50,13 +50,13 @@ def idea_distribution_score(convo, idea_flows_dict):
         idea_percentage_dict[key] /= total_idea_flows/100
 
     # compute percentage variance
-    percentages = idea_percentage_dict.values()
-    var = variance(percentages)
+    percentages = list(idea_percentage_dict.values())
+    var = np.var(percentages)
     
     # compute variance where one percentages is 100%, others are 0%
-    max_var_data_points = [0 for i in range(len(percentages)-1)]
-    max_var_data_points.append(100)
-    max_var = variance(max_var_data_points)
+    p_count = len(percentages)
+    max_var_data_points = [0 for _ in range(p_count-1)] + [100]
+    max_var = np.var(max_var_data_points)
 
     return round(var/max_var, 4)
 
@@ -76,8 +76,8 @@ def speech_rate_convergence(convo, frame):
         early_medians.append(medians[0])
         late_medians.append(medians[1])
     
-    early_var = variance(early_medians)
-    late_var = variance(late_medians)
+    early_var = np.var(early_medians)
+    late_var = np.var(late_medians)
 
     return round(early_var - late_var, 4)
 
@@ -89,17 +89,19 @@ def speech_rate_convergence(convo, frame):
 # returns variance for both sets of scores
 def coordination_variances(convo, corpus):
     
-    corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
+    corpus = corpus.filter_utterances_by(
+        lambda u: u.conversation_id == convo.id
+    )
 
     coord = Coordination()
     coord.fit(corpus)
     corpus = coord.transform(corpus)
 
     coord_from_dict = coord.summarize(corpus, focus="targets").averages_by_speaker()
-    coord_from_var = variance(list(coord_from_dict.values()))
+    coord_from_var = np.var(list(coord_from_dict.values()))
 
     coord_to_dict = coord.summarize(corpus).averages_by_speaker()
-    coord_to_var = variance(list(coord_to_dict.values()))
+    coord_to_var = np.var(list(coord_to_dict.values()))
 
     return round(coord_to_var, 6), round(coord_from_var, 6)
 

@@ -1,4 +1,6 @@
+from src.feature_extraction.prosody.meter import speaker_meter_affinity
 from src.utils.timestamps import convert_to_secs
+from src.utils.stats import within_cluster_variance
 
 def speech_pause_percentage(convo):
     
@@ -20,6 +22,16 @@ def speech_pause_percentage(convo):
     total_time = convo.meta['Meeting Length in Minutes'] * 60
 
     return round(pause_time/total_time, 2)
+
+
+def contrast_in_meter(convo):
+    meter_matrix = []
+    for speaker in convo.iter_speakers():
+        meter_matrix.append(speaker_meter_affinity(speaker, convo))
+    
+    
+
+
 
 
 

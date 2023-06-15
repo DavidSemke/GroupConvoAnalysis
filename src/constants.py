@@ -27,7 +27,7 @@ meters = [
     # 'iambic_pentameter2',
     # 'iambic_pentameter3',
     'kiparskyhanson_hopkins',
-    # 'kiparskyhanson_shakespeare',
+    'kiparskyhanson_shakespeare',
     # 'litlab',
     'meter_arto',
     'meter_ryan'

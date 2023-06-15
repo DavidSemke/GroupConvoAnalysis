@@ -1,6 +1,6 @@
+import numpy as np
 import prosodic as pro
 from src.utils.timestamps import convert_to_secs
-from src.utils.stats import median
 from src.utils.filter_utterances import convo_frame
 
 def speaker_median_speech_rate(speaker, convo, frame):
@@ -26,7 +26,7 @@ def speaker_median_speech_rate(speaker, convo, frame):
             rates.append(rate)
         
         if rates:
-            medians.append(median(rates))
+            medians.append(np.median(rates))
 
     return medians
 
