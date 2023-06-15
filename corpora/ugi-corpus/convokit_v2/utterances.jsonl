@@ -187,7 +187,7 @@
 {"id": "1.Pink.50", "conversation_id": "1.Blue.1", "text": "yeah off the box matches", "speaker": "1.Pink", "meta": {}, "reply-to": null, "timestamp": "11:02.8"}
 {"id": "1.Blue.68", "conversation_id": "1.Blue.1", "text": "so compass is fourteen", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "11:07.2"}
 {"id": "1.Green.37", "conversation_id": "1.Blue.1", "text": "yeah", "speaker": "1.Green", "meta": {}, "reply-to": null, "timestamp": "11:09.9"}
-{"id": "1.Blue.69", "conversation_id": "1.Blue.1", "text": "and then the box of  matches is thirteen", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "11:12.1"}
+{"id": "1.Blue.69", "conversation_id": "1.Blue.1", "text": "and then the box of matches is thirteen", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "11:12.1"}
 {"id": "1.Green.38", "conversation_id": "1.Blue.1", "text": "yep", "speaker": "1.Green", "meta": {}, "reply-to": null, "timestamp": "11:02.8"}
 {"id": "1.Green.39", "conversation_id": "1.Blue.1", "text": "okay lets see", "speaker": "1.Green", "meta": {}, "reply-to": null, "timestamp": "11:17.9"}
 {"id": "1.Pink.51", "conversation_id": "1.Blue.1", "text": "see so what are we", "speaker": "1.Pink", "meta": {}, "reply-to": null, "timestamp": "11:18.6"}
@@ -222,7 +222,7 @@
 {"id": "1.Blue.80", "conversation_id": "1.Blue.1", "text": "yeah unless its inflatable", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "12:50.0"}
 {"id": "1.Orange.39", "conversation_id": "1.Blue.1", "text": "I mean if even if it is most likely it is inflatable and in that case it can be large enough to hold multiple people so its gonna be cumbersome to use as something other than a life raft", "speaker": "1.Orange", "meta": {}, "reply-to": null, "timestamp": "12:52.7"}
 {"id": "1.Blue.81", "conversation_id": "1.Blue.1", "text": "yeah but its also going to have air in it", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "13:00.6"}
-{"id": "1.Orange.40", "conversation_id": "1.Blue.1", "text": "yeah but not necessarily useful air  ould be just nitrogen or something", "speaker": "1.Orange", "meta": {}, "reply-to": null, "timestamp": "13:05.4"}
+{"id": "1.Orange.40", "conversation_id": "1.Blue.1", "text": "yeah but not necessarily useful air ould be just nitrogen or something", "speaker": "1.Orange", "meta": {}, "reply-to": null, "timestamp": "13:05.4"}
 {"id": "1.Blue.82", "conversation_id": "1.Blue.1", "text": "I dont know and they have in them", "speaker": "1.Blue", "meta": {}, "reply-to": null, "timestamp": "13:09.0"}
 {"id": "1.Green.47", "conversation_id": "1.Blue.1", "text": "I have no idea", "speaker": "1.Green", "meta": {}, "reply-to": null, "timestamp": "13:20.9"}
 {"id": "1.Pink.59", "conversation_id": "1.Blue.1", "text": "yeah", "speaker": "1.Pink", "meta": {}, "reply-to": null, "timestamp": "13:25.2"}
@@ -497,9 +497,9 @@
 {"id": "2.Blue.53", "conversation_id": "2.Pink.1", "text": "yeah thats actually a really good point", "speaker": "2.Blue", "meta": {}, "reply-to": null, "timestamp": "09:41.5"}
 {"id": "2.Pink.56", "conversation_id": "2.Pink.1", "text": "Thats a good point Would flares work in space", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:41.7"}
 {"id": "2.Orange.57", "conversation_id": "2.Pink.1", "text": "I think flares would work because they provide their own like heat like fuel src", "speaker": "2.Orange", "meta": {}, "reply-to": null, "timestamp": "09:44.0"}
-{"id": "2.Pink.57", "conversation_id": "2.Pink.1", "text": "They have  okay yeah I like the flares then well go the flares", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:47.9"}
+{"id": "2.Pink.57", "conversation_id": "2.Pink.1", "text": "They have okay yeah I like the flares then well go the flares", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:47.9"}
 {"id": "2.Blue.54", "conversation_id": "2.Pink.1", "text": "yeah we should probably put matches last I didnt even think about", "speaker": "2.Blue", "meta": {}, "reply-to": null, "timestamp": "09:50.3"}
-{"id": "2.Pink.58", "conversation_id": "2.Pink.1", "text": "yeah I didnt  that didnt occur to me either", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:52.9"}
+{"id": "2.Pink.58", "conversation_id": "2.Pink.1", "text": "yeah I didnt that didnt occur to me either", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:52.9"}
 {"id": "2.Orange.58", "conversation_id": "2.Pink.1", "text": "so after first aid kit flares Is that guys are", "speaker": "2.Orange", "meta": {}, "reply-to": null, "timestamp": "09:55.6"}
 {"id": "2.Blue.55", "conversation_id": "2.Pink.1", "text": "so yeah", "speaker": "2.Blue", "meta": {}, "reply-to": null, "timestamp": "09:56.1"}
 {"id": "2.Pink.59", "conversation_id": "2.Pink.1", "text": "I think so", "speaker": "2.Pink", "meta": {}, "reply-to": null, "timestamp": "09:56.2"}
@@ -1704,7 +1704,7 @@
 {"id": "5.Green.156", "conversation_id": "5.Blue.1", "text": "all right", "speaker": "5.Green", "meta": {}, "reply-to": null, "timestamp": "15:03.2"}
 {"id": "5.Green.157", "conversation_id": "5.Blue.1", "text": "a little", "speaker": "5.Green", "meta": {}, "reply-to": null, "timestamp": "15:03.2"}
 {"id": "5.Blue.55", "conversation_id": "5.Blue.1", "text": "so here", "speaker": "5.Blue", "meta": {}, "reply-to": null, "timestamp": "15:03.3"}
-{"id": "6.Pink.1", "conversation_id": "6.Pink.1", "text": "okay so can we at least agree that  oxygen is number one because without breathing nothings gonna happen", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "00:01.1"}
+{"id": "6.Pink.1", "conversation_id": "6.Pink.1", "text": "okay so can we at least agree that oxygen is number one because without breathing nothings gonna happen", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "00:01.1"}
 {"id": "6.Blue.1", "conversation_id": "6.Pink.1", "text": "yeah I put that", "speaker": "6.Blue", "meta": {}, "reply-to": null, "timestamp": "00:06.4"}
 {"id": "6.Green.1", "conversation_id": "6.Pink.1", "text": "step one not dying", "speaker": "6.Green", "meta": {}, "reply-to": null, "timestamp": "00:06.6"}
 {"id": "6.Pink.2", "conversation_id": "6.Pink.1", "text": "woo lets not die kay thats great", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "00:08.2"}
@@ -1911,7 +1911,7 @@
 {"id": "6.Pink.75", "conversation_id": "6.Pink.1", "text": "so rope nine", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "07:38.1"}
 {"id": "6.Orange.14", "conversation_id": "6.Pink.1", "text": "yeah", "speaker": "6.Orange", "meta": {}, "reply-to": null, "timestamp": "07:43.5"}
 {"id": "6.Pink.76", "conversation_id": "6.Pink.1", "text": "kay cool", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "07:43.5"}
-{"id": "6.Blue.45", "conversation_id": "6.Pink.1", "text": "maybe the compass next just like if it does work or at least like we have an idea even if the we know the  that were going at least the same direction the whole time you know", "speaker": "6.Blue", "meta": {}, "reply-to": null, "timestamp": "07:50.2"}
+{"id": "6.Blue.45", "conversation_id": "6.Pink.1", "text": "maybe the compass next just like if it does work or at least like we have an idea even if the we know the that were going at least the same direction the whole time you know", "speaker": "6.Blue", "meta": {}, "reply-to": null, "timestamp": "07:50.2"}
 {"id": "6.Pink.77", "conversation_id": "6.Pink.1", "text": "and even if it doesnt work its kind of small", "speaker": "6.Pink", "meta": {}, "reply-to": null, "timestamp": "07:55.2"}
 {"id": "6.Yellow.17", "conversation_id": "6.Pink.1", "text": "okay", "speaker": "6.Yellow", "meta": {}, "reply-to": null, "timestamp": "07:55.3"}
 {"id": "6.Green.58", "conversation_id": "6.Pink.1", "text": "mhm", "speaker": "6.Green", "meta": {}, "reply-to": null, "timestamp": "07:55.8"}
@@ -2169,7 +2169,7 @@
 {"id": "7.Pink.64", "conversation_id": "7.Pink.1", "text": "the flares sounds seems like when you cannot communicate you just", "speaker": "7.Pink", "meta": {}, "reply-to": null, "timestamp": "06:21.3"}
 {"id": "7.Blue.34", "conversation_id": "7.Pink.1", "text": "flash right yeah that also makes sense", "speaker": "7.Blue", "meta": {}, "reply-to": null, "timestamp": "06:30.4"}
 {"id": "7.Pink.65", "conversation_id": "7.Pink.1", "text": "yeah yeah yes as a signal like oh Im here like that", "speaker": "7.Pink", "meta": {}, "reply-to": null, "timestamp": "06:31.0"}
-{"id": "7.Pink.66", "conversation_id": "7.Pink.1", "text": "and the compass is justa  for you looking for direction", "speaker": "7.Pink", "meta": {}, "reply-to": null, "timestamp": "06:38.9"}
+{"id": "7.Pink.66", "conversation_id": "7.Pink.1", "text": "and the compass is justa for you looking for direction", "speaker": "7.Pink", "meta": {}, "reply-to": null, "timestamp": "06:38.9"}
 {"id": "7.Green.34", "conversation_id": "7.Pink.1", "text": "ohhh", "speaker": "7.Green", "meta": {}, "reply-to": null, "timestamp": "06:38.9"}
 {"id": "7.Green.35", "conversation_id": "7.Pink.1", "text": "I think maybe", "speaker": "7.Green", "meta": {}, "reply-to": null, "timestamp": "06:38.9"}
 {"id": "7.Blue.35", "conversation_id": "7.Pink.1", "text": "yeah", "speaker": "7.Blue", "meta": {}, "reply-to": null, "timestamp": "06:43.9"}
@@ -2736,7 +2736,7 @@
 {"id": "8.Yellow.72", "conversation_id": "8.Yellow.1", "text": "so", "speaker": "8.Yellow", "meta": {}, "reply-to": null, "timestamp": "09:00.6"}
 {"id": "8.Orange.64", "conversation_id": "8.Yellow.1", "text": "rational so we can", "speaker": "8.Orange", "meta": {}, "reply-to": null, "timestamp": "09:02.2"}
 {"id": "8.Green.74", "conversation_id": "8.Yellow.1", "text": "yeah", "speaker": "8.Green", "meta": {}, "reply-to": null, "timestamp": "09:02.8"}
-{"id": "8.Green.75", "conversation_id": "8.Yellow.1", "text": "Im pretty sure we  can", "speaker": "8.Green", "meta": {}, "reply-to": null, "timestamp": "09:02.8"}
+{"id": "8.Green.75", "conversation_id": "8.Yellow.1", "text": "Im pretty sure we can", "speaker": "8.Green", "meta": {}, "reply-to": null, "timestamp": "09:02.8"}
 {"id": "8.Yellow.73", "conversation_id": "8.Yellow.1", "text": "well can we assume weve memorized the stars", "speaker": "8.Yellow", "meta": {}, "reply-to": null, "timestamp": "09:03.5"}
 {"id": "8.Yellow.74", "conversation_id": "8.Yellow.1", "text": "like how how well do we know this", "speaker": "8.Yellow", "meta": {}, "reply-to": null, "timestamp": "09:07.3"}
 {"id": "8.Orange.65", "conversation_id": "8.Yellow.1", "text": "thats", "speaker": "8.Orange", "meta": {}, "reply-to": null, "timestamp": "09:07.4"}
@@ -2925,7 +2925,7 @@
 {"id": "9.Blue.1", "conversation_id": "9.Blue.1", "text": "I was just just a little bit confused whether were trying to reach the mother ship or survive the longest amount of time", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "00:04.2"}
 {"id": "9.Pink.1", "conversation_id": "9.Blue.1", "text": "yeah", "speaker": "9.Pink", "meta": {}, "reply-to": null, "timestamp": "00:06.4"}
 {"id": "9.Green.1", "conversation_id": "9.Blue.1", "text": "I think yeah I think reach the mother ship but you have to like survive in order to reach the mother ship", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "00:12.6"}
-{"id": "9.Pink.2", "conversation_id": "9.Blue.1", "text": "this is  200 miles", "speaker": "9.Pink", "meta": {}, "reply-to": null, "timestamp": "00:19.6"}
+{"id": "9.Pink.2", "conversation_id": "9.Blue.1", "text": "this is 200 miles", "speaker": "9.Pink", "meta": {}, "reply-to": null, "timestamp": "00:19.6"}
 {"id": "9.Green.2", "conversation_id": "9.Blue.1", "text": "yeah", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "00:21.2"}
 {"id": "9.Green.3", "conversation_id": "9.Blue.1", "text": "so I think the main priority in the beginning its just survival because it doesnt matter if you get there if you are not alive", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "00:23.1"}
 {"id": "9.Green.4", "conversation_id": "9.Blue.1", "text": "you know", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "00:29.9"}
@@ -3130,7 +3130,7 @@
 {"id": "9.Green.96", "conversation_id": "9.Blue.1", "text": "says the compass spring", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "09:41.0"}
 {"id": "9.Blue.52", "conversation_id": "9.Blue.1", "text": "of", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "09:49.1"}
 {"id": "9.Blue.53", "conversation_id": "9.Blue.1", "text": "matches are still srcs of", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "09:52.0"}
-{"id": "9.Blue.54", "conversation_id": "9.Blue.1", "text": "energy he if you really need it verses the pistol unless you take apart  the pistol", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "09:54.7"}
+{"id": "9.Blue.54", "conversation_id": "9.Blue.1", "text": "energy he if you really need it verses the pistol unless you take apart the pistol", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "09:54.7"}
 {"id": "9.Green.97", "conversation_id": "9.Blue.1", "text": "yeah", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "09:57.1"}
 {"id": "9.Green.98", "conversation_id": "9.Blue.1", "text": "yeah", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "10:01.9"}
 {"id": "9.Blue.55", "conversation_id": "9.Blue.1", "text": "that would be annoying that I dont think thats something we need to", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "10:02.5"}
@@ -3167,7 +3167,7 @@
 {"id": "9.Blue.63", "conversation_id": "9.Blue.1", "text": "shelter at night at least", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "11:42.0"}
 {"id": "9.Green.116", "conversation_id": "9.Blue.1", "text": "from the elements and space", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "11:43.8"}
 {"id": "9.Blue.64", "conversation_id": "9.Blue.1", "text": "yeah the solar", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "11:44.7"}
-{"id": "9.Blue.65", "conversation_id": "9.Blue.1", "text": "solar radiation youd actually good  you could get cancer", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "11:47.9"}
+{"id": "9.Blue.65", "conversation_id": "9.Blue.1", "text": "solar radiation youd actually good you could get cancer", "speaker": "9.Blue", "meta": {}, "reply-to": null, "timestamp": "11:47.9"}
 {"id": "9.Green.117", "conversation_id": "9.Blue.1", "text": "we have a lot", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "11:51.3"}
 {"id": "9.Pink.66", "conversation_id": "9.Blue.1", "text": "we have the suit already", "speaker": "9.Pink", "meta": {}, "reply-to": null, "timestamp": "11:51.6"}
 {"id": "9.Green.118", "conversation_id": "9.Blue.1", "text": "its also probably going to go that rays are probably going to go through the life raft dont think that would be like a", "speaker": "9.Green", "meta": {}, "reply-to": null, "timestamp": "11:53.2"}
@@ -3279,7 +3279,7 @@
 {"id": "10.Orange.11", "conversation_id": "10.Green.1", "text": "no but then the signal flares will", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "02:05.0"}
 {"id": "10.Green.17", "conversation_id": "10.Green.1", "text": "I mean they burn right so they need oxygen", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "02:07.8"}
 {"id": "10.Green.18", "conversation_id": "10.Green.1", "text": "without the oxygen there is no point to this with", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "02:11.7"}
-{"id": "10.Blue.14", "conversation_id": "10.Green.1", "text": "see I think I think the next important part is  youre making a safari sort of thing right so basically you really need some water that will keep you going so water is probably the four", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "02:13.9"}
+{"id": "10.Blue.14", "conversation_id": "10.Green.1", "text": "see I think I think the next important part is youre making a safari sort of thing right so basically you really need some water that will keep you going so water is probably the four", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "02:13.9"}
 {"id": "10.Green.19", "conversation_id": "10.Green.1", "text": "yes", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "02:18.2"}
 {"id": "10.Green.20", "conversation_id": "10.Green.1", "text": "yes what is the next one yes water", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "02:20.5"}
 {"id": "10.Orange.12", "conversation_id": "10.Green.1", "text": "yeah", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "02:21.4"}
@@ -3313,7 +3313,7 @@
 {"id": "10.Green.26", "conversation_id": "10.Green.1", "text": "portable heating unit is actually fourth on my list", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "03:06.5"}
 {"id": "10.Pink.27", "conversation_id": "10.Green.1", "text": "okay what are your four five and six then", "speaker": "10.Pink", "meta": {}, "reply-to": null, "timestamp": "03:10.2"}
 {"id": "10.Orange.20", "conversation_id": "10.Green.1", "text": "umm", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "03:10.3"}
-{"id": "10.Orange.21", "conversation_id": "10.Green.1", "text": "so more of four was  then life raft", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "03:11.7"}
+{"id": "10.Orange.21", "conversation_id": "10.Green.1", "text": "so more of four was then life raft", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "03:11.7"}
 {"id": "10.Orange.22", "conversation_id": "10.Green.1", "text": "and then five was FM transmitter for", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "03:11.7"}
 {"id": "10.Orange.23", "conversation_id": "10.Green.1", "text": "communication and six was a box of matches but then considering that you like you do not have oxygen that say about you", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "03:20.4"}
 {"id": "10.Blue.22", "conversation_id": "10.Green.1", "text": "theres no atmosphere my four five six are", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "03:27.0"}
@@ -3417,7 +3417,7 @@
 {"id": "10.Orange.46", "conversation_id": "10.Green.1", "text": "nine is uhh", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "07:33.0"}
 {"id": "10.Orange.47", "conversation_id": "10.Green.1", "text": "parachute silk", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "07:36.5"}
 {"id": "10.Blue.47", "conversation_id": "10.Green.1", "text": "now we are coming to slowly coming to useless things", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "07:39.6"}
-{"id": "10.Green.45", "conversation_id": "10.Green.1", "text": "so my my ten was parachute silk and we already used that  so eleven is pistols and twelve is box of matches", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "07:43.6"}
+{"id": "10.Green.45", "conversation_id": "10.Green.1", "text": "so my my ten was parachute silk and we already used that so eleven is pistols and twelve is box of matches", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "07:43.6"}
 {"id": "10.Blue.48", "conversation_id": "10.Green.1", "text": "books of matches is just useless", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "07:57.5"}
 {"id": "10.Green.46", "conversation_id": "10.Green.1", "text": "yeah that is not good", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "07:59.8"}
 {"id": "10.Blue.49", "conversation_id": "10.Green.1", "text": "and it can potentially be dangerous as I mean if youre getting an oxygen cylinder and then matches and everything so thats why my box of matches is just last on the list so", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "08:00.4"}
@@ -3477,7 +3477,7 @@
 {"id": "10.Green.57", "conversation_id": "10.Green.1", "text": "why is that", "speaker": "10.Green", "meta": {}, "reply-to": null, "timestamp": "10:13.2"}
 {"id": "10.Pink.73", "conversation_id": "10.Green.1", "text": "if I", "speaker": "10.Pink", "meta": {}, "reply-to": null, "timestamp": "10:13.4"}
 {"id": "10.Orange.60", "conversation_id": "10.Green.1", "text": "I have", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "10:18.4"}
-{"id": "10.Orange.61", "conversation_id": "10.Green.1", "text": "I have a question about signal flares like you mean  those signals which are in the atmosphere or", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "10:20.2"}
+{"id": "10.Orange.61", "conversation_id": "10.Green.1", "text": "I have a question about signal flares like you mean those signals which are in the atmosphere or", "speaker": "10.Orange", "meta": {}, "reply-to": null, "timestamp": "10:20.2"}
 {"id": "10.Blue.69", "conversation_id": "10.Green.1", "text": "no no no these are these are small bullet shots and you shoot them to go up in the air and often", "speaker": "10.Blue", "meta": {}, "reply-to": null, "timestamp": "10:27.4"}
 {"id": "10.Pink.74", "conversation_id": "10.Green.1", "text": "yeah yeah yeah sort of and then it should light up", "speaker": "10.Pink", "meta": {}, "reply-to": null, "timestamp": "10:27.6"}
 {"id": "10.Pink.75", "conversation_id": "10.Green.1", "text": "sure", "speaker": "10.Pink", "meta": {}, "reply-to": null, "timestamp": "10:33.7"}
@@ -3623,7 +3623,7 @@
 {"id": "11.Pink.57", "conversation_id": "11.Pink.1", "text": "yeah like someones going to get like mad at another person when we cant find the things someones gonna like", "speaker": "11.Pink", "meta": {}, "reply-to": null, "timestamp": "05:34.8"}
 {"id": "11.Pink.58", "conversation_id": "11.Pink.1", "text": "I would agree with that", "speaker": "11.Pink", "meta": {}, "reply-to": null, "timestamp": "05:42.6"}
 {"id": "11.Blue.26", "conversation_id": "11.Pink.1", "text": "I mean like", "speaker": "11.Blue", "meta": {}, "reply-to": null, "timestamp": "05:44.3"}
-{"id": "11.Blue.27", "conversation_id": "11.Pink.1", "text": "yeah I I I doesnt see anything you need to like shoot on the moon  so like", "speaker": "11.Blue", "meta": {}, "reply-to": null, "timestamp": "05:44.3"}
+{"id": "11.Blue.27", "conversation_id": "11.Pink.1", "text": "yeah I I I doesnt see anything you need to like shoot on the moon so like", "speaker": "11.Blue", "meta": {}, "reply-to": null, "timestamp": "05:44.3"}
 {"id": "11.Green.43", "conversation_id": "11.Pink.1", "text": "what do you think", "speaker": "11.Green", "meta": {}, "reply-to": null, "timestamp": "05:44.4"}
 {"id": "11.Pink.59", "conversation_id": "11.Pink.1", "text": "cause like theres nothing on the moon thats like were gonna need to shoot", "speaker": "11.Pink", "meta": {}, "reply-to": null, "timestamp": "05:45.4"}
 {"id": "11.Green.44", "conversation_id": "11.Pink.1", "text": "hahaha", "speaker": "11.Green", "meta": {}, "reply-to": null, "timestamp": "05:51.4"}
@@ -3778,7 +3778,7 @@
 {"id": "12.Pink.37", "conversation_id": "12.Pink.1", "text": "okay", "speaker": "12.Pink", "meta": {}, "reply-to": null, "timestamp": "05:26.0"}
 {"id": "12.Green.36", "conversation_id": "12.Pink.1", "text": "and I somehow put the heating unit still further down so maybe that", "speaker": "12.Green", "meta": {}, "reply-to": null, "timestamp": "05:27.1"}
 {"id": "12.Blue.56", "conversation_id": "12.Pink.1", "text": "okay", "speaker": "12.Blue", "meta": {}, "reply-to": null, "timestamp": "05:27.2"}
-{"id": "12.Blue.57", "conversation_id": "12.Pink.1", "text": "okaymy heating unit was very high up so", "speaker": "12.Blue", "meta": {}, "reply-to": null, "timestamp": "05:30.1"}
+{"id": "12.Blue.57", "conversation_id": "12.Pink.1", "text": "okay my heating unit was very high up so", "speaker": "12.Blue", "meta": {}, "reply-to": null, "timestamp": "05:30.1"}
 {"id": "12.Pink.38", "conversation_id": "12.Pink.1", "text": "mhm so", "speaker": "12.Pink", "meta": {}, "reply-to": null, "timestamp": "05:31.5"}
 {"id": "12.Green.37", "conversation_id": "12.Pink.1", "text": "yeah so either first aid or heating unit as number seven", "speaker": "12.Green", "meta": {}, "reply-to": null, "timestamp": "05:35.3"}
 {"id": "12.Blue.58", "conversation_id": "12.Pink.1", "text": "yeah", "speaker": "12.Blue", "meta": {}, "reply-to": null, "timestamp": "05:38.5"}
@@ -4416,7 +4416,7 @@
 {"id": "14.Green.79", "conversation_id": "14.Green.1", "text": "Holding yeah", "speaker": "14.Green", "meta": {}, "reply-to": null, "timestamp": "11:17.2"}
 {"id": "14.Pink.49", "conversation_id": "14.Green.1", "text": "Well theres no precipitation on th emoon I dont think so the tarp", "speaker": "14.Pink", "meta": {}, "reply-to": null, "timestamp": "11:19.2"}
 {"id": "14.Blue.31", "conversation_id": "14.Green.1", "text": "The tarp will help keep the heat like trapped inside an area", "speaker": "14.Blue", "meta": {}, "reply-to": null, "timestamp": "11:25.7"}
-{"id": "14.Green.80", "conversation_id": "14.Green.1", "text": "Well yeah it could hold the heat and then on top of that a tarp is honestly just useful for carrying things Back to the if someone gets injured you can use a tarp to make a gurney thats not the word Stretcher  I mean that was my thinking for it not to keep things war dry but its like useful for carrying So its like a bag", "speaker": "14.Green", "meta": {}, "reply-to": null, "timestamp": "11:28.2"}
+{"id": "14.Green.80", "conversation_id": "14.Green.1", "text": "Well yeah it could hold the heat and then on top of that a tarp is honestly just useful for carrying things Back to the if someone gets injured you can use a tarp to make a gurney thats not the word Stretcher I mean that was my thinking for it not to keep things war dry but its like useful for carrying So its like a bag", "speaker": "14.Green", "meta": {}, "reply-to": null, "timestamp": "11:28.2"}
 {"id": "14.Pink.50", "conversation_id": "14.Green.1", "text": "Okay", "speaker": "14.Pink", "meta": {}, "reply-to": null, "timestamp": "11:43.8"}
 {"id": "14.Pink.51", "conversation_id": "14.Green.1", "text": "One final question", "speaker": "14.Pink", "meta": {}, "reply-to": null, "timestamp": "11:55.5"}
 {"id": "14.Green.81", "conversation_id": "14.Green.1", "text": "Sure or maybe more questions Laughter", "speaker": "14.Green", "meta": {}, "reply-to": null, "timestamp": "11:56.6"}
@@ -4500,7 +4500,7 @@
 {"id": "15.Blue.2", "conversation_id": "15.Blue.1", "text": "Yeah", "speaker": "15.Blue", "meta": {}, "reply-to": null, "timestamp": "00:07.1"}
 {"id": "15.Pink.2", "conversation_id": "15.Blue.1", "text": "Actually number two", "speaker": "15.Pink", "meta": {}, "reply-to": null, "timestamp": "00:08.4"}
 {"id": "15.Orange.1", "conversation_id": "15.Blue.1", "text": "Yeah", "speaker": "15.Orange", "meta": {}, "reply-to": null, "timestamp": "00:09.1"}
-{"id": "15.Green.2", "conversation_id": "15.Blue.1", "text": "No you cant survive without oxygen  You can survive with water you can survive longer without water than oxygen", "speaker": "15.Green", "meta": {}, "reply-to": null, "timestamp": "00:09.8"}
+{"id": "15.Green.2", "conversation_id": "15.Blue.1", "text": "No you cant survive without oxygen You can survive with water you can survive longer without water than oxygen", "speaker": "15.Green", "meta": {}, "reply-to": null, "timestamp": "00:09.8"}
 {"id": "15.Pink.3", "conversation_id": "15.Blue.1", "text": "Well you cant yeah", "speaker": "15.Pink", "meta": {}, "reply-to": null, "timestamp": "00:10.1"}
 {"id": "15.Blue.3", "conversation_id": "15.Blue.1", "text": "Fair enough", "speaker": "15.Blue", "meta": {}, "reply-to": null, "timestamp": "00:10.3"}
 {"id": "15.Blue.4", "conversation_id": "15.Blue.1", "text": "Okay so real quick ground rules Are we making this journey for two hundred miles in space suits", "speaker": "15.Blue", "meta": {}, "reply-to": null, "timestamp": "00:13.5"}
@@ -5035,7 +5035,7 @@
 {"id": "16.Pink.64", "conversation_id": "16.Green.1", "text": "I dont know", "speaker": "16.Pink", "meta": {}, "reply-to": null, "timestamp": "10:10.6"}
 {"id": "16.Green.92", "conversation_id": "16.Green.1", "text": "I mean I imagine you", "speaker": "16.Green", "meta": {}, "reply-to": null, "timestamp": "10:10.8"}
 {"id": "16.Blue.54", "conversation_id": "16.Green.1", "text": "Alright lets assume theres some way to like eat the food and stuff", "speaker": "16.Blue", "meta": {}, "reply-to": null, "timestamp": "10:12.7"}
-{"id": "16.Green.93", "conversation_id": "16.Green.1", "text": "Yeah eat the food Okay  Just gonna make this a possible dilemma to have like okay", "speaker": "16.Green", "meta": {}, "reply-to": null, "timestamp": "10:13.2"}
+{"id": "16.Green.93", "conversation_id": "16.Green.1", "text": "Yeah eat the food Okay Just gonna make this a possible dilemma to have like okay", "speaker": "16.Green", "meta": {}, "reply-to": null, "timestamp": "10:13.2"}
 {"id": "16.Orange.56", "conversation_id": "16.Green.1", "text": "There should be otherwise the oxygen would be useless", "speaker": "16.Orange", "meta": {}, "reply-to": null, "timestamp": "10:21.6"}
 {"id": "16.Green.94", "conversation_id": "16.Green.1", "text": "Yeah", "speaker": "16.Green", "meta": {}, "reply-to": null, "timestamp": "10:24.0"}
 {"id": "16.Green.95", "conversation_id": "16.Green.1", "text": "Alright so", "speaker": "16.Green", "meta": {}, "reply-to": null, "timestamp": "10:27.5"}
@@ -5214,7 +5214,7 @@
 {"id": "17.Green.30", "conversation_id": "17.Green.1", "text": "which is well actually this doesnt specify that we have space suits so we might just all be dead anyway", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "04:22.8"}
 {"id": "17.Pink.30", "conversation_id": "17.Green.1", "text": "Yeah exactly", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "04:30.8"}
 {"id": "17.Green.31", "conversation_id": "17.Green.1", "text": "Yeah but", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "04:34.9"}
-{"id": "17.Pink.31", "conversation_id": "17.Green.1", "text": "Yeah I mean I guess I dont know exactly how youd make a shelter out of those You cant really Nothing is going everything is going to fall down I guess  Well actually no itll itll stay up I guess", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "04:35.3"}
+{"id": "17.Pink.31", "conversation_id": "17.Green.1", "text": "Yeah I mean I guess I dont know exactly how youd make a shelter out of those You cant really Nothing is going everything is going to fall down I guess Well actually no itll itll stay up I guess", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "04:35.3"}
 {"id": "17.Green.32", "conversation_id": "17.Green.1", "text": "Not not really the moon does have gravity just not very much", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "04:44.4"}
 {"id": "17.Pink.32", "conversation_id": "17.Green.1", "text": "Yeah very very very light yeah", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "04:47.1"}
 {"id": "17.Green.33", "conversation_id": "17.Green.1", "text": "No it its more to get yourself out of the sun because solar heating would eventually become an issue thats why all the stuff we sent we sent up there is white", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "04:49.3"}
@@ -5327,7 +5327,7 @@
 {"id": "17.Pink.69", "conversation_id": "17.Green.1", "text": "Well I think now its pretty straight", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "11:54.6"}
 {"id": "17.Green.77", "conversation_id": "17.Green.1", "text": "And", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "12:01.8"}
 {"id": "17.Green.78", "conversation_id": "17.Green.1", "text": "You could make that last like three and a half days so if we just walk straight through and dont sleep we could make it", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "12:06.5"}
-{"id": "17.Pink.70", "conversation_id": "17.Green.1", "text": "Yeah youre right actually  I dont think we yeah I think the other things are more important than the dehydrated milk I think at this point  So we can rank those and then thatll be probably twelfth", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "12:10.3"}
+{"id": "17.Pink.70", "conversation_id": "17.Green.1", "text": "Yeah youre right actually I dont think we yeah I think the other things are more important than the dehydrated milk I think at this point So we can rank those and then thatll be probably twelfth", "speaker": "17.Pink", "meta": {}, "reply-to": null, "timestamp": "12:10.3"}
 {"id": "17.Blue.44", "conversation_id": "17.Green.1", "text": "Yeah okay", "speaker": "17.Blue", "meta": {}, "reply-to": null, "timestamp": "12:19.3"}
 {"id": "17.Green.79", "conversation_id": "17.Green.1", "text": "Yeah", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "12:19.9"}
 {"id": "17.Green.80", "conversation_id": "17.Green.1", "text": "I think the rope would would be a good candidate for ninth because it it rope is always handy Ive never been in a situation where Ive been like man I wish I didnt have this rope", "speaker": "17.Green", "meta": {}, "reply-to": null, "timestamp": "12:22.7"}
@@ -5705,7 +5705,7 @@
 {"id": "18.Pink.39", "conversation_id": "18.Orange.1", "text": "We got the air", "speaker": "18.Pink", "meta": {}, "reply-to": null, "timestamp": "09:46.1"}
 {"id": "18.Green.87", "conversation_id": "18.Orange.1", "text": "Yeah", "speaker": "18.Green", "meta": {}, "reply-to": null, "timestamp": "09:46.9"}
 {"id": "19.Pink.1", "conversation_id": "19.Pink.1", "text": "Okay so", "speaker": "19.Pink", "meta": {}, "reply-to": null, "timestamp": "00:01.6"}
-{"id": "19.Green.1", "conversation_id": "19.Pink.1", "text": "Should  we just go down the list for each item", "speaker": "19.Green", "meta": {}, "reply-to": null, "timestamp": "00:03.7"}
+{"id": "19.Green.1", "conversation_id": "19.Pink.1", "text": "Should we just go down the list for each item", "speaker": "19.Green", "meta": {}, "reply-to": null, "timestamp": "00:03.7"}
 {"id": "19.Pink.2", "conversation_id": "19.Pink.1", "text": "Yeah I", "speaker": "19.Pink", "meta": {}, "reply-to": null, "timestamp": "00:05.6"}
 {"id": "19.Green.2", "conversation_id": "19.Pink.1", "text": "regardless of ranking", "speaker": "19.Green", "meta": {}, "reply-to": null, "timestamp": "00:06.3"}
 {"id": "19.Pink.3", "conversation_id": "19.Pink.1", "text": "Yeah I feel like in general the main thing we need to worry about is were not sure how long its going to take us to get like", "speaker": "19.Pink", "meta": {}, "reply-to": null, "timestamp": "00:08.0"}
@@ -6456,7 +6456,7 @@
 {"id": "21.Green.13", "conversation_id": "21.Green.1", "text": "what do you guys think", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "00:52.8"}
 {"id": "21.Green.14", "conversation_id": "21.Green.1", "text": "Alright", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "00:55.2"}
 {"id": "21.Green.15", "conversation_id": "21.Green.1", "text": "Okay yeah", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "00:56.9"}
-{"id": "21.Orange.7", "conversation_id": "21.Green.1", "text": "Thats  yeah", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "00:57.4"}
+{"id": "21.Orange.7", "conversation_id": "21.Green.1", "text": "Thats yeah", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "00:57.4"}
 {"id": "21.Pink.3", "conversation_id": "21.Green.1", "text": "I feel like theyre the easiest to agree upon", "speaker": "21.Pink", "meta": {}, "reply-to": null, "timestamp": "00:57.6"}
 {"id": "21.Green.16", "conversation_id": "21.Green.1", "text": "Yeah needs Okay yeah", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "00:59.7"}
 {"id": "21.Blue.10", "conversation_id": "21.Green.1", "text": "Yeah like", "speaker": "21.Blue", "meta": {}, "reply-to": null, "timestamp": "00:59.8"}
@@ -6491,7 +6491,7 @@
 {"id": "21.Orange.14", "conversation_id": "21.Green.1", "text": "Yeah but", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "02:00.6"}
 {"id": "21.Pink.8", "conversation_id": "21.Green.1", "text": "Yeah what about it", "speaker": "21.Pink", "meta": {}, "reply-to": null, "timestamp": "02:01.0"}
 {"id": "21.Yellow.6", "conversation_id": "21.Green.1", "text": "What are our basic needs", "speaker": "21.Yellow", "meta": {}, "reply-to": null, "timestamp": "02:01.0"}
-{"id": "21.Orange.15", "conversation_id": "21.Green.1", "text": "I thought the more  I put like for two and three I put like stuff that was necessary to get to the location because if we dont get to the location we would die eventually anyway", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "02:02.6"}
+{"id": "21.Orange.15", "conversation_id": "21.Green.1", "text": "I thought the more I put like for two and three I put like stuff that was necessary to get to the location because if we dont get to the location we would die eventually anyway", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "02:02.6"}
 {"id": "21.Blue.17", "conversation_id": "21.Green.1", "text": "So I think", "speaker": "21.Blue", "meta": {}, "reply-to": null, "timestamp": "02:03.3"}
 {"id": "21.Green.27", "conversation_id": "21.Green.1", "text": "See okay so youre talking about as stuff like", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "02:13.9"}
 {"id": "21.Blue.18", "conversation_id": "21.Green.1", "text": "Do you have So what do you have", "speaker": "21.Blue", "meta": {}, "reply-to": null, "timestamp": "02:14.7"}
@@ -6502,7 +6502,7 @@
 {"id": "21.Green.28", "conversation_id": "21.Green.1", "text": "Yeah those were", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "02:23.6"}
 {"id": "21.Pink.10", "conversation_id": "21.Green.1", "text": "Yeah", "speaker": "21.Pink", "meta": {}, "reply-to": null, "timestamp": "02:31.9"}
 {"id": "21.Green.29", "conversation_id": "21.Green.1", "text": "Yeah I feel like definitely see I so we crash landed right But were on the way so we can kind of know in what general direction But yes definitely knowing like at least a compass like those things are definitely one of those things that we do need", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "02:32.1"}
-{"id": "21.Orange.18", "conversation_id": "21.Green.1", "text": "I  Im willing to say that water would be more important than that though like hindsight", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "02:47.6"}
+{"id": "21.Orange.18", "conversation_id": "21.Green.1", "text": "I Im willing to say that water would be more important than that though like hindsight", "speaker": "21.Orange", "meta": {}, "reply-to": null, "timestamp": "02:47.6"}
 {"id": "21.Blue.20", "conversation_id": "21.Green.1", "text": "I think", "speaker": "21.Blue", "meta": {}, "reply-to": null, "timestamp": "02:51.8"}
 {"id": "21.Blue.21", "conversation_id": "21.Green.1", "text": "Yeah I didnt get that then", "speaker": "21.Blue", "meta": {}, "reply-to": null, "timestamp": "02:51.8"}
 {"id": "21.Green.30", "conversation_id": "21.Green.1", "text": "Yeah", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "02:51.9"}
@@ -6885,7 +6885,7 @@
 {"id": "21.Green.130", "conversation_id": "21.Green.1", "text": "Yeah we were", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "15:05.6"}
 {"id": "21.Green.131", "conversation_id": "21.Green.1", "text": "I mean honestly all that stuff in the middle though there kind of interchangeable", "speaker": "21.Green", "meta": {}, "reply-to": null, "timestamp": "15:12.0"}
 {"id": "22.Pink.1", "conversation_id": "22.Pink.1", "text": "Okay so", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "00:04.1"}
-{"id": "22.Pink.2", "conversation_id": "22.Pink.1", "text": "I guess we just need to get a starting point  What did you guys put as your first thing", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "00:07.3"}
+{"id": "22.Pink.2", "conversation_id": "22.Pink.1", "text": "I guess we just need to get a starting point What did you guys put as your first thing", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "00:07.3"}
 {"id": "22.Green.1", "conversation_id": "22.Pink.1", "text": "I put the oxygen", "speaker": "22.Green", "meta": {}, "reply-to": null, "timestamp": "00:10.3"}
 {"id": "22.Blue.1", "conversation_id": "22.Pink.1", "text": "Same", "speaker": "22.Blue", "meta": {}, "reply-to": null, "timestamp": "00:12.4"}
 {"id": "22.Orange.1", "conversation_id": "22.Pink.1", "text": "Same", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "00:12.6"}
@@ -6910,7 +6910,7 @@
 {"id": "22.Orange.4", "conversation_id": "22.Pink.1", "text": "I was like were two hundred miles away right So if we dont know which direction to move then we cant even start moving towards the mother ship", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "00:57.8"}
 {"id": "22.Green.7", "conversation_id": "22.Pink.1", "text": "Right", "speaker": "22.Green", "meta": {}, "reply-to": null, "timestamp": "01:07.5"}
 {"id": "22.Pink.9", "conversation_id": "22.Pink.1", "text": "Yeah okay", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "01:08.8"}
-{"id": "22.Yellow.1", "conversation_id": "22.Pink.1", "text": "for me I had for my number two I had stellar map  Same reason as him I thought that you could survive around three days without water but since you are only two hundred miles away maybe you should try to get to the point so you need like a navigational system to get there And hope that maybe um youll last three days while you do it But I agree with you guys about how important water is water was my third choice so I guess Ill go with water as number 2", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "01:10.8"}
+{"id": "22.Yellow.1", "conversation_id": "22.Pink.1", "text": "for me I had for my number two I had stellar map Same reason as him I thought that you could survive around three days without water but since you are only two hundred miles away maybe you should try to get to the point so you need like a navigational system to get there And hope that maybe um youll last three days while you do it But I agree with you guys about how important water is water was my third choice so I guess Ill go with water as number 2", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "01:10.8"}
 {"id": "22.Pink.10", "conversation_id": "22.Pink.1", "text": "Consensus in two Okay", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "01:41.0"}
 {"id": "22.Blue.7", "conversation_id": "22.Pink.1", "text": "Yeah", "speaker": "22.Blue", "meta": {}, "reply-to": null, "timestamp": "01:41.8"}
 {"id": "22.Pink.11", "conversation_id": "22.Pink.1", "text": "Okay so both you guys had water as your third choice so", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "01:49.1"}
@@ -6987,7 +6987,7 @@
 {"id": "22.Yellow.13", "conversation_id": "22.Pink.1", "text": "So for navigation which one is more important The map or the compass", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "05:02.9"}
 {"id": "22.Orange.16", "conversation_id": "22.Pink.1", "text": "The stellar map is the one I mean you", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "05:06.7"}
 {"id": "22.Yellow.14", "conversation_id": "22.Pink.1", "text": "I was confused So by stellar map is it like the map of like the surface or the map of", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "05:10.9"}
-{"id": "22.Orange.17", "conversation_id": "22.Pink.1", "text": "It is the map of the part of the moon which is getting hit by the sun  It is a time dependent map", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "05:14.7"}
+{"id": "22.Orange.17", "conversation_id": "22.Pink.1", "text": "It is the map of the part of the moon which is getting hit by the sun It is a time dependent map", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "05:14.7"}
 {"id": "22.Yellow.15", "conversation_id": "22.Pink.1", "text": "Ok yeah I was kind of confused", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "05:16.4"}
 {"id": "22.Orange.18", "conversation_id": "22.Pink.1", "text": "This part of the moon will be enlightened it will be bright today tomorrow it will be a little shifted that variation is in the map", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "05:20.9"}
 {"id": "22.Yellow.16", "conversation_id": "22.Pink.1", "text": "Okay", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "05:24.5"}
@@ -7013,7 +7013,7 @@
 {"id": "22.Yellow.20", "conversation_id": "22.Pink.1", "text": "Why was youre uh", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "06:18.4"}
 {"id": "22.Orange.23", "conversation_id": "22.Pink.1", "text": "Why", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "06:19.2"}
 {"id": "22.Green.28", "conversation_id": "22.Pink.1", "text": "We dont need pistols though", "speaker": "22.Green", "meta": {}, "reply-to": null, "timestamp": "06:19.3"}
-{"id": "22.Pink.38", "conversation_id": "22.Pink.1", "text": "Survival instinct I dont know The second the second you touchdown you dont actually   if youre  you dont what is it", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "06:21.2"}
+{"id": "22.Pink.38", "conversation_id": "22.Pink.1", "text": "Survival instinct I dont know The second the second you touchdown you dont actually if youre you dont what is it", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "06:21.2"}
 {"id": "22.Yellow.21", "conversation_id": "22.Pink.1", "text": "Aliens", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "06:27.2"}
 {"id": "22.Pink.39", "conversation_id": "22.Pink.1", "text": "Youre just in youre in a completely new environment so", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "06:27.9"}
 {"id": "22.Green.29", "conversation_id": "22.Pink.1", "text": "Laughter", "speaker": "22.Green", "meta": {}, "reply-to": null, "timestamp": "06:28.2"}
@@ -7206,7 +7206,7 @@
 {"id": "22.Green.62", "conversation_id": "22.Pink.1", "text": "Yeah", "speaker": "22.Green", "meta": {}, "reply-to": null, "timestamp": "13:50.9"}
 {"id": "22.Pink.85", "conversation_id": "22.Pink.1", "text": "Okay", "speaker": "22.Pink", "meta": {}, "reply-to": null, "timestamp": "13:53.5"}
 {"id": "22.Yellow.67", "conversation_id": "22.Pink.1", "text": "Now that I think about it I feel like the stellar map is also pretty useless", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "13:55.3"}
-{"id": "22.Blue.52", "conversation_id": "22.Pink.1", "text": "Not necessarily um because it  you told us it was a time like basically a clock right So", "speaker": "22.Blue", "meta": {}, "reply-to": null, "timestamp": "14:01.0"}
+{"id": "22.Blue.52", "conversation_id": "22.Pink.1", "text": "Not necessarily um because it you told us it was a time like basically a clock right So", "speaker": "22.Blue", "meta": {}, "reply-to": null, "timestamp": "14:01.0"}
 {"id": "22.Orange.58", "conversation_id": "22.Pink.1", "text": "It shows a map of like where the light will be I mean where they will", "speaker": "22.Orange", "meta": {}, "reply-to": null, "timestamp": "14:06.4"}
 {"id": "22.Blue.53", "conversation_id": "22.Pink.1", "text": "Yeah", "speaker": "22.Blue", "meta": {}, "reply-to": null, "timestamp": "14:11.1"}
 {"id": "22.Yellow.68", "conversation_id": "22.Pink.1", "text": "The constellation So like what stars you can see from your surface so you can determine like", "speaker": "22.Yellow", "meta": {}, "reply-to": null, "timestamp": "14:11.4"}

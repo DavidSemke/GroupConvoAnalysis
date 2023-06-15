@@ -21,7 +21,7 @@ def convo_metadata(df, expert_ranking, transcripts_path, patts):
         last_line = lines[-1]
         secs_match = re.search(patts['ts'], last_line)
         secs = secs_match.group()
-        mins = round(secs / 60, 2)
+        mins = round(float(secs) / 60, 2)
 
         for line in lines:
             person_match = re.search(patts['p_match'], line)
