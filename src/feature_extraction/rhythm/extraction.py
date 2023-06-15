@@ -1,4 +1,4 @@
-from src.feature_extraction.prosody.meter import speaker_meter_affinity
+from src.feature_extraction.rhythm.meter import speaker_meter_affinity
 from src.utils.timestamps import convert_to_secs
 from src.utils.stats import within_cluster_variance
 

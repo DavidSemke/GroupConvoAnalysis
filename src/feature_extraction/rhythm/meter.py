@@ -1,6 +1,6 @@
-import src.constants as const
-import prosodic as pro
 import re
+import prosodic as pro
+import src.constants as const
 
 def speaker_meter_affinity(speaker, convo):
     utt_meter_counts = {}
