@@ -23,20 +23,14 @@ ugi_convos = [ugi_corpus.get_conversation('1.Blue.1')]
 # Prosodic Constants
 
 meters = [
-    # 'iambic_pentameter',
-    # 'iambic_pentameter2',
-    # 'iambic_pentameter3',
-    'kiparskyhanson_hopkins',
-    'kiparskyhanson_shakespeare',
+    'iambic_meter1',
+    'iambic_meter2',
+    'kiparskyhanson_hopkins'
+    # 'kiparskyhanson_shakespeare',
     # 'litlab',
-    'meter_arto',
-    'meter_ryan'
-    # 'meter_ryan_categorical',
-    # 'prose_rhythm_iambic',
-    # 'prose_rhythm_iambic_inviolable',
-    # 'prose_rhythm_iambic_violable',
-    # 'strength_and_resolution',
-    # 'strength_only'
+    # 'meter_arto',
+    # 'meter_ryan',
+    # 'strength_and_resolution'
 ]
 
 # Lexical Constants

@@ -1,20 +1,19 @@
 from meter import speaker_meter_affinity
 import src.constants as const
 
-convo = const.gap_convos[0]
-
-print()
-print('SPEAKER METERS')
-print()
-
-for s in convo.iter_speakers():
-    print(s.id, ':')
-    affinity_vector = speaker_meter_affinity(s, convo)
-
-    for m in const.meters:
-        print('\t', m, ':', affinity_vector[m], '%')
-    
+for convo in const.gap_convos:
     print()
+    print(f'{convo.id.upper()} - SPEAKER METERS')
+    print()
+
+    for s in convo.iter_speakers():
+        print(s.id, ':')
+        affinity_vector = speaker_meter_affinity(s, convo)
+
+        for m in const.meters:
+            print('\t', m, ':', affinity_vector[m], '%')
+        
+        print()
 
 
 # meter_dict = {

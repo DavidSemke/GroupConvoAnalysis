@@ -15,7 +15,8 @@ def speaker_meter_affinity(speaker, convo):
     ):
         text = re.sub('[^ \w]', '', utt.text)
 
-        if not text: continue
+        # filter utterances unlikely to reveal meter affinity
+        if len(text.split()) < 5: continue
 
         meter_dict = {}
 
@@ -28,7 +29,6 @@ def speaker_meter_affinity(speaker, convo):
 
             p = best_ps[0]
 
-            stress = p.str_stress()
             viols_dict = p.violations()
             viol_counts = list(viols_dict.values())
             viol_count = int(sum(viol_counts))
@@ -37,7 +37,6 @@ def speaker_meter_affinity(speaker, convo):
             )
             
             meter_dict[m] = {
-                'stress': stress,
                 'vc': viol_count,
                 'vcc': viol_constraint_count
             }
