@@ -130,7 +130,6 @@
 321.481:>>Person3>>So it seems like we all have real relative agreement. 
 322.024:>>Person2>>Alright so we all agreed on the oxygen being one, and the water being two, so we might as well just put that down. 
 327.638:>>Person1>>Definitely.
-P2>>So %HESITATION
 328.429:>>Person3>>Then I put 
 330.648:>>Person3>>food as third 'cause that's the third most important like it goes, in my mind, oxygen, water well you need oxygen to survive minutes, you need water to survive days, then you need food to survive weeks. 
 338.325:>>Person1>>Yeah.

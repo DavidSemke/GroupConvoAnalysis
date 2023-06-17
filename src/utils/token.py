@@ -54,8 +54,10 @@ def is_content_tag(tag):
 # an utterance is a content utterance if it contains a content word
 def is_content_utterance(utt, parser):
     first_word_not_found = True
-    for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
-                     for tok_dict in parsed_dict['toks']]:
+    for tok_dict in [
+        tok_dict for parsed_dict in utt.meta['parsed'] 
+        for tok_dict in parsed_dict['toks']
+    ]:
         if first_word_not_found and tok_dict['tok'].isalnum():
             first_word_not_found = False
             is_content = is_content_word(tok_dict, parser, True)
@@ -69,7 +71,9 @@ def is_content_utterance(utt, parser):
 
 def content_word_count(convo, corpus):
     # filter out utterances not included in convo
-    corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
+    corpus = corpus.filter_utterances_by(
+        lambda u: u.conversation_id == convo.id
+    )
 
     # parse corpus
     parser = TextParser()
@@ -79,8 +83,10 @@ def content_word_count(convo, corpus):
     for utt in corpus.iter_utterances():
         
         first_word_not_found = True
-        for tok_dict in [tok_dict for parsed_dict in utt.meta['parsed'] 
-                        for tok_dict in parsed_dict['toks']]:
+        for tok_dict in [
+            tok_dict for parsed_dict in utt.meta['parsed'] 
+            for tok_dict in parsed_dict['toks']
+        ]:
             
             if first_word_not_found and tok_dict['tok'].isalnum():
                 first_word_not_found = False
@@ -96,7 +102,9 @@ def content_word_count(convo, corpus):
 
 def content_utterance_count(convo, corpus):
     # filter out utterances not included in convo
-    corpus = corpus.filter_utterances_by(lambda u: u.conversation_id == convo.id)
+    corpus = corpus.filter_utterances_by(
+        lambda u: u.conversation_id == convo.id
+    )
 
     # parse corpus
     parser = TextParser()
@@ -122,7 +130,9 @@ def lemmatize_word(tok_dict, lemmatizer):
     # so they can be added back after lemmatization
     is_proper_noun_plural = tok_dict['tag'] == "NNPS"
     if is_proper_noun_plural:
-        upper_indexes = [i for i in range(len(tok)) if tok[i].isupper()]
+        upper_indexes = [
+            i for i in range(len(tok)) if tok[i].isupper()
+        ]
 
     tok = tok.lower()
     
@@ -140,7 +150,9 @@ def lemmatize_word(tok_dict, lemmatizer):
     lemma = lemmatizer.lemmatize(tok, lemmatizing_tag)
 
     if is_proper_noun_plural:
-        l = lambda char, i: char.upper() if i in upper_indexes else char
+        l = lambda char, i: (
+            char.upper() if i in upper_indexes else char
+        )
         lemma_list = [l(lemma[i], i) for i in range(len(lemma))]
         
         lemma = "".join(lemma_list)
