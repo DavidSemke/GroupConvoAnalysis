@@ -7,7 +7,7 @@ from pyrqa.neighbourhood import FixedRadius
 from pyrqa.metric import TaxicabMetric
 from pyrqa.computation import RQAComputation, RPComputation
 from pyrqa.image_generator import ImageGenerator
-from src.utils.token import lemmatize_word, is_word, is_content_word
+from src.utils.token import is_word, idea_word
 
 
 def turn_taking_rqa(data_pts, embed, rplot_path):
@@ -97,52 +97,36 @@ def idea_data_pts(convo, corpus):
 
     lemmatizer = WordNetLemmatizer()
 
-    banned_verb_ideas = ["be", "have", "do"]
     data_pts = []
     vocab_words = []
     word_index_dict = {}
     index = 0
     
     for utt in corpus.iter_utterances():
-        first_word_not_found = True
-
+        first_word = True
+        
         for tok_dict in [
             tok_dict for parsed_dict in utt.meta['parsed'] 
             for tok_dict in parsed_dict['toks']
         ]:
             
             if not is_word(tok_dict): continue
-            
-            # exclude adverbs
-            is_adverb = tok_dict['tag'][0:2] == 'RB'
-            
-            if is_adverb:
-                first_word_not_found = False
-                is_idea = False
 
-            elif first_word_not_found:
-                # skip non-idea words mistaken for proper nouns
-                # (due to capitalization)
-                first_word_not_found = False
-                is_idea = is_content_word(tok_dict, parser, True)
-
-            else:
-                is_idea = is_content_word(tok_dict, parser, False)
+            idea = idea_word(
+                tok_dict, parser, lemmatizer, first_word
+            )
+            first_word = False
             
-            if not is_idea: continue
-            
-            tok = lemmatize_word(tok_dict, lemmatizer)
+            if not idea: continue
 
-            if tok in banned_verb_ideas: continue
-
-            existing_index = word_index_dict.get(tok)
+            existing_index = word_index_dict.get(idea)
 
             if existing_index is not None:
                 data_pts.append(existing_index)
             else:
-                word_index_dict[tok] = index
+                word_index_dict[idea] = index
                 data_pts.append(index)
-                vocab_words.append(tok)
+                vocab_words.append(idea)
                 index += 1
 
     return data_pts, vocab_words

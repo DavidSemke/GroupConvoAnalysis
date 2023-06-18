@@ -18,13 +18,18 @@ def is_word(tok_dict):
 
 
 # True if word in tok_dict is verb, noun, adjective, adverb 
-def is_content_word(tok_dict, parser, started_sent):
+def content_word(tok_dict, parser, lemmatizer, started_sent):
     
-    if not is_word(tok_dict): return False
+    if not is_word(tok_dict): return None
     
-    if not is_content_tag(tok_dict['tag']): return False
+    if not is_content_tag(tok_dict['tag']): return None
 
     tok = tok_dict['tok']
+    
+    lemma = lemmatize_word(tok_dict, lemmatizer)
+    func_verbs = ["be", "have", "do", "shall"]
+
+    if lemma in func_verbs: return None
 
     is_proper_noun = tok_dict['tag'][0:3] == 'NNP'
 
@@ -36,9 +41,9 @@ def is_content_word(tok_dict, parser, started_sent):
         utt = parser.transform_utterance(tok.lower())
         tag = utt.meta['parsed'][0]['toks'][0]['tag']
 
-        if not is_content_tag(tag): return False
+        if not is_content_tag(tag): return None
         
-    return True
+    return lemma
 
 
 def is_content_tag(tag):
@@ -51,6 +56,20 @@ def is_content_tag(tag):
     return is_content
 
 
+def idea_word(tok_dict, parser, lemmatizer, started_sent):  
+    
+    # exclude adverbs; adverbs are not idea words
+    is_adverb = tok_dict['tag'][0:2] == 'RB'
+    
+    if is_adverb: return None
+
+    content = content_word(
+        tok_dict, parser, lemmatizer, started_sent
+    )
+    
+    return content
+    
+    
 # an utterance is a content utterance if it contains a content word
 def is_content_utterance(utt, parser):
     first_word_not_found = True
@@ -60,11 +79,11 @@ def is_content_utterance(utt, parser):
     ]:
         if first_word_not_found and tok_dict['tok'].isalnum():
             first_word_not_found = False
-            is_content = is_content_word(tok_dict, parser, True)
+            content = content_word(tok_dict, parser, True)
         else:
-            is_content = is_content_word(tok_dict, parser, False)
+            content = content_word(tok_dict, parser, False)
         
-        if is_content: return True
+        if content: return True
     
     return False
 
@@ -90,12 +109,11 @@ def content_word_count(convo, corpus):
             
             if first_word_not_found and tok_dict['tok'].isalnum():
                 first_word_not_found = False
-                is_content = is_content_word(tok_dict, parser, True)
+                content = content_word(tok_dict, parser, True)
             else:
-                is_content = is_content_word(tok_dict, parser, False)
+                content = content_word(tok_dict, parser, False)
         
-            if is_content: 
-                count+=1
+            if content: count+=1
     
     return count
 

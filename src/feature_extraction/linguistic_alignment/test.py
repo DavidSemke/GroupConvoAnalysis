@@ -73,6 +73,6 @@ def turn_taking_rqa_test():
 
 
 if __name__ == "__main__":
-    # main()
-    turn_taking_rqa_test()
+    main()
+    # turn_taking_rqa_test()
     

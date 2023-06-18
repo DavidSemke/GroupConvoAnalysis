@@ -2,7 +2,7 @@ from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from src.utils.timestamps import add_timestamps
 from src.utils.search import binary_search
-from src.utils.token import is_word, is_content_word, lemmatize_word
+from src.utils.token import is_word, idea_word
 
 """
 An idea flow is a string of utterances that contain a specific idea, 
@@ -24,46 +24,32 @@ def idea_flows(convo, corpus):
 
     # initialize lemmatizer
     lemmatizer = WordNetLemmatizer()
-
-    # define banned verb ideas
-    banned_verb_ideas = ["be", "have", "do"]
     
     # J = Adjective, N = Noun, V = Verb
     idea_flows = {"J": [], "N": [], "V": []}
     
     for utt in corpus.iter_utterances():
-
+        
         expiration_tick(utt, idea_flows)
+        
+        first_word = True
 
-        first_word_not_found = True
         for tok_dict in [
             tok_dict for parsed_dict in utt.meta['parsed'] 
             for tok_dict in parsed_dict['toks']
         ]:
             
             if not is_word(tok_dict): continue
-            
-            # exclude adverbs; adverbs are not idea words
-            is_adverb = tok_dict['tag'][0:2] == 'RB'
-            if is_adverb:
-                first_word_not_found = False
-                is_idea = False
-            elif first_word_not_found:
-                # skip non-idea word that starts sentence and would otherwise
-                # be accepted due to capitalization (mistaken for proper noun)
-                first_word_not_found = False
-                is_idea = is_content_word(tok_dict, parser, True)
-            else:
-                is_idea = is_content_word(tok_dict, parser, False)
-            
-            if not is_idea: continue
-            
-            tok = lemmatize_word(tok_dict, lemmatizer)
 
-            if tok in banned_verb_ideas: continue
+            idea = idea_word(
+                tok_dict, parser, lemmatizer, first_word
+            )
+            first_word = False
+            
+            if not idea: continue
 
             handle_idea_existence(
-                tok, utt, convo, idea_flows[tok_dict['tag'][0]]
+                idea, utt, convo, idea_flows[tok_dict['tag'][0]]
             )
 
     # get rid of idea flows that failed (never included more than 1 participant)

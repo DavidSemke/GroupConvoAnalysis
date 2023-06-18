@@ -2,7 +2,7 @@ import numpy as np
 from convokit import TextParser, PolitenessStrategies
 from nltk.stem import WordNetLemmatizer
 from src.utils.timestamps import convert_to_secs
-from src.utils.token import is_content_word, is_word, lemmatize_word
+from src.utils.token import content_word, is_word
 import src.constants as const
 
 """
@@ -65,7 +65,7 @@ def speaker_personality_vector(speaker, convo, parser, lemmatizer):
         
         speaking_time += convert_to_secs(utt.meta['Duration'])
 
-        first_word_not_found = True
+        first_word = True
         for tok_dict in [
             tok_dict for parsed_dict in utt.meta['parsed'] 
             for tok_dict in parsed_dict['toks']
@@ -77,15 +77,13 @@ def speaker_personality_vector(speaker, convo, parser, lemmatizer):
             if not (is_word(tok_dict) or tok == 'nt'): continue
 
             total_words += 1
-
-            if first_word_not_found:
-                first_word_not_found = False
-                is_content = is_content_word(tok_dict, parser, True)
-            else:
-                is_content = is_content_word(tok_dict, parser, False)
+            content = content_word(
+                tok_dict, parser, lemmatizer, first_word
+            )
+            first_word = False
             
-            if is_content:
-                tok = lemmatize_word(tok_dict, lemmatizer)
+            if content:
+                tok = content
             elif tok in const.negation_words:
                 negations += 1
             elif tok in const.first_pronouns_sing:
