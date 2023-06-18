@@ -1,5 +1,4 @@
-import re
-from src.ugi_dataset.line_processing import process_text
+from src.ugi_dataset.line_processing import *
 import src.constants as const
 
 def convo_metadata(df, expert_ranking, transcripts_path, patts):
@@ -19,23 +18,22 @@ def convo_metadata(df, expert_ranking, transcripts_path, patts):
         lines = [l.strip() for l in lines if l.strip()]
 
         last_line = lines[-1]
-        secs_match = re.search(patts['ts'], last_line)
-        secs = secs_match.group()
+        secs, _, _ = parse_line(last_line, patts)
         mins = round(float(secs) / 60, 2)
 
-        for line in lines:
-            person_match = re.search(patts['p_match'], line)
+        line_index = 0
 
-            if not person_match: continue
+        while line_index < len(lines):
 
-            splitter = person_match.group()
-            tail = line.split(splitter)[1]
-            text = process_text(tail, patts)
+            elements = process_line_elements(lines, line_index, patts)
 
-            if not text: continue
+            if not elements:
+                line_index += 1
+                continue
+        
+            _, local_id, _ = elements
 
-            person_id = int(splitter[-1])
-            color = const.speaker_colors[person_id-1]
+            color = const.speaker_colors[local_id-1]
             speaker_id = f'{group_id}.{color}'
             convo_id = f'{speaker_id}.1'
 

@@ -1,6 +1,6 @@
 import re
 from src.utils.timestamps import convert_to_timestamp
-from src.ugi_dataset.line_processing import process_text
+from src.ugi_dataset.line_processing import *
 import src.constants as const
 
 def utterance_metadata(transcripts_path, patts):
@@ -22,71 +22,44 @@ def utterance_metadata(transcripts_path, patts):
 
 def extract_utterances(lines, group_id, utt_metadata, patts):
     lines = [l.strip() for l in lines if l.strip()]
-    colored_utts = {}
+    colored_utts = {color:0 for color in const.speaker_colors}
     first_loop = True
     line_index = 0
     
     while line_index < len(lines):
-        line = lines[line_index]
-        person_matches = re.findall(patts['p_match'], line)
 
-        if not person_matches:
-            raise Exception(f'Line is missing person ID:\n\n{line}\n')
+        elements = process_line_elements(lines, line_index, patts)
         
-        elif len(person_matches) > 1: 
-            raise Exception(f'Line contains multiple utts:\n\n{line}\n')
-
-        splitter = person_matches[0]
-        head, tail = line.split(splitter)
-
-        text = process_text(tail, patts)
-
-        if not text:
+        if not elements:
             line_index += 1
             continue
-        
-        secs_match = re.search(patts['ts'], head)
-        
-        if not secs_match:
-            raise Exception(f'Line is missing secs:\n\n{line}\n')
-        
-        secs = secs_match.group()
-        timestamp = convert_to_timestamp(secs)
-        
-        if (
-            line_index+1 < len(lines)
-            and not re.search(patts['p_match'], lines[line_index+1])
-            and not re.search(patts['ts'], lines[line_index+1])
-        ):
-            next_line_text = process_text(lines[line_index+1], patts)
-            text += ' ' + next_line_text
-            text = text.strip()
-            del lines[line_index+1]
-        
-        person_id = int(splitter[-1])
-        color = const.speaker_colors[person_id-1]
-        
-        if color not in colored_utts:
-            colored_utts[color] = 1
-        else:
-            colored_utts[color] += 1
+
+        timestamp, local_id, sents = elements
+        color = const.speaker_colors[local_id-1]
         
         speaker_id = f'{group_id}.{color}'
-        utt_id = f'{speaker_id}.{colored_utts[color]}'
+        utt_id_sent_pairs = []
+
+        for sent in sents:
+            colored_utts[color] += 1
+            utt_id_sent_pairs.append(
+                (f'{speaker_id}.{colored_utts[color]}', sent)
+            )
 
         if first_loop:
-            convo_id = utt_id
+            convo_id = utt_id_sent_pairs[0][0]
             first_loop = False
         
-        utt_metadata[utt_id] = {
-            'id': utt_id,
-            'conversation_id': convo_id,
-            'text': text,
-            'speaker': speaker_id,
-            'meta': {},
-            'reply-to': None,
-            'timestamp': timestamp
-        }
+        for utt_id, sent in utt_id_sent_pairs:
+            utt_metadata[utt_id] = {
+                'id': utt_id,
+                'conversation_id': convo_id,
+                'text': sent,
+                'speaker': speaker_id,
+                'meta': {},
+                'reply-to': None,
+                'timestamp': timestamp
+            }
 
         line_index += 1
 
