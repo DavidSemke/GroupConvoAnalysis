@@ -1,35 +1,75 @@
+import numpy as np
 from meter import speaker_meter_affinity
+from src.utils.rqa_data_pts import stress_data_pts
+from src.feature_extraction.rhythm.recurrence import stress_rqa
+from src.feature_extraction.rhythm.meter import *
+from src.utils.stats import within_cluster_variance
 import src.constants as const
 
-for convo in const.gap_convos:
-    print()
-    print(f'{convo.id.upper()} - SPEAKER METERS')
-    print()
+def main():
+    for convo in const.gap_convos:
 
-    for s in convo.iter_speakers():
-        print(s.id, ':')
-        affinity_vector = speaker_meter_affinity(s, convo)
+        print()
+        print(f'{convo.id.upper()} - SPEAKER METER VARIANCES')
+        print()
 
-        for m in const.meters:
-            print('\t', m, ':', affinity_vector[m], '%')
+        print('Order of meters:', const.meters)
+        print()
+
+        affinity_matrix = []
         
+        for speaker in convo.iter_speakers():
+            affinity, _ = speaker_meter_affinity(speaker, convo)
+
+            affinity_matrix.append(
+                list(affinity.values())
+            )
+        
+        affinity_matrix = np.array(affinity_matrix)
+        vars = []
+
+        for i in range(len(affinity_matrix[0])):
+            vars.append(round(np.var(affinity_matrix[:, i]), 2))
+
+        print('\tVARS:', vars)
+        print('\tWCV:', within_cluster_variance(affinity_matrix))
+
+
+def stress_rqa_test():
+    convo = const.gap_convos[0]
+    all_utt_stresses = []
+
+    for speaker in convo.iter_speakers():
+        utt_meter_ps, utt_stresses = speaker_meter_affinity(
+            speaker, convo
+        )
+
+        utt_stresses = best_utterance_stresses(
+            utt_meter_ps, utt_stresses
+        )
+        all_utt_stresses.append(utt_stresses)
+
+    stresses = convo_stresses(convo, all_utt_stresses)
+
+    print(stresses)
+
+    data_pts = stress_data_pts(stresses)
+
+    rplot_path = r'recurrence_plots\stress'
+
+    for embed in (3, 4, 5, 6):
+        print(f'Embedding Dimn = {embed}:')
+        print()
+        
+        res = stress_rqa(
+            data_pts, 
+            embed, 
+            rf'{rplot_path}\rplot{convo.id}-embed{embed}.png')
+        
+        print(res)
         print()
 
 
-# meter_dict = {
-#     'a': {'stress': 0, 'vc': 2, 'vcc': 1},
-#     'b': {'stress': 0, 'vc': 1, 'vcc': 2},
-#     'c': {'stress': 0, 'vc': 4, 'vcc': 1},
-#     'd': {'stress': 0, 'vc': 9, 'vcc': 2}
-# }
-
-# meter_triples = [
-#         (
-#             meter_dict[k]['vc'],
-#             meter_dict[k]['vcc'],  
-#             k
-#         )  
-#         for k in meter_dict
-# ]
-
-# print(meter_triples)
+if __name__ == '__main__':
+    # main()
+    stress_rqa_test()

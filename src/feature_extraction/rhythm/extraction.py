@@ -24,8 +24,12 @@ def contrast_in_meter_affinity(convo):
     affinity_matrix = []
 
     for speaker in convo.iter_speakers():
-        affinity_matrix.append(speaker_meter_affinity(speaker, convo))
+        affinity, _ = speaker_meter_affinity(speaker, convo)
 
+        affinity_matrix.append(
+            list(affinity.values())
+        )
+            
     return within_cluster_variance(affinity_matrix)
     
 

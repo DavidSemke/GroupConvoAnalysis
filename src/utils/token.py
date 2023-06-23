@@ -1,4 +1,5 @@
 from convokit import TextParser
+from nltk.stem import WordNetLemmatizer
 
 def is_word(tok_dict):
     
@@ -71,47 +72,72 @@ def idea_word(tok_dict, parser, lemmatizer, started_sent):
     
     
 # an utterance is a content utterance if it contains a content word
-def is_content_utterance(utt, parser):
-    first_word_not_found = True
+def is_content_utterance(utt, parser, lemmatizer):
+    first_word = True
+    
     for tok_dict in [
         tok_dict for parsed_dict in utt.meta['parsed'] 
         for tok_dict in parsed_dict['toks']
     ]:
-        if first_word_not_found and tok_dict['tok'].isalnum():
-            first_word_not_found = False
-            content = content_word(tok_dict, parser, True)
-        else:
-            content = content_word(tok_dict, parser, False)
+        
+        if not is_word(tok_dict): continue
+
+        content = content_word(
+            tok_dict, parser, lemmatizer, first_word
+        )
+        first_word = False
         
         if content: return True
     
     return False
 
 
+def is_idea_utterance(utt, parser, lemmatizer):
+    first_word = True
+
+    for tok_dict in [
+        tok_dict for parsed_dict in utt.meta['parsed'] 
+        for tok_dict in parsed_dict['toks']
+    ]:
+        
+        if not is_word(tok_dict): continue
+
+        idea = idea_word(
+            tok_dict, parser, lemmatizer, first_word
+        )
+        first_word = False
+        
+        if idea: return True
+    
+    return False
+
+
 def content_word_count(convo, corpus):
-    # filter out utterances not included in convo
     corpus = corpus.filter_utterances_by(
         lambda u: u.conversation_id == convo.id
     )
 
-    # parse corpus
     parser = TextParser()
     corpus = parser.transform(corpus)
+
+    lemmatizer = WordNetLemmatizer()
     
     count = 0
+
     for utt in corpus.iter_utterances():
+        first_word = True
         
-        first_word_not_found = True
         for tok_dict in [
             tok_dict for parsed_dict in utt.meta['parsed'] 
             for tok_dict in parsed_dict['toks']
         ]:
             
-            if first_word_not_found and tok_dict['tok'].isalnum():
-                first_word_not_found = False
-                content = content_word(tok_dict, parser, True)
-            else:
-                content = content_word(tok_dict, parser, False)
+            if not is_word(tok_dict): continue
+
+            content = content_word(
+                tok_dict, parser, lemmatizer, first_word
+            )
+            first_word = False
         
             if content: count+=1
     
@@ -124,13 +150,14 @@ def content_utterance_count(convo, corpus):
         lambda u: u.conversation_id == convo.id
     )
 
-    # parse corpus
     parser = TextParser()
     corpus = parser.transform(corpus)
 
+    lemmatizer = WordNetLemmatizer()
+
     count = 0
     for utt in corpus.iter_utterances():
-        if is_content_utterance(utt, parser): 
+        if is_content_utterance(utt, parser, lemmatizer): 
             count+=1
     
     return count

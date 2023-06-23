@@ -23,4 +23,5 @@ def psych_property_score_variances(ratings_matrix):
 
 def constrast_in_personality(convo, corpus):
     p_matrix = personality_matrix(convo, corpus)
+    
     return round(within_cluster_variance(p_matrix), 2)

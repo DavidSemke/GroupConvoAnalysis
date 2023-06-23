@@ -2,6 +2,7 @@ from extraction import *
 from idea_flow import idea_flows
 from src.constants import gap_corpus, gap_convos
 from recurrence import *
+from src.utils.rqa_data_pts import *
 
 def main():
 
@@ -41,7 +42,7 @@ def idea_rqa_test():
 
         data_pts, _ = idea_data_pts(convo, gap_corpus)
         res = idea_rqa(
-            data_pts, rf'recurrence_plots\idea_rplot{convo.id}.png'
+            data_pts, rf'recurrence_plots\ideas\rplot_{convo.id}.png'
         )
 
         print(res)
@@ -55,24 +56,49 @@ def turn_taking_rqa_test():
         print(f'{convo.id.upper()} - TURN-TAKING RQA')
         print()
 
+        rplot_folder = r'recurrence_plots\turn-taking'
+
         data_pts, _ = turn_taking_data_pts(convo)
 
-        print(data_pts)
-
-        for i in (1, 2, 3):
-            print(f'Embedding Dimn = {i}:')
+        for embed in (1, 2, 3):
+            print(f'Embedding Dimn = {embed}:')
             print()
             
             res = turn_taking_rqa(
-                data_pts, i,
-                rf'recurrence_plots\turn_rplot{convo.id}-embed{i}.png'
-            )
+                data_pts, 
+                embed, 
+                rf'{rplot_folder}\rplot{convo.id}-embed{embed}.png')
+            
+            print(res)
+            print()
+
+
+def letter_stream_rqa_test():
+    for convo in gap_convos:
+        print()
+        print(f'{convo.id.upper()} - LETTER STREAM RQA')
+        print()
+
+        rplot_path = r'recurrence_plots\letter_stream'
+
+        data_pts = letter_data_pts(convo)
+
+        for embed in (3, 4, 5):
+            print(f'Embedding Dimn = {embed}:')
+            print()
+            
+            res = letter_stream_rqa(
+                data_pts, 
+                embed, 
+                rf'{rplot_path}\rplot{convo.id}-embed{embed}.png')
             
             print(res)
             print()
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    # idea_rqa_test()
     # turn_taking_rqa_test()
+    letter_stream_rqa_test()
     
