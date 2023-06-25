@@ -98,17 +98,12 @@ def letter_data_pts(convo):
     return data_pts
 
 
-def stress_data_pts(convo_stresses):
+def stress_data_pts(stresses):
     data_pts = []
-    position_to_index = {
-        'U': 0, 'P': 1, 'S': 2,
-        'UU': 3, 'UP': 4, 'US': 5,
-        'PP': 6, 'PU': 7, 'PS': 8,
-        'SS': 9, 'SU': 10, 'SP': 11
-    }
+    position_to_index = {'U': 0, 'S': 1, 'P': 2}
 
-    for utt_id in convo_stresses:
-        utt_stresses = list(convo_stresses[utt_id].values())
+    for utt_id in stresses:
+        utt_stresses = list(stresses[utt_id].values())
 
         if len(utt_stresses) != 1:
             raise Exception(
@@ -119,11 +114,7 @@ def stress_data_pts(convo_stresses):
         positions = utt_stress.split('|')
 
         for pos in positions:
-            data_pts.append(position_to_index[pos])
+            for slot in pos:
+                data_pts.append(position_to_index[slot])
         
     return data_pts
-
-
-
-        
-

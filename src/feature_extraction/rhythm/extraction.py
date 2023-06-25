@@ -31,14 +31,3 @@ def contrast_in_meter_affinity(convo):
         )
             
     return within_cluster_variance(affinity_matrix)
-    
-
-    
-    
-
-
-
-
-
-
-

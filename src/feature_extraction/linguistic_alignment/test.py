@@ -35,18 +35,19 @@ def main():
 
 
 def idea_rqa_test():
-    for convo in gap_convos:
-        print()
-        print(f'{convo.id.upper()} - IDEA RQA')
-        print()
+    # for convo in gap_convos:
+    convo = gap_convos[0]
 
-        data_pts, _ = idea_data_pts(convo, gap_corpus)
-        res = idea_rqa(
-            data_pts, rf'recurrence_plots\ideas\rplot_{convo.id}.png'
-        )
+    print()
+    print(f'{convo.id.upper()} - IDEA RQA')
+    print()
 
-        print(res)
-    
+    data_pts, _ = idea_data_pts(convo, gap_corpus)
+    rqa_res, rp_res = idea_rqa(
+        data_pts, rf'recurrence_plots\rqa\ideas\rplot_{convo.id}.png'
+    )
+
+    print(rqa_res)
     print()
 
 
@@ -56,20 +57,21 @@ def turn_taking_rqa_test():
         print(f'{convo.id.upper()} - TURN-TAKING RQA')
         print()
 
-        rplot_folder = r'recurrence_plots\turn-taking'
+        rplot_folder = r'recurrence_plots\rqa\turn-taking'
 
         data_pts, _ = turn_taking_data_pts(convo)
 
         for embed in (1, 2, 3):
             print(f'Embedding Dimn = {embed}:')
             print()
+
+            rplot_path = rf'{rplot_folder}\rplot_{convo.id}_embed{embed}.png'
             
-            res = turn_taking_rqa(
-                data_pts, 
-                embed, 
-                rf'{rplot_folder}\rplot{convo.id}-embed{embed}.png')
+            rqa_res, rp_res = turn_taking_rqa(
+                data_pts, embed, rplot_path
+            )
             
-            print(res)
+            print(rqa_res.recurrence_points)
             print()
 
 
@@ -79,26 +81,27 @@ def letter_stream_rqa_test():
         print(f'{convo.id.upper()} - LETTER STREAM RQA')
         print()
 
-        rplot_path = r'recurrence_plots\letter_stream'
+        rplot_folder = r'recurrence_plots\rqa\letter_stream'
 
         data_pts = letter_data_pts(convo)
 
         for embed in (3, 4, 5):
             print(f'Embedding Dimn = {embed}:')
             print()
+
+            rplot_path = rf'{rplot_folder}\rplot_{convo.id}_embed{embed}.png'
             
-            res = letter_stream_rqa(
-                data_pts, 
-                embed, 
-                rf'{rplot_path}\rplot{convo.id}-embed{embed}.png')
+            rqa_res, rp_res = turn_taking_rqa(
+                data_pts, embed, rplot_path
+            )
             
-            print(res)
+            print(rqa_res)
             print()
 
 
 if __name__ == "__main__":
     # main()
     # idea_rqa_test()
-    # turn_taking_rqa_test()
-    letter_stream_rqa_test()
+    turn_taking_rqa_test()
+    # letter_stream_rqa_test()
     

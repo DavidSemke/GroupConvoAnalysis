@@ -16,18 +16,15 @@ def turn_taking_rqa(data_pts, embed, rplot_path):
     )
 
     computation = RPComputation.create(settings)
-    result = computation.run()
+    rp_result = computation.run()
     ImageGenerator.save_recurrence_plot(
-        result.recurrence_matrix_reverse, rplot_path
+        rp_result.recurrence_matrix_reverse, rplot_path
     )
 
     computation = RQAComputation.create(settings)
-    result = computation.run()
-    result.min_diagonal_line_length = 2
-    result.min_vertical_line_length = 2
-    result.min_white_vertical_line_length = 2
+    rqa_result = computation.run()
 
-    return result
+    return rqa_result, rp_result
 
 
 def idea_rqa(data_pts, rplot_path):
@@ -40,18 +37,15 @@ def idea_rqa(data_pts, rplot_path):
     )
 
     computation = RPComputation.create(settings)
-    result = computation.run()
+    rp_result = computation.run()
     ImageGenerator.save_recurrence_plot(
-        result.recurrence_matrix_reverse, rplot_path
+        rp_result.recurrence_matrix_reverse, rplot_path
     )
 
     computation = RQAComputation.create(settings)
-    result = computation.run()
-    result.min_diagonal_line_length = 2
-    result.min_vertical_line_length = 2
-    result.min_white_vertical_line_length = 2
+    rqa_result = computation.run()
 
-    return result
+    return rqa_result, rp_result
 
 
 def letter_stream_rqa(data_pts, embed, rplot_path):
@@ -64,15 +58,12 @@ def letter_stream_rqa(data_pts, embed, rplot_path):
     )
 
     computation = RPComputation.create(settings)
-    result = computation.run()
+    rp_result = computation.run()
     ImageGenerator.save_recurrence_plot(
-        result.recurrence_matrix_reverse, rplot_path
+        rp_result.recurrence_matrix_reverse, rplot_path
     )
 
     computation = RQAComputation.create(settings)
-    result = computation.run()
-    result.min_diagonal_line_length = 2
-    result.min_vertical_line_length = 2
-    result.min_white_vertical_line_length = 2
+    rqa_result = computation.run()
 
-    return result
+    return rqa_result, rp_result

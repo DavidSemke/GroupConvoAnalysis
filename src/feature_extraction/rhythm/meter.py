@@ -1,25 +1,32 @@
 import re
 import prosodic as pro
+from src.utils.filter_utterances import is_dyad_utterance
 import src.constants as const
 
 # Utterances with a length less than len_cutoff are ignored
 # Divide by 0 if len_cutoff is too high
+# utt filter must take one argument (utt) and return a boolean
 # Returns percentage of utts that each meter managed to get the best parse on and the stress sequences associated with the best parses for each utterance
-def speaker_meter_affinity(speaker, convo, len_cutoff=6):
-    
+def convo_meter_affinity(convo, utt_filter=None, len_cutoff=6):
     utt_meter_counts = {m:0 for m in const.meters}
     utt_stresses = {}
     total_utts = 0
 
-    for utt in convo.iter_utterances(
-            lambda u: u.speaker.id == speaker.id
-    ):
+    if callable(utt_filter):
+        utts = convo.iter_utterances(utt_filter)
+
+    else:
+        utts = convo.iter_utterances()
+
+    for utt in utts:
+        # filter utt text
         text = re.sub('[^ \w]', '', utt.text).strip()
 
         if len(text.split()) < len_cutoff: continue
 
         meter_dict = {}
 
+        # parse utt using each meter in constants.py
         for m in const.meters:
             t = pro.Text(text, meter=m)
             t.parse()
@@ -49,6 +56,8 @@ def speaker_meter_affinity(speaker, convo, len_cutoff=6):
         utt_stresses[utt.id] = {}
         best_ms = best_meters(meter_dict)
         
+        # Increment meter count and the associated stress pattern
+        # for all meters that provided a best parse for the utt
         for m in best_ms:
             utt_meter_counts[m] += 1
             utt_stresses
@@ -60,8 +69,8 @@ def speaker_meter_affinity(speaker, convo, len_cutoff=6):
         utt_meter_percentages[k] /= total_utts/100
     
     return utt_meter_percentages, utt_stresses
+    
 
-        
 def best_meters(meter_dict):
     meter_triples = [
         (
@@ -82,8 +91,36 @@ def best_meters(meter_dict):
     return best
 
 
-# output from speaker_meter_affinity function is input here
-def best_utterance_stresses(utt_meter_percentages, utt_stresses):
+def speaker_meter_affinity(
+        speaker, convo, utt_filter=None, len_cutoff=6
+):
+    if callable(utt_filter):
+        filter = lambda u: speaker.id == u.speaker.id and utt_filter(u)
+
+    else:
+        filter = lambda u: speaker.id == u.speaker.id
+    
+    return convo_meter_affinity(convo, filter, len_cutoff)
+
+
+def dyad_meter_affinity(
+        speaker1, speaker2, convo, utt_filter=None, len_cutoff=6
+):
+    if callable(utt_filter):
+        filter = lambda u: (
+            is_dyad_utterance(u, speaker1, speaker2)
+            and utt_filter(u)
+        )
+    
+    else:
+        filter = lambda u: is_dyad_utterance(u, speaker1, speaker2)
+
+    return convo_meter_affinity(convo, filter, len_cutoff)
+
+
+# Ensures that only the best meter is associated with each utt
+def best_utterance_stresses(meter_affinity):
+    utt_meter_percentages, utt_stresses = meter_affinity
 
     best_meter = max(
         utt_meter_percentages, key=utt_meter_percentages.get
@@ -99,31 +136,32 @@ def best_utterance_stresses(utt_meter_percentages, utt_stresses):
     return utt_stresses
 
 
-# utt_stresses_list is a list of all utt_stresses dicts
-# (one utt_stresses dict per speaker of a convo)
-# An utt_stresses dict is created using the utterances_stresses 
-# function
-def convo_stresses(convo, utt_stresses_list):
-    speaker_utt_stresses = {}
+def speaker_subset_best_stresses(
+        speakers, convo, utt_filter=None, len_cutoff=6
+):
+    best_stresses = {}
 
-    for utt_stresses in utt_stresses_list:
-        key = list(utt_stresses.keys())[0]
-        # utt ids have format int.str.int (e.g. 1.Pink.1)
-        speaker_id = '.'.join(key.split('.')[:2])
-        speaker_utt_stresses[speaker_id] = utt_stresses
+    for speaker in speakers:
+        utt_meter_ps, utt_stresses = speaker_meter_affinity(
+            speaker, convo, utt_filter, len_cutoff
+        )
+        utt_stresses = best_utterance_stresses(
+            utt_meter_ps, utt_stresses
+        )
+        best_stresses[speaker.id] = utt_stresses
     
+    return best_stresses
+
+
+def convo_stresses(convo, speaker_stresses):
     convo_utt_stresses = {}
 
     for utt in convo.iter_utterances():
         s_id = utt.speaker.id
-        utt_stress = speaker_utt_stresses[s_id].get(utt.id)
+        utt_stress = speaker_stresses[s_id].get(utt.id)
 
         if not utt_stress: continue
 
         convo_utt_stresses[utt.id] = utt_stress
     
     return convo_utt_stresses
-        
-        
-
-
