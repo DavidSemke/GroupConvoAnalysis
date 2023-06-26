@@ -1,5 +1,3 @@
-import re
-from src.utils.timestamps import convert_to_timestamp
 from src.ugi_dataset.line_processing import *
 import src.constants as const
 
@@ -24,6 +22,7 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
     lines = [l.strip() for l in lines if l.strip()]
     colored_utts = {color:0 for color in const.speaker_colors}
     first_loop = True
+    prior_utt_id = None
     line_index = 0
     
     while line_index < len(lines):
@@ -57,10 +56,11 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
                 'text': sent,
                 'speaker': speaker_id,
                 'meta': {},
-                'reply-to': None,
+                'reply-to': prior_utt_id,
                 'timestamp': timestamp
             }
-
+        
+        prior_utt_id = utt_id_sent_pairs[0][0]
         line_index += 1
 
     print(f"Utts for group {group_id} finished")

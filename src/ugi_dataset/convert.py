@@ -49,8 +49,13 @@ def create_utterances_jsonl(utt_metadata):
                 
                 if k == "meta":
                     line += f'"{k}": {v}, '
+
+                elif k == "reply-to" and v:
+                    line += f'"{k}": "{v}", '
+                
                 elif k == "reply-to":
                     line += f'"{k}": null, '
+
                 else:
                     line += f'"{k}": "{v}", '
             
