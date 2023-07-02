@@ -5,7 +5,6 @@ from pyrqa.neighbourhood import FixedRadius
 from pyrqa.computation import RQAComputation, RPComputation
 from pyrqa.image_generator import ImageGenerator
 from pyrqa.analysis_type import Cross
-from src.feature_extraction.rhythm.meter import *
 
 def stress_crqa(data_pts_x, data_pts_y, embed, rplot_path):
     time_series_x = TimeSeries(

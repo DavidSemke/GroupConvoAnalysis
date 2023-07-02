@@ -100,8 +100,8 @@ def letter_stream_rqa_test():
 
 
 if __name__ == "__main__":
-    # main()
+    main()
     # idea_rqa_test()
-    turn_taking_rqa_test()
+    # turn_taking_rqa_test()
     # letter_stream_rqa_test()
     

@@ -36,8 +36,7 @@ def main():
         print('\tWCV:', within_cluster_variance(affinity_matrix))
 
 
-def convo_stress_rqa_test():
-    convo = const.gap_convos[0]
+def convo_stress_rqa_test(convo):
     speakers = list(convo.iter_speakers())
     utt_stresses = speaker_subset_best_stresses(speakers, convo)
     stresses = convo_stresses(convo, utt_stresses)
@@ -61,8 +60,7 @@ def convo_stress_rqa_test():
         print()
 
 
-def dyad_stress_rqa_test():
-    convo = const.gap_convos[0]
+def dyad_stress_rqa_test(convo):
     speakers = list(convo.iter_speakers())
     speaker_pairs = list(combinations(speakers, 2))
 
@@ -89,8 +87,7 @@ def dyad_stress_rqa_test():
             print()
 
 
-def dyad_stress_crqa_test():
-    convo = const.gap_convos[0]
+def dyad_stress_crqa_test(convo):
     speakers = list(convo.iter_speakers())
     speaker_pairs = list(combinations(speakers, 2))
 
@@ -127,4 +124,4 @@ def dyad_stress_crqa_test():
 if __name__ == '__main__':
     # main()
     # dyad_stress_rqa_test()
-    dyad_stress_crqa_test()
+    dyad_stress_crqa_test(const.gap_convos[0])

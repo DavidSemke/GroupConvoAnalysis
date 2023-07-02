@@ -1,7 +1,8 @@
 import numpy as np
 from convokit import Coordination
 from src.utils.timestamps import convert_to_secs
-from src.feature_extraction.linguistic_alignment.speech_rate import speaker_median_speech_rate
+from src.feature_extraction.linguistic_alignment.speech_flow import *
+from src.utils.filter_utterances import convo_frame
 
 # returns seconds
 # median is used to avoid influence of outliers
@@ -67,19 +68,38 @@ def idea_distribution_score(convo, idea_flows_dict):
 # negative value implies divergence, positive implies convergence
 # returns (early_var - late_var)
 def speech_rate_convergence(convo, frame):
-    
+    early_utts, late_utts = list(convo_frame(convo, frame))
     early_medians = []
     late_medians = []
+
     for speaker in convo.iter_speakers():
-        
-        medians = speaker_median_speech_rate(speaker, convo, frame)
-        early_medians.append(medians[0])
-        late_medians.append(medians[1])
+        speaker_early_utts = [
+            utt for utt in early_utts if utt.speaker.id == speaker.id
+        ]
+        early_rates = speech_rates(speaker_early_utts)
+
+        if early_rates:
+            early_medians.append(np.median(early_rates))
+
+        speaker_late_utts = [
+            utt for utt in late_utts if utt.speaker.id == speaker.id
+        ]
+        late_rates = speech_rates(speaker_late_utts)
+
+        if late_rates:
+            late_medians.append(np.median(late_rates))
     
     early_var = np.var(early_medians)
     late_var = np.var(late_medians)
 
     return round(early_var - late_var, 4)
+
+
+def speech_pause_percentage(convo):
+    pause_time = sum(convo_speech_pauses(convo))
+    total_time = convo.meta['Meeting Length in Minutes'] * 60
+
+    return round(pause_time/total_time, 2)
 
 
 # coordination scores for speakers are calculated, where a speaker
@@ -97,7 +117,9 @@ def coordination_variances(convo, corpus):
     coord.fit(corpus)
     corpus = coord.transform(corpus)
 
-    coord_from_dict = coord.summarize(corpus, focus="targets").averages_by_speaker()
+    coord_from_dict = coord.summarize(
+        corpus, focus="targets"
+    ).averages_by_speaker()
     coord_from_var = np.var(list(coord_from_dict.values()))
 
     coord_to_dict = coord.summarize(corpus).averages_by_speaker()
