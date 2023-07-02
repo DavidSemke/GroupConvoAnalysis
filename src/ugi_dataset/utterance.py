@@ -1,4 +1,5 @@
-from src.ugi_dataset.line_processing import *
+from src.ugi_dataset.line_processing import process_line_elements
+from src.ugi_dataset.utterance_periods import approx_utterance_periods
 import src.constants as const
 
 def utterance_metadata(transcripts_path, patts):
@@ -62,5 +63,8 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
         
         prior_utt_id = utt_id_sent_pairs[0][0]
         line_index += 1
-
+    
+    # add 'Duration' and 'End' fields to utt.meta property
+    approx_utterance_periods(utt_metadata)
+    
     print(f"Utts for group {group_id} finished")

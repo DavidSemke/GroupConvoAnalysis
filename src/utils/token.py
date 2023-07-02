@@ -8,9 +8,7 @@ def is_word(tok_dict):
     if not tok.isalnum(): return False
 
     vowels = ['a', 'e', 'i', 'o', 'u', 'y']
-    contains_vowel = bool(
-        [letter for letter in tok if letter in vowels]
-    )
+    contains_vowel = any((letter in vowels for letter in tok))
     is_acronym = tok.isupper()
 
     if not (contains_vowel or is_acronym): return False
@@ -18,7 +16,6 @@ def is_word(tok_dict):
     return True
 
 
-# True if word in tok_dict is verb, noun, adjective, adverb 
 def content_word(tok_dict, parser, lemmatizer, started_sent):
     
     if not is_word(tok_dict): return None
@@ -156,6 +153,7 @@ def content_utterance_count(convo, corpus):
     lemmatizer = WordNetLemmatizer()
 
     count = 0
+    
     for utt in corpus.iter_utterances():
         if is_content_utterance(utt, parser, lemmatizer): 
             count+=1
@@ -168,12 +166,14 @@ def lemmatize_word(tok_dict, lemmatizer):
     
     # if proper noun, no need to lemmatize
     is_proper_noun = tok_dict['tag'] == "NNP"
+    
     if is_proper_noun:
         return tok
 
     # if proper noun plural, remember capitalized letters
     # so they can be added back after lemmatization
     is_proper_noun_plural = tok_dict['tag'] == "NNPS"
+    
     if is_proper_noun_plural:
         upper_indexes = [
             i for i in range(len(tok)) if tok[i].isupper()
@@ -187,8 +187,10 @@ def lemmatize_word(tok_dict, lemmatizer):
 
     if two_letter_tag == 'RB':
         lemmatizing_tag = 'r'
+    
     elif one_letter_tag == 'J':
         lemmatizing_tag = 'a'
+    
     else:
         lemmatizing_tag = one_letter_tag.lower()
     
