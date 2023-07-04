@@ -44,7 +44,8 @@ def idea_rqa_test():
 
     data_pts, _ = idea_data_pts(convo, gap_corpus)
     rqa_res, rp_res = idea_rqa(
-        data_pts, rf'recurrence_plots\rqa\ideas\rplot_{convo.id}.png'
+        data_pts, 1, 
+        rf'recurrence_plots\rqa\ideas\rplot_{convo.id}.png'
     )
 
     print(rqa_res)
@@ -91,7 +92,7 @@ def letter_stream_rqa_test():
 
             rplot_path = rf'{rplot_folder}\rplot_{convo.id}_embed{embed}.png'
             
-            rqa_res, rp_res = turn_taking_rqa(
+            rqa_res, rp_res = letter_stream_rqa(
                 data_pts, embed, rplot_path
             )
             
@@ -99,9 +100,39 @@ def letter_stream_rqa_test():
             print()
 
 
+def speech_sampling_rqa_test():
+    for convo in gap_convos:
+        print()
+        print(f'{convo.id.upper()} - SPEECH FLOW RQA')
+        print()
+
+        rplot_folder = r'recurrence_plots\rqa\speech_sampling'
+
+        # for GAP and UGI corpora, groups have max size of 5
+        primes = (2, 3, 5, 7, 11)
+
+        data_pts, _ = speech_sampling_data_pts(convo, primes)
+        embed = 4
+
+        print(data_pts)
+        
+        print(f'Embedding Dimn = {embed}:')
+        print()
+
+        rplot_path = rf'{rplot_folder}\rplot_{convo.id}_embed{embed}.png'
+        
+        rqa_res, rp_res = speech_sampling_rqa(
+            data_pts, embed, rplot_path
+        )
+        
+        print(rqa_res)
+        print()
+
+
 if __name__ == "__main__":
-    main()
+    # main()
     # idea_rqa_test()
     # turn_taking_rqa_test()
     # letter_stream_rqa_test()
+    speech_sampling_rqa_test()
     
