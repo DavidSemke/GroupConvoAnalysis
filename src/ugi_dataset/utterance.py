@@ -60,8 +60,9 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
                 'reply-to': prior_utt_id,
                 'timestamp': timestamp
             }
+
+            prior_utt_id = utt_id
         
-        prior_utt_id = utt_id_sent_pairs[0][0]
         line_index += 1
     
     # add 'Duration' and 'End' fields to utt.meta property

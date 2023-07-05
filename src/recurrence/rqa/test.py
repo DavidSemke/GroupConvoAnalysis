@@ -83,7 +83,7 @@ def speech_sampling_rqa_test():
         print(f'{convo.id.upper()} - SPEECH SAMPLING RQA')
         print()
 
-        rplot_folder = r'recurrence_plots\rqa\speech_sampling'
+        rplot_folder = r'recurrence_plots\rqa\speech_sampling\nonbinary'
 
         data_pts, _ = speech_sampling_data_pts(convo)
         
@@ -107,7 +107,7 @@ def binary_speech_sampling_rqa_test():
         print(f'{convo.id.upper()} - BINARY SPEECH SAMPLING RQA')
         print()
 
-        rplot_folder = r'recurrence_plots\rqa\binary_speech_sampling'
+        rplot_folder = r'recurrence_plots\rqa\speech_sampling\binary'
 
         data_pts = binary_speech_sampling_data_pts(convo)
 
@@ -182,5 +182,5 @@ if __name__ == '__main__':
     # turn_taking_rqa_test()
     # convo_stress_rqa_test()
     # dyad_stress_rqa_test()
-    # speech_sampling_rqa_test()
+    speech_sampling_rqa_test()
     binary_speech_sampling_rqa_test()
