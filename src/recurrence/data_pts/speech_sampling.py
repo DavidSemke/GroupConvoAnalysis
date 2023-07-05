@@ -1,15 +1,35 @@
 from src.utils.primes import generate_primes
 from src.utils.timestamps import convert_to_secs
+from src.utils.primes import is_prime
 
+
+# 1 indicates simultaneous speech; 0 otherwise
+def simult_binary_speech_sampling_data_pts(convo, time_delay=1):
+    data_pts, _ = complete_speech_sampling_data_pts(convo, time_delay)
+    data_pts = [
+        0 if pt == 1 or is_prime(pt) else 1 for pt in data_pts
+    ]
+
+    return data_pts
+
+
+# 1 indicates speech, 0 indicates pause
 def binary_speech_sampling_data_pts(convo, time_delay=1):
-    data_pts, _ = speech_sampling_data_pts(convo, time_delay)
+    data_pts, _ = complete_speech_sampling_data_pts(convo, time_delay)
     data_pts = [1 if pt != 1 else 0 for pt in data_pts]
 
     return data_pts
 
 
-# data_pts are sampled once per sec by default (time_delay=1)
-def speech_sampling_data_pts(convo, time_delay=1):
+# The following describes how to interpret the data points:
+    # If no one is speaking, sample data is 1
+    # If a speaker is speaking, sample data is a prime number that 
+    # identifies the speaker
+    # If multiple speakers are speaking (simultaneous speech), sample 
+    # data is the product of prime numbers, where each prime number 
+    # identifies a speaker
+# time_delay = 1 by default, meaning data is sampled once per sec
+def complete_speech_sampling_data_pts(convo, time_delay=1):
     speaker_ids = convo.get_speaker_ids()
     primes = generate_primes(len(speaker_ids))
     speaker_attributes = {
@@ -27,7 +47,6 @@ def speech_sampling_data_pts(convo, time_delay=1):
     # takes place at the end of a list (bin)
     for utt in reversed(utts):
         speaker_attributes['utts'][utt.speaker.id].append(utt)
-
 
     for sid in speaker_ids:
         first_utt = speaker_attributes['utts'][sid][-1]
@@ -92,6 +111,7 @@ def sample_position(pos, speaker_attributes):
     return sample
 
 
+# remove pause samples from the beginning and end of the data pts
 def trim_pauses(data_pts):
     trim_start = 0
     for pt in data_pts:

@@ -4,8 +4,9 @@ from src.recurrence.data_pts.ideas import idea_data_pts
 from src.recurrence.data_pts.turn_taking import turn_taking_data_pts
 from src.recurrence.data_pts.letters import letter_data_pts
 from src.recurrence.data_pts.speech_sampling import (
-    speech_sampling_data_pts,
-    binary_speech_sampling_data_pts
+    complete_speech_sampling_data_pts,
+    binary_speech_sampling_data_pts,
+    simult_binary_speech_sampling_data_pts
 )
 from src.recurrence.data_pts.stresses import stress_data_pts
 from src.feature_extraction.rhythm.meter import *
@@ -83,9 +84,9 @@ def speech_sampling_rqa_test():
         print(f'{convo.id.upper()} - SPEECH SAMPLING RQA')
         print()
 
-        rplot_folder = r'recurrence_plots\rqa\speech_sampling\nonbinary'
+        rplot_folder = r'recurrence_plots\rqa\speech_sampling\complete'
 
-        data_pts, _ = speech_sampling_data_pts(convo)
+        data_pts, _ = complete_speech_sampling_data_pts(convo)
         
         for embed in (3, 4):
             print(f'Embedding Dimn = {embed},')
@@ -110,6 +111,35 @@ def binary_speech_sampling_rqa_test():
         rplot_folder = r'recurrence_plots\rqa\speech_sampling\binary'
 
         data_pts = binary_speech_sampling_data_pts(convo)
+
+        for embed in (3, 4):
+            print(f'Embedding Dimn = {embed}:')
+            print()
+
+            rplot_path = rf'{rplot_folder}\rplot_{convo.id}_embed{embed}.png'
+            
+            rqa_res, rp_res = speech_sampling_rqa(
+                data_pts, embed, rplot_path
+            )
+            
+            print(rqa_res)
+            print()
+
+
+def simult_binary_speech_sampling_rqa_test():
+    for convo in gap_convos:
+        print()
+        print(
+            f'{convo.id.upper()} - SIMULT BINARY SPEECH SAMPLING RQA'
+        )
+        print()
+
+        rplot_folder = (
+            r'recurrence_plots\rqa\speech_sampling\simult_binary'
+        )
+
+
+        data_pts = simult_binary_speech_sampling_data_pts(convo)
 
         for embed in (3, 4):
             print(f'Embedding Dimn = {embed}:')
@@ -184,3 +214,4 @@ if __name__ == '__main__':
     # dyad_stress_rqa_test()
     speech_sampling_rqa_test()
     binary_speech_sampling_rqa_test()
+    simult_binary_speech_sampling_rqa_test()
