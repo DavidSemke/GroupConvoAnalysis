@@ -32,7 +32,7 @@ def binary_speech_sampling_data_pts(convo, time_delay=1):
 def complete_speech_sampling_data_pts(convo, time_delay=1):
     speaker_ids = convo.get_speaker_ids()
     primes = generate_primes(len(speaker_ids))
-    speaker_attributes = {
+    speaker_data = {
         'primes': {
             sid:primes[i] for i, sid in enumerate(speaker_ids)
         },
@@ -46,40 +46,40 @@ def complete_speech_sampling_data_pts(convo, time_delay=1):
     # are scanned in chronological order, so removal of an utt always 
     # takes place at the end of a list (bin)
     for utt in reversed(utts):
-        speaker_attributes['utts'][utt.speaker.id].append(utt)
+        speaker_data['utts'][utt.speaker.id].append(utt)
 
     for sid in speaker_ids:
-        first_utt = speaker_attributes['utts'][sid][-1]
+        first_utt = speaker_data['utts'][sid][-1]
         
         start_secs = convert_to_secs(first_utt.timestamp)
         end_secs = convert_to_secs(first_utt.meta['End'])
 
-        speaker_attributes['utt_periods'][sid] = (start_secs, end_secs)
+        speaker_data['utt_periods'][sid] = (start_secs, end_secs)
     
     data_pts = []
     position_secs = 0
 
     # Keys are removed from dict speaker_utts when their corresponding
     # list value becomes empty, eventually leading to an empty dict
-    while speaker_attributes['utts']:
-        sample = sample_position(position_secs, speaker_attributes)
+    while speaker_data['utts']:
+        sample = sample_position(position_secs, speaker_data)
         position_secs += time_delay
         data_pts.append(sample)
 
     # trim data_pts by removing pause symbols (1's) from both ends of list
     data_pts = trim_pauses(data_pts)
 
-    return data_pts, speaker_attributes['primes']
+    return data_pts, speaker_data['primes']
 
 
 # time delay is the amount of time between samples
-def sample_position(pos, speaker_attributes):
+def sample_position(pos, speaker_data):
     # if a sample remains 1, that means no utterance was
     # occurring at that moment (which is position_secs)
     sample = 1
 
-    for sid in tuple(speaker_attributes['utts']):
-        start_secs, end_secs = speaker_attributes['utt_periods'][sid]
+    for sid in tuple(speaker_data['utts']):
+        start_secs, end_secs = speaker_data['utt_periods'][sid]
         first_loop = True
         pos_after_utt = False
 
@@ -89,22 +89,22 @@ def sample_position(pos, speaker_attributes):
         
             # sampling occurs within utt period
             if start_secs <= pos <= end_secs:
-                sample *= speaker_attributes['primes'][sid]
+                sample *= speaker_data['primes'][sid]
             
             if not pos_after_utt: break
 
             # utt was completely scanned or skipped; remove it
-            speaker_attributes['utts'][sid].pop()
+            speaker_data['utts'][sid].pop()
 
             # remove speaker if speaker has no more utts
-            if not speaker_attributes['utts'][sid]: 
-                del speaker_attributes['utts'][sid]
+            if not speaker_data['utts'][sid]: 
+                del speaker_data['utts'][sid]
                 break
                 
-            next_utt = speaker_attributes['utts'][sid][-1]
+            next_utt = speaker_data['utts'][sid][-1]
             start_secs = convert_to_secs(next_utt.timestamp)
             end_secs = convert_to_secs(next_utt.meta['End'])
-            speaker_attributes['utt_periods'][sid] = (
+            speaker_data['utt_periods'][sid] = (
                 start_secs, end_secs
             )
         

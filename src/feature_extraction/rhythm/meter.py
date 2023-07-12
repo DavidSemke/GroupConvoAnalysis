@@ -142,12 +142,10 @@ def speaker_subset_best_stresses(
     best_stresses = {}
 
     for speaker in speakers:
-        utt_meter_ps, utt_stresses = speaker_meter_affinity(
+        meter_affinity = speaker_meter_affinity(
             speaker, convo, utt_filter, len_cutoff
         )
-        utt_stresses = best_utterance_stresses(
-            utt_meter_ps, utt_stresses
-        )
+        utt_stresses = best_utterance_stresses(meter_affinity)
         best_stresses[speaker.id] = utt_stresses
     
     return best_stresses
