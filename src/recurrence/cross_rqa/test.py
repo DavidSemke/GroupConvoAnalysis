@@ -1,37 +1,18 @@
-from itertools import combinations
-from src.recurrence.cross_rqa.computation import stress_crqa
-from src.recurrence.data_pts.stresses import stress_data_pts
-from src.feature_extraction.rhythm.meter import *
+from src.recurrence.cross_rqa.computation import dyad_stress_crqa
+from src.constants import gap_convos
 
-def dyad_stress_crqa_test(convo):
-    speakers = list(convo.iter_speakers())
-    speaker_pairs = list(combinations(speakers, 2))
+def dyad_stress_crqa_test(verbose=False):
+    for convo in gap_convos:
+        print()
+        print(f'{convo.id.upper()} - DYAD STRESS CRQA')
+        print()
 
-    for pair in speaker_pairs:
-        data_pts = {}
-        s1, s2 = pair
+        out = dyad_stress_crqa(convo)
+        
+        if verbose:
+            for res in out:
+                print(res[0])
 
-        for speaker in pair:
-            filter = lambda u: u.speaker.id == speaker.id
-            meter_affinity = dyad_meter_affinity(
-                s1, s2, convo, filter
-            )
-            stresses = best_utterance_stresses(meter_affinity)
-            data = stress_data_pts(stresses)
-            data_pts[speaker.id] = data
-    
-        rplot_folder = r'recurrence_plots\cross_rqa\dyad_stress'
 
-        for embed in (3, 4, 5, 6):
-            print()
-            print(f'Embedding Dimn = {embed}:')
-            print()
-            
-            rplot_path = rf'{rplot_folder}\rplot_{convo.id}_{s1.id}-{s2.id}_embed{embed}.png'
-                
-            rqa_res, rp_res = stress_crqa(
-                data_pts[s1.id], data_pts[s2.id], embed, rplot_path
-            )
-            
-            print(rqa_res)
-            print()
+if __name__ == '__main__':
+    dyad_stress_crqa_test(True)

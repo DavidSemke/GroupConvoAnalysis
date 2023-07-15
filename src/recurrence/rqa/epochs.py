@@ -4,6 +4,7 @@ from src.recurrence.rqa.computation import rqa
 # returns the epochs' RQA metric values
 # All epochs use the same delay and embedding dim
 def frame_epochs(data_pts, frame, delay, embed):
+    
     if not 0 < frame < 50:
         raise Exception(
             'Parameter frame must take a value in range (0, 50)'
@@ -26,8 +27,10 @@ def frame_epochs(data_pts, frame, delay, embed):
 # Returns the RQA metric values of adjacent epochs, where parameters
 # size and overlap correspond to epoch size and inter-epoch overlap
 # All epochs use the same delay and embedding dim
-# Parameter position determines how to deal with excess data pts ( );
-# if another epoch will not fit,  
+# Parameter position determines how to deal with excess data pts;
+    # left - first epoch starts at index 0
+    # right - last epoch ends at index -1
+    # center - remove excess from left and right
 def adjacent_epochs(
         data_pts, size, overlap, delay=1, embed=1, position='left'
 ):
@@ -90,12 +93,3 @@ def fit_epochs(data_pts, size, overlap, position):
         )
 
     return data_pts
-
-
-
-
-    
-
-
-    
-

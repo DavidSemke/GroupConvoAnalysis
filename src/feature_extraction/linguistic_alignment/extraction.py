@@ -126,3 +126,15 @@ def coordination_variances(convo, corpus):
     coord_to_var = np.var(list(coord_to_dict.values()))
 
     return round(coord_to_var, 6), round(coord_from_var, 6)
+
+
+def turn_taking_coordination():
+    pass
+
+
+def turn_taking_coordination_convergence():
+    pass
+
+
+
+
