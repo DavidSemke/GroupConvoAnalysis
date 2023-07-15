@@ -1,8 +1,15 @@
+# Returns the first and last frame % of the convo's utterances,
+# where utterances are in chronological order
 def convo_frame(convo, frame):
+
+    if not 0 < frame < 50:
+        raise Exception(
+            'Parameter frame must take a value in range (0, 50)'
+        )
 
     utts = convo.get_chronological_utterance_list()
     total_utts = len(utts)
-    half_frame_utt_count = round((frame/100) * (total_utts))
+    half_frame_utt_count = round(frame/100 * total_utts)
     
     first = utts[:half_frame_utt_count]
     last = utts[total_utts - half_frame_utt_count:]
@@ -10,12 +17,11 @@ def convo_frame(convo, frame):
     return first, last
 
 
-# Returns true if utt
+# Returns true if utterance
 # 1) comes from speaker 1 and speaker 2 AND
 # 2) is directed toward
     # a) the group as a whole (no one in particular)
     # b) either speaker1 or speaker2
-# returns dict with speakers as keys
 def is_dyad_utterance(utt, speaker1, speaker2):
         
     if utt.speaker.id in (speaker1.id, speaker2.id):
