@@ -42,7 +42,7 @@ def dyad_stress_crqa(convo, embeds=(2,4,6)):
                 rplot_path=rplot_path
             )
             results.append(
-                {'delay': delay, 'embed': embed, 'rqa': out}
+                {'delay': delay, 'embed': embed, 'results': out}
             )
             
     return results

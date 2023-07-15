@@ -42,31 +42,31 @@ def letter_stream_rqa(convo):
 
 
 def turn_taking_rqa(convo, plot=False):
-        data_pts, _ = turn_taking_data_pts(convo)
-        rplot_folder = r'recurrence_plots\rqa\turn-taking'
-        
-        total_speakers = len(convo.get_speaker_ids())
+    data_pts, _ = turn_taking_data_pts(convo)
+    rplot_folder = r'recurrence_plots\rqa\turn-taking'
+    
+    total_speakers = len(convo.get_speaker_ids())
 
-        # time delay not set, so find optimal
-        delay = optimal_delay(
-            data_pts, max_delay=total_speakers, plot=plot
+    # time delay not set, so find optimal
+    delay = optimal_delay(
+        data_pts, max_delay=total_speakers, plot=plot
+    )
+
+    results = []
+
+    for embed in range(2, total_speakers+1):
+
+        rplot_path = (
+            rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
+            + f'_embed{embed}.png'
         )
 
-        results = []
-
-        for embed in range(2, total_speakers+1):
-
-            rplot_path = (
-                rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
-                + f'_embed{embed}.png'
-            )
-
-            out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-            results.append(
-                {'delay': delay, 'embed': embed, 'rqa': out}
-            )
-        
-        return results
+        out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
+        results.append(
+            {'delay': delay, 'embed': embed, 'results': out}
+        )
+    
+    return results
 
 
 def complete_speech_sampling_rqa(convo, plot=False):
@@ -105,7 +105,7 @@ def speech_sampling_rqa(convo, data_pts, rplot_folder, plot=False):
 
     out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
     
-    return {'delay': delay, 'embed': embed, 'rqa': out}
+    return {'delay': delay, 'embed': embed, 'results': out}
     
 
 def convo_stress_rqa(convo, embeds=(2,4,6), plot=False):
@@ -130,7 +130,7 @@ def convo_stress_rqa(convo, embeds=(2,4,6), plot=False):
 
         out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
         results.append(
-            {'delay': delay, 'embed': embed, 'rqa': out}
+            {'delay': delay, 'embed': embed, 'results': out}
         )
 
     return results 
@@ -162,7 +162,7 @@ def dyad_stress_rqa(convo, embeds=(2,4,6), plot=False):
 
             out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
             results.append(
-                {'delay': delay, 'embed': embed, 'rqa': out}
+                {'delay': delay, 'embed': embed, 'results': out}
             )
 
     return results

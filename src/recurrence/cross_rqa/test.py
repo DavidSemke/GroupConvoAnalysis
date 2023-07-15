@@ -11,8 +11,8 @@ def dyad_stress_crqa_test(verbose=False):
         
         if verbose:
             for res in out:
-                print(res[0])
+                print(res['results'][0])
 
 
 if __name__ == '__main__':
-    dyad_stress_crqa_test(True)
+    dyad_stress_crqa_test()

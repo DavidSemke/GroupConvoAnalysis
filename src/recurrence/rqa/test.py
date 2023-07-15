@@ -12,8 +12,7 @@ def idea_rqa_test(verbose=False):
         out = idea_rqa(gap_corpus, convo)
         
         if verbose:
-            for res in out:
-                print(res[0])
+            print(out[0])
 
 
 def letter_stream_rqa_test(verbose=False):
@@ -24,10 +23,9 @@ def letter_stream_rqa_test(verbose=False):
         print()
 
         out = letter_stream_rqa(convo)
-        
+
         if verbose:
-            for res in out:
-                print(res[0])
+            print(out[0])
 
 
 def turn_taking_rqa_test(verbose=False):
@@ -41,7 +39,7 @@ def turn_taking_rqa_test(verbose=False):
         
         if verbose:
             for res in out:
-                print(res[0])
+                print(res['results'][0])
 
 
 def complete_speech_sampling_rqa_test(verbose=False):
@@ -54,8 +52,7 @@ def complete_speech_sampling_rqa_test(verbose=False):
         out = complete_speech_sampling_rqa(convo, verbose)
         
         if verbose:
-            for res in out:
-                print(res[0])
+            print(out['results'][0])
 
 
 def binary_speech_sampling_rqa_test(verbose=False):
@@ -68,8 +65,7 @@ def binary_speech_sampling_rqa_test(verbose=False):
         out = binary_speech_sampling_rqa(convo, verbose)
         
         if verbose:
-            for res in out:
-                print(res[0])
+            print(out['results'][0])
 
 
 def simult_binary_speech_sampling_rqa_test(verbose=False):
@@ -84,8 +80,7 @@ def simult_binary_speech_sampling_rqa_test(verbose=False):
         out = simult_binary_speech_sampling_rqa(convo, verbose)
         
         if verbose:
-            for res in out:
-                print(res[0])
+            print(out['results'][0])
     
 
 def convo_stress_rqa_test(verbose=False):
@@ -99,7 +94,7 @@ def convo_stress_rqa_test(verbose=False):
         
         if verbose:
             for res in out:
-                print(res[0])
+                print(res['results'][0])
 
 
 def dyad_stress_rqa_test(verbose=False):
@@ -113,7 +108,7 @@ def dyad_stress_rqa_test(verbose=False):
 
         if verbose:
             for res in out:
-                print(res[0])
+                print(res['results'][0])
             
 
 if __name__ == '__main__':
