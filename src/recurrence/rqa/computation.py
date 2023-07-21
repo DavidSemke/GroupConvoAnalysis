@@ -4,168 +4,100 @@ from pyrqa.analysis_type import Classic
 from pyrqa.neighbourhood import FixedRadius
 from pyrqa.computation import RQAComputation, RPComputation
 from pyrqa.image_generator import ImageGenerator
-from itertools import combinations
-from src.recurrence.data_pts.ideas import idea_data_pts
-from src.recurrence.data_pts.turn_taking import turn_taking_data_pts
-from src.recurrence.data_pts.letters import letter_data_pts
-from src.recurrence.data_pts.speech_sampling import (
-    complete_speech_sampling_data_pts,
-    binary_speech_sampling_data_pts,
-    simult_binary_speech_sampling_data_pts
-)
-from src.recurrence.data_pts.stresses import stress_data_pts
-from src.feature_extraction.rhythm.meter import *
-from src.recurrence.rqa.optimization import *
 
-# delay and embed are both 1, so they are omitted from file names
-def idea_rqa(corpus, convo):
-    data_pts, _ = idea_data_pts(convo, corpus)
-    rplot_folder = r'recurrence_plots\rqa\ideas'
-    rplot_path = rf'{rplot_folder}\rplot_{convo.id}.png'
+# Makes the first and last frame % of the data_pts epochs and 
+# returns the epochs' RQA metric values
+# All epochs use the same delay and embedding dim
+def frame_epochs(data_pts, frame, delay, embed):
     
-    return rqa(data_pts, rplot_path=rplot_path)
-
-
-def letter_stream_rqa(convo):
-    data_pts = letter_data_pts(convo)
-    rplot_folder = r'recurrence_plots\rqa\letter_stream'
+    if not 0 < frame < 50:
+        raise Exception(
+            'Parameter frame must take a value in range (0, 50)'
+        )
     
-    delay = 1
-    embed = 3
+    half_frame_data_count = round(frame/100 * len(data_pts))
 
-    rplot_path = (
-        rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
-        + f'_embed{embed}.png'
-    )
-
-    return rqa(data_pts, embed=embed, rplot_path=rplot_path)
-
-
-def turn_taking_rqa(convo, plot=False):
-    data_pts, _ = turn_taking_data_pts(convo)
-    rplot_folder = r'recurrence_plots\rqa\turn-taking'
-    
-    total_speakers = len(convo.get_speaker_ids())
-
-    # time delay not set, so find optimal
-    delay = optimal_delay(
-        data_pts, max_delay=total_speakers, plot=plot
-    )
+    early_epoch = data_pts[:half_frame_data_count]
+    late_epoch = data_pts[len(data_pts) - half_frame_data_count:]
 
     results = []
 
-    for embed in range(2, total_speakers+1):
-
-        rplot_path = (
-            rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
-            + f'_embed{embed}.png'
-        )
-
-        out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-        results.append(
-            {'delay': delay, 'embed': embed, 'results': out}
-        )
+    for epoch in (early_epoch, late_epoch):
+        out = rqa(epoch, delay, embed)
+        results.append(out[0])
     
     return results
 
 
-def complete_speech_sampling_rqa(convo, plot=False):
-    data_pts, _ = complete_speech_sampling_data_pts(convo)
-    rplot_folder = r'recurrence_plots\rqa\speech_sampling\complete'
-
-    return speech_sampling_rqa(convo, data_pts, rplot_folder, plot)
-
-
-def binary_speech_sampling_rqa(convo, plot=False):
-    data_pts = binary_speech_sampling_data_pts(convo)
-    rplot_folder = r'recurrence_plots\rqa\speech_sampling\binary'
-
-    return speech_sampling_rqa(convo, data_pts, rplot_folder, plot)
-
-
-def simult_binary_speech_sampling_rqa(convo, plot=False):
-    data_pts = simult_binary_speech_sampling_data_pts(convo)
-    rplot_folder = (
-        r'recurrence_plots\rqa\speech_sampling\simult_binary'
-    )
-    
-    return speech_sampling_rqa(convo, data_pts, rplot_folder, plot)
-        
-
-def speech_sampling_rqa(convo, data_pts, rplot_folder, plot=False):
-    # time delay not set, so find optimal
-    delay = optimal_delay(data_pts, 6, plot=plot)
-    # embedding dim not set, so find optimal
-    embed = optimal_embed(data_pts, delay, 6, plot=plot)
-
-    rplot_path = (
-        rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
-        + f'_embed{embed}.png'
-    )
-
-    out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-    
-    return {'delay': delay, 'embed': embed, 'results': out}
-    
-
-def convo_stress_rqa(convo, embeds=(2,4,6), plot=False):
-    speakers = list(convo.iter_speakers())
-    utt_stresses = speaker_subset_best_stresses(speakers, convo)
-    stresses = convo_stresses(convo, utt_stresses)
-    data_pts = stress_data_pts(stresses)
-    
-    rplot_folder = r'recurrence_plots\rqa\stress\convo'
-    
-    # time delay not set, so find optimal
-    delay = optimal_delay(data_pts, 6, plot=plot)
-
-    results = []
-
-    for embed in embeds:
-
-        rplot_path = (
-        rf'{rplot_folder}\rplot_{convo.id}_delay{delay}'
-        + f'_embed{embed}.png'
+# Returns the RQA metric values of adjacent epochs, where parameters
+# size and overlap correspond to epoch size and inter-epoch overlap
+# All epochs use the same delay and embedding dim
+# Parameter position determines how to deal with excess data pts;
+    # left - first epoch starts at index 0
+    # right - last epoch ends at index -1
+    # center - remove excess from left and right
+def adjacent_epochs(
+        data_pts, size, overlap, delay=1, embed=1, position='left'
+):
+    if not 0 < size < len(data_pts)//2:
+        raise Exception(
+            'Parameter size must take a value in range'
+            + ' (0, len(data_pts)//2]'
         )
-
-        out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-        results.append(
-            {'delay': delay, 'embed': embed, 'results': out}
+    
+    if not 0 <= overlap < size:
+        raise Exception(
+            'Parameter overlap must take a value in range [0, size)'
         )
-
-    return results 
-
-
-def dyad_stress_rqa(convo, embeds=(2,4,6), plot=False):
-    speakers = list(convo.iter_speakers())
-    speaker_pairs = list(combinations(speakers, 2))
+    
+    data_pts = fit_epochs(data_pts, size, overlap, position)
+    
     results = []
+    lower_bound = 0
+    upper_bound = size
 
-    for pair in speaker_pairs:
-        s1, s2 = pair
-        
-        meter_affinity = dyad_meter_affinity(s1, s2, convo)
-        stresses = best_utterance_stresses(meter_affinity)
-        data_pts = stress_data_pts(stresses)
-        
-        rplot_folder = r'recurrence_plots\rqa\stress\dyad'
-        
-        # time delay not set, so find optimal
-        delay = optimal_delay(data_pts, 6, plot=plot)
+    while upper_bound <= len(data_pts):
+        epoch = data_pts[lower_bound:upper_bound]
+        out = rqa(epoch, delay, embed)
+        results.append(out[0])
 
-        for embed in embeds:
-
-            rplot_path = (
-                rf'{rplot_folder}\rplot_{convo.id}_{s1.id}-{s2.id}'
-                + f'_delay{delay}_embed{embed}.png'
-            )
-
-            out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-            results.append(
-                {'delay': delay, 'embed': embed, 'results': out}
-            )
-
+        lower_bound = upper_bound - overlap
+        upper_bound = lower_bound + size
+    
     return results
+
+
+def fit_epochs(data_pts, size, overlap, position):
+    # get excess data that will be excluded in epochs
+    epoch_count = len(data_pts) // (size - overlap)
+
+    if len(data_pts) % (size - overlap) < overlap:
+        epoch_count -= 1
+    
+    epoch_data_count = size * epoch_count - overlap * (epoch_count - 1)
+    excess_data_count = len(data_pts) - epoch_data_count
+
+    # remove excess data
+    if position == 'left':
+        data_pts = data_pts[:len(data_pts) - excess_data_count]
+    
+    elif position == 'right':
+        data_pts = data_pts[excess_data_count:]
+    
+    elif position == 'center':
+        half = excess_data_count // 2
+
+        if excess_data_count % 2 == 0:
+            data_pts = data_pts[half : len(data_pts)-half]
+        else:
+            data_pts = data_pts[half : len(data_pts)-half-1]
+    
+    else:
+        raise Exception(
+            'Parameter position must be "left", "right", or "center"'
+        )
+
+    return data_pts
 
 
 def rqa(data_pts, delay=1, embed=1, radius=0.1, rplot_path=None):

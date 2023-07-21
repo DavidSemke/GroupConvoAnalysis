@@ -21,10 +21,3 @@ def binary_search(dict_list, compare_key, val_to_find):
     # element was not present
     # insert at low
     return (False, low)
-
-
-
-
-
-
-
