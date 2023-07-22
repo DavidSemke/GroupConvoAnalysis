@@ -1,6 +1,9 @@
 from extraction import *
 from idea_flow import idea_flows
 from src.constants import gap_corpus, gap_convos
+import matplotlib.pyplot as plt
+from convokit import Corpus
+from src.recurrence.data_pts.turn_taking import turn_taking_data_pts
 
 def main():
 
@@ -32,5 +35,52 @@ def main():
         print()
 
 
+def plot_turn_taking_epoch_determinism(convo):
+    trials = turn_taking_rqa(convo, 'sliding')
+
+    plt.title(f'Epoch Determinism - {convo.id}')
+    plt.ylabel('Determinism')
+    plt.xlabel('Epoch')
+
+    for t in trials:
+        dets = [epoch.determinism for epoch in t['results']]
+        epochs = range(len(dets))
+        label = f's={t["size"]},o={t["overlap"]},e={t["embed"]}'
+
+        plt.plot(epochs, dets, label=label)
+
+    plt.legend()
+    plt.show()
+    
+    # diff, _ = turn_taking_frame_det_diff(convo)
+    # print(diff)
+
+    # diff, _ = turn_taking_sliding_det_diff(convo)
+    # print(diff)
+
+
+# get conversations with enough turn taking data
+def turn_taking_convos(min_data_count=140):
+    corpus = Corpus('corpora/gap-corpus')
+    convo_ids = corpus.get_conversation_ids()
+    convos = []
+
+    for id in convo_ids:
+        convo = corpus.get_conversation(id)
+        data_pts, _ = turn_taking_data_pts(convo)
+
+        if len(data_pts) < min_data_count: continue
+
+        convos.append(convo)
+
+    return convos
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+
+    convos = turn_taking_convos()[:6]
+
+    for convo in convos:
+        plot_turn_taking_epoch_determinism(convo)
+    

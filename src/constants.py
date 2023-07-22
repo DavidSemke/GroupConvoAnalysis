@@ -9,8 +9,10 @@ speaker_colors = ['Pink', 'Blue', 'Green', 'Orange', 'Yellow']
 
 gap_corpus = Corpus('corpora/gap-corpus', utterance_end_index=890)
 
-gap_convos = [gap_corpus.get_conversation('1.Pink.1'),
-          gap_corpus.get_conversation('12.Blue.1')]
+gap_convos = [
+    gap_corpus.get_conversation('1.Pink.1'),
+    gap_corpus.get_conversation('12.Blue.1')
+]
 
 
 # UGI Corpus Constants

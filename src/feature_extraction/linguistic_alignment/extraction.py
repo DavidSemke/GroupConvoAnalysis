@@ -3,6 +3,7 @@ from convokit import Coordination
 from src.utils.timestamps import convert_to_secs
 from src.feature_extraction.linguistic_alignment.speech_flow import *
 from src.utils.filter_utterances import convo_frame
+from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 
 # returns seconds
 # median is used to avoid influence of outliers
@@ -128,13 +129,31 @@ def coordination_variances(convo, corpus):
     return round(coord_to_var, 6), round(coord_from_var, 6)
 
 
-def turn_taking_coordination():
-    pass
+# Returns the RQA trial that produces the max diff in determinism
+# between early and late frame epochs
+def turn_taking_frame_det_diff(convo):
+    trials = turn_taking_rqa(convo, 'frame')
+    l = lambda t: (
+        t['results'][1].determinism - t['results'][0].determinism
+    )
+    best_trial = max(trials, key=l)
+    det_diff = l(best_trial)
+
+    return det_diff, best_trial
 
 
-def turn_taking_coordination_convergence():
-    pass
+# Returns the max aggregate score for determinism diffs between epochs, 
+# where epochs are adjacent such that they span the entire time series
+# The aggregate function takes a list of numbers and outputs a number
+def turn_taking_sliding_det_diff(convo, aggregate_func=np.mean):
+    trials = turn_taking_rqa(convo, 'sliding')
+    l = lambda t: (
+        aggregate_func(
+            np.diff([epoch.determinism for epoch in t['results']])
+        )
+    )
+    best_trial = max(trials, key=l)
+    det_diff = l(best_trial)
 
-
-
+    return det_diff, best_trial
 

@@ -15,10 +15,10 @@ def frame_epochs(data_pts, frame, delay, embed):
             'Parameter frame must take a value in range (0, 50)'
         )
     
-    half_frame_data_count = round(frame/100 * len(data_pts))
+    frame_data_count = round(frame/100 * len(data_pts))
 
-    early_epoch = data_pts[:half_frame_data_count]
-    late_epoch = data_pts[len(data_pts) - half_frame_data_count:]
+    early_epoch = data_pts[:frame_data_count]
+    late_epoch = data_pts[len(data_pts) - frame_data_count:]
 
     results = []
 
@@ -36,13 +36,15 @@ def frame_epochs(data_pts, frame, delay, embed):
     # left - first epoch starts at index 0
     # right - last epoch ends at index -1
     # center - remove excess from left and right
-def adjacent_epochs(
+def sliding_epochs(
         data_pts, size, overlap, delay=1, embed=1, position='left'
 ):
-    if not 0 < size < len(data_pts)//2:
+
+    # this ensures at least 2 epochs
+    if not 0 < size <= (len(data_pts) + overlap) // 2:
         raise Exception(
             'Parameter size must take a value in range'
-            + ' (0, len(data_pts)//2]'
+            + ' (0, (len(data_pts) + overlap) // 2]'
         )
     
     if not 0 <= overlap < size:
@@ -51,7 +53,6 @@ def adjacent_epochs(
         )
     
     data_pts = fit_epochs(data_pts, size, overlap, position)
-    
     results = []
     lower_bound = 0
     upper_bound = size
@@ -68,14 +69,15 @@ def adjacent_epochs(
 
 
 def fit_epochs(data_pts, size, overlap, position):
-    # get excess data that will be excluded in epochs
-    epoch_count = len(data_pts) // (size - overlap)
+    # get excess data count that will be excluded from epochs
+    data_count = len(data_pts)
+    epoch_count = data_count // (size - overlap)
 
-    if len(data_pts) % (size - overlap) < overlap:
+    if data_count % (size - overlap) < overlap:
         epoch_count -= 1
     
     epoch_data_count = size * epoch_count - overlap * (epoch_count - 1)
-    excess_data_count = len(data_pts) - epoch_data_count
+    excess_data_count = data_count - epoch_data_count
 
     # remove excess data
     if position == 'left':

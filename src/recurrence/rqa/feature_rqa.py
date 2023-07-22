@@ -35,8 +35,7 @@ def letter_stream_rqa(convo):
 
 def turn_taking_rqa(convo, epoch_type=None):
     data_pts, _ = turn_taking_data_pts(convo)
-    total_speakers = len(convo.get_speaker_ids())
-    embeds = range(2, total_speakers+1)
+    embeds = (2, 3)
     delay = 1
         
     if not epoch_type:
@@ -51,16 +50,22 @@ def turn_taking_rqa(convo, epoch_type=None):
             data_pts, frames, delay, embeds
         )
             
-    elif epoch_type == 'adjacent':
-        size_overlap_pairs = ((50, 5), (50, 10), (50, 20))
-        results = adjacent_epochs_trials(
+    elif epoch_type == 'sliding':
+        overlaps = (20, 30)
+        size_overlap_pairs = []
+        
+        for overlap in overlaps:
+            size = stretched_epoch_size(len(data_pts), overlap, 50) 
+            size_overlap_pairs.append((size, overlap))
+               
+        results = sliding_epochs_trials(
             data_pts, size_overlap_pairs, delay, embeds
         )
 
     else:
         raise Exception(
             'Parameter epoch_type can only take on values "frame"' 
-            + 'or "adjacent"'
+            + 'and "sliding"'
         )
 
     return results
@@ -112,16 +117,22 @@ def speech_sampling_rqa(
             data_pts, frames, delay, embeds
         )
             
-    elif epoch_type == 'adjacent':
-        size_overlap_pairs = ((50, 5), (50, 10), (50, 20))
-        results = adjacent_epochs_trials(
+    elif epoch_type == 'sliding':
+        overlaps = (10, 15, 20)
+        size_overlap_pairs = []
+        
+        for overlap in overlaps:
+            size = stretched_epoch_size(len(data_pts), overlap, 50) 
+            size_overlap_pairs.append((size, overlap))
+               
+        results = sliding_epochs_trials(
             data_pts, size_overlap_pairs, delay, embeds
         )
 
     else:
         raise Exception(
             'Parameter epoch_type can only take on values "frame"' 
-            + 'or "adjacent"'
+            + 'and "sliding"'
         )
     
     return results
@@ -148,16 +159,22 @@ def convo_stress_rqa(convo, epoch_type=None):
             data_pts, frames, delay, embeds
         )
             
-    elif epoch_type == 'adjacent':
-        size_overlap_pairs = ((50, 5), (50, 10), (50, 20))
-        results = adjacent_epochs_trials(
+    elif epoch_type == 'sliding':
+        overlaps = (10, 15, 20)
+        size_overlap_pairs = []
+        
+        for overlap in overlaps:
+            size = stretched_epoch_size(len(data_pts), overlap, 50) 
+            size_overlap_pairs.append((size, overlap))
+               
+        results = sliding_epochs_trials(
             data_pts, size_overlap_pairs, delay, embeds
         )
 
     else:
         raise Exception(
             'Parameter epoch_type can only take on values "frame"' 
-            + 'or "adjacent"'
+            + 'and "sliding"'
         )
 
     return results 
@@ -169,6 +186,7 @@ def dyad_stress_rqa(convo, epoch_type=None):
     
     delay = 1
     embeds=(2,4,6)
+    results = []
     
     for pair in speaker_pairs:
         s1, s2 = pair
@@ -179,27 +197,41 @@ def dyad_stress_rqa(convo, epoch_type=None):
 
         if not epoch_type:
             rplot_folder = r'recurrence_plots\rqa\stress\dyad'
-            results = epochless_trials(
+            trials = epochless_trials(
                 data_pts, delay, embeds, convo.id, rplot_folder, 
                 (s1.id, s2.id)
             )
+            results.append(
+                {'sid1': s1.id, 'sid2': s2.id, 'trials': trials})
     
         elif epoch_type == 'frame':
             frames = (10, 20)
-            results = frame_epochs_trials(
+            trials = frame_epochs_trials(
                 data_pts, frames, delay, embeds
             )
+            results.append(
+                {'sid1': s1.id, 'sid2': s2.id, 'trials': trials})
                 
-        elif epoch_type == 'adjacent':
-            size_overlap_pairs = ((50, 5), (50, 10), (50, 20))
-            results = adjacent_epochs_trials(
+        elif epoch_type == 'sliding':
+            overlaps = (10, 15, 20)
+            size_overlap_pairs = []
+            
+            for overlap in overlaps:
+                size = stretched_epoch_size(
+                    len(data_pts), overlap, 50
+                ) 
+                size_overlap_pairs.append((size, overlap))
+                
+            trials = sliding_epochs_trials(
                 data_pts, size_overlap_pairs, delay, embeds
             )
+            results.append(
+                {'sid1': s1.id, 'sid2': s2.id, 'trials': trials})
 
         else:
             raise Exception(
                 'Parameter epoch_type can only take on values "frame"' 
-                + 'or "adjacent"'
+                + 'and "sliding"'
             )
 
     return results
@@ -248,8 +280,8 @@ def frame_epochs_trials(data_pts, frames, delay, embeds):
     return results
 
 
-def adjacent_epochs_trials(
-        data_pts, size_overlap_pairs, delay, embeds 
+def sliding_epochs_trials(
+        data_pts, size_overlap_pairs, delay, embeds
 ):
     results = []
 
@@ -257,7 +289,7 @@ def adjacent_epochs_trials(
         size, overlap = pair
 
         for embed in embeds:  
-            out = adjacent_epochs(
+            out = sliding_epochs(
                 data_pts, size, overlap, delay, embed
             )
             results.append(
@@ -271,3 +303,21 @@ def adjacent_epochs_trials(
             )
     
     return results
+
+
+# Increases epoch size until excess data excluded from epochs cannot 
+# be distributed such that all epochs retain the same size
+def stretched_epoch_size(data_count, overlap, min_size):
+    epoch_count = data_count // (min_size - overlap)
+
+    if data_count % (min_size - overlap) < overlap:
+        epoch_count -= 1
+    
+    epoch_data_count = (
+        min_size * epoch_count - overlap * (epoch_count - 1)
+    )
+    excess_data_count = data_count - epoch_data_count
+
+    stretched_size = min_size + excess_data_count // epoch_count
+    
+    return stretched_size
