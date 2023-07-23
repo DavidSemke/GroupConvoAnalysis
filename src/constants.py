@@ -7,7 +7,7 @@ speaker_colors = ['Pink', 'Blue', 'Green', 'Orange', 'Yellow']
 
 # GAP Corpus Constants
 
-gap_corpus = Corpus('corpora/gap-corpus', utterance_end_index=890)
+gap_corpus = Corpus('corpora/gap-corpus')
 
 gap_convos = [
     gap_corpus.get_conversation('1.Pink.1'),

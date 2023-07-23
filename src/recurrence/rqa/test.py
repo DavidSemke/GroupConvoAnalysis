@@ -1,7 +1,6 @@
 from src.recurrence.rqa.feature_rqa import *
 from src.constants import gap_corpus, gap_convos
 
-
 def feature_rqa_test(title, verbose, feature_rqa_func, **kwargs):
     print()
     print(f'{kwargs["convo"].id.upper()} - {title.upper()}')
@@ -82,7 +81,7 @@ if __name__ == '__main__':
         # )
         feature_rqa_test(
             'TURN-TAKING RQA', True, turn_taking_rqa, 
-            convo=convo, epoch_type='sliding'
+            convo=convo, epoch_type=None
         )
         # feature_rqa_test(
         #     'COMPLETE SPEECH SAMPLING RQA', True, 
