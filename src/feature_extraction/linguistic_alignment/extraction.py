@@ -129,12 +129,12 @@ def coordination_variances(convo, corpus):
     return round(coord_to_var, 6), round(coord_from_var, 6)
 
 
-# Returns the RQA trial that produces the max diff in determinism
-# between early and late frame epochs
-def turn_taking_frame_det_diff(convo):
+# Returns the RQA trial that produces the max mean in determinism
+# using both early and late frame epochs
+def turn_taking_frame_det(convo):
     trials = turn_taking_rqa(convo, 'frame')
     l = lambda t: (
-        t['results'][1].determinism - t['results'][0].determinism
+        np.mean([epoch.determinism for epoch in t['results']])
     )
     best_trial = max(trials, key=l)
     det_diff = l(best_trial)
@@ -142,18 +142,17 @@ def turn_taking_frame_det_diff(convo):
     return det_diff, best_trial
 
 
-# Returns the max aggregate score for determinism diffs between epochs, 
-# where epochs are adjacent such that they span the entire time series
+# Returns the max aggregate score for determinism diffs between 
+# epochs, where epochs are adjacent such that they span the entire 
+# time series
 # The aggregate function takes a list of numbers and outputs a number
-def turn_taking_sliding_det_diff(convo, aggregate_func=np.mean):
+def turn_taking_sliding_det(convo, aggregate_func=np.mean):
     trials = turn_taking_rqa(convo, 'sliding')
     l = lambda t: (
-        aggregate_func(
-            np.diff([epoch.determinism for epoch in t['results']])
+        aggregate_func([epoch.determinism for epoch in t['results']]
         )
     )
     best_trial = max(trials, key=l)
     det_diff = l(best_trial)
 
     return det_diff, best_trial
-

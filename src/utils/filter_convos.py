@@ -1,26 +1,27 @@
 import numpy as np
 
-# Returns all convos that score an AGS greater than 
-# (mean of AGS) + (stdev of AGS) * stdev_pad
-def high_ags_convos(corpus, stdev_pad=1):
-    ags_list = []
+# Returns all convos that score an AGS
+def convos_by_ags(corpus, under_bound_func=None, over_bound_func=None):
     convos = [
         corpus.get_conversation(convo_id) 
         for convo_id in corpus.get_conversation_ids()
     ]
+    ags_list = [convo.meta['AGS'] for convo in convos]
 
-    for convo in convos:
-        ags_list.append(convo.meta['AGS'])
+    unbounded_convos = []
+
+    if under_bound_func:
+        under_bound_convos = [
+            convo for convo in convos 
+            if convo.meta['AGS'] < under_bound_func(ags_list)
+        ]
+        unbounded_convos.append(under_bound_convos)
+
+    if over_bound_func:
+        over_bound_convos = [
+            convo for convo in convos 
+            if convo.meta['AGS'] > over_bound_func(ags_list)
+        ]
+        unbounded_convos.append(over_bound_convos)
     
-    mean = np.mean(ags_list)
-    stdev = np.std(ags_list)
-    threshold = mean + stdev * stdev_pad
-    high_ags_convos = []
-
-    for convo in convos:
-
-        if convo.meta['AGS'] < threshold: continue
-
-        high_ags_convos.append(convo)
-    
-    return high_ags_convos
+    return unbounded_convos

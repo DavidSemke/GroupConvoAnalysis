@@ -47,12 +47,12 @@ def main():
             coordination_variances(convo, gap_corpus)
         )
         
-        diff, trial = turn_taking_frame_det_diff(convo)
+        det, trial = turn_taking_frame_det(convo)
         frame = trial["frame"]
-        print(f'Turn taking frame DET diff (frame = {frame}):', diff)
+        print(f'Turn taking frame DET (frame = {frame}):', det)
 
-        diff, trial = turn_taking_sliding_det_diff(convo)
-        print(f'Turn taking mean sliding DET diff:', diff)
+        det, trial = turn_taking_sliding_det(convo)
+        print(f'Turn taking mean sliding DET:', det)
         
         print()
 
