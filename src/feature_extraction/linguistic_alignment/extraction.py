@@ -5,8 +5,8 @@ from src.feature_extraction.linguistic_alignment.speech_flow import *
 from src.utils.filter_utterances import convo_frame
 from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 
-# returns seconds
-# median is used to avoid influence of outliers
+# Returns seconds
+# Median is used to avoid influence of outliers
 def median_idea_discussion_time(idea_flows_dict):
     times = [convert_to_secs(idea_flow['time_spent']) 
              for key in idea_flows_dict 
@@ -29,8 +29,8 @@ def avg_idea_participation_percentage(convo, idea_flows_dict):
     return round(100*sum_of_fractions/total_ideas, 1)
 
 
-# ranges from 0 to 1
-# a score of 0 means that each speaker started an equal number of idea flows
+# Ranges from 0 to 1
+# A score of 0 means that each speaker started an equal number of idea flows
 def idea_distribution_score(convo, idea_flows_dict):
     speaker_ids = convo.get_speaker_ids()
     idea_count_dict = {}
@@ -63,11 +63,11 @@ def idea_distribution_score(convo, idea_flows_dict):
     return round(var/max_var, 4)
 
 
-# frame is the first and last x% of utterances considered
-# early variance comes from speaker speech rate variance in first x%
-# late variance is variance in the last x%
-# negative value implies divergence, positive implies convergence
-# returns (early_var - late_var)
+# Frame is the first and last x% of utterances considered
+# Early variance comes from speaker speech rate variance in first x%
+# Late variance is variance in the last x%
+# Negative value implies divergence, positive implies convergence
+# Returns (early_var - late_var)
 def speech_rate_convergence(convo, frame):
     early_utts, late_utts = list(convo_frame(convo, frame))
     early_medians = []
@@ -103,11 +103,11 @@ def speech_pause_percentage(convo):
     return round(pause_time/total_time, 2)
 
 
-# coordination scores for speakers are calculated, where a speaker
-# has a score for
+# Coordination scores for speakers are calculated, where a speaker
+# Has a score for
 #   1) how much they coordinate to the other speakers
 #   2) how much other speakers coordinate to them
-# returns variance for both sets of scores
+# Returns variance for both sets of scores
 def coordination_variances(convo, corpus):
     
     corpus = corpus.filter_utterances_by(
@@ -132,27 +132,52 @@ def coordination_variances(convo, corpus):
 # Returns the RQA trial that produces the max mean in determinism
 # using both early and late frame epochs
 def turn_taking_frame_det(convo):
-    trials = turn_taking_rqa(convo, 'frame')
-    l = lambda t: (
-        np.mean([epoch.determinism for epoch in t['results']])
-    )
-    best_trial = max(trials, key=l)
-    det_diff = l(best_trial)
-
-    return det_diff, best_trial
+    return turn_taking_det(convo, 'frame', np.mean)
 
 
 # Returns the max aggregate score for determinism diffs between 
 # epochs, where epochs are adjacent such that they span the entire 
 # time series
 # The aggregate function takes a list of numbers and outputs a number
-def turn_taking_sliding_det(convo, aggregate_func=np.mean):
-    trials = turn_taking_rqa(convo, 'sliding')
-    l = lambda t: (
-        aggregate_func([epoch.determinism for epoch in t['results']]
-        )
+# Default aggregate function takes the mean of differences between
+# adjacent epochs (late epoch det - early epoch det)
+def turn_taking_sliding_det(convo):
+    return turn_taking_det(
+        convo, 'sliding', lambda x: np.mean(np.diff(x))
     )
-    best_trial = max(trials, key=l)
-    det_diff = l(best_trial)
 
-    return det_diff, best_trial
+
+# aggregate_func is only used if epoch_type is not None
+def turn_taking_det(convo, epoch_type=None, aggregate_func=np.mean):
+    trials = turn_taking_rqa(convo, epoch_type)
+
+    if epoch_type:
+        l = lambda trial: (
+            aggregate_func(
+                [epoch.determinism for epoch in trial['results']]
+            )
+        )
+        best_trial = max(trials, key=l)
+        det_score = l(best_trial)
+    
+    else:
+        l = lambda trial: trial['results'][0].determinism
+        best_trial = max(trials, key=l)
+        det_score = l(best_trial)
+
+    return det_score, best_trial
+
+
+# Returns avg and longest diagonal line len for trial with greatest
+# determinism
+# Uses RQA without epochs (to avoid interrupting diagonal lines)
+def turn_taking_diagonal_stats(convo):
+    trials = turn_taking_rqa(convo)
+    
+    l = lambda trial: trial['results'][0].determinism
+    best_trial = max(trials, key=l)
+
+    avg_diag_len = best_trial['results'][0].average_diagonal_line
+    longest_diag_len = best_trial['results'][0].longest_diagonal_line
+    
+    return avg_diag_len, longest_diag_len

@@ -2,7 +2,6 @@ from src.utils.primes import generate_primes
 from src.utils.timestamps import convert_to_secs
 from src.utils.primes import is_prime
 
-
 # 1 indicates simultaneous speech; 0 otherwise
 def simult_binary_speech_sampling_data_pts(convo, time_delay=1):
     data_pts, _ = complete_speech_sampling_data_pts(convo, time_delay)

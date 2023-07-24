@@ -2,6 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from nolitsa import delay, dimension, noise
 
+'''
+Note that optimal delay/embedding values can only be found if time 
+series being analyzed is produced from a system exhibiting stationary
+behavior, meaning the statistics describing the system undergo trivial
+change. For a time series produced from conversational data,
+stationary behavior is unlikely.
+'''
+
 # Uses delayed mutual information to determine optimal delay
 # The delay correpsonding to the first local minimum of the DMI 
 # function is returned if first_min is true

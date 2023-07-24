@@ -52,7 +52,7 @@ def idea_flows(convo, corpus):
                 idea, utt, convo, idea_flows[tok_dict['tag'][0]]
             )
 
-    # get rid of idea flows that failed (never included more than 1 participant)
+    # get rid of failed idea flows (only have 1 participant)
     successful_idea_flows = {"J": [], "N": [], "V": []}
     for key in successful_idea_flows:
         successful_idea_flows[key] = [
@@ -86,7 +86,7 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list):
 
         if expired:
             # removes previous speaker who tried to introduce the idea
-            # and adds the latest speaker that is trying to introduce it
+            # and adds the latest speaker trying to introduce it
             idea_flow['participant_ids'] = [utt.speaker.id]
             
         curr_speaker_is_participant = utt.speaker.id in idea_flow['participant_ids']
@@ -108,7 +108,8 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list):
             idea_flow['utt_ids'].append(utt.id)
             idea_flow['participant_ids'].append(utt.speaker.id)
             idea_flow['total_participants'] += 1
-            # idea flow established, -1 indicates it can no longer expire
+            # idea flow established, -1 indicates it can no longer 
+            # expire
             idea_flow['utts_before_expiry'] = -1
     
     else:
