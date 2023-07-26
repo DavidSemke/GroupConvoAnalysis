@@ -3,6 +3,10 @@ from convokit import Coordination
 from src.utils.timestamps import convert_to_secs
 from src.feature_extraction.linguistic_alignment.speech_flow import *
 from src.utils.filter_utterances import convo_frame
+from src.recurrence.rqa.extraction import (
+    epoch_rqa_det, 
+    epochless_rqa_stats
+)
 from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 
 # Returns seconds
@@ -129,10 +133,10 @@ def coordination_variances(convo, corpus):
     return round(coord_to_var, 6), round(coord_from_var, 6)
 
 
-# Returns the RQA trial that produces the max mean in determinism
-# using both early and late frame epochs
+# Returns the max mean for frame epoch laminarity and the trial that 
+# achieved the max mean
 def turn_taking_frame_det(convo):
-    return turn_taking_det(convo, 'frame', np.mean)
+    return epoch_rqa_det(turn_taking_rqa(convo, 'frame'))
 
 
 # Returns the max aggregate score for determinism diffs between 
@@ -142,42 +146,23 @@ def turn_taking_frame_det(convo):
 # Default aggregate function takes the mean of differences between
 # adjacent epochs (late epoch det - early epoch det)
 def turn_taking_sliding_det(convo):
-    return turn_taking_det(
-        convo, 'sliding', lambda x: np.mean(np.diff(x))
+    return epoch_rqa_det(
+        turn_taking_rqa(convo, 'sliding'), 
+        lambda dets: np.mean(np.diff(dets))
     )
-
-
-# aggregate_func is only used if epoch_type is not None
-def turn_taking_det(convo, epoch_type=None, aggregate_func=np.mean):
-    trials = turn_taking_rqa(convo, epoch_type)
-
-    if epoch_type:
-        l = lambda trial: (
-            aggregate_func(
-                [epoch.determinism for epoch in trial['results']]
-            )
-        )
-        best_trial = max(trials, key=l)
-        det_score = l(best_trial)
-    
-    else:
-        l = lambda trial: trial['results'][0].determinism
-        best_trial = max(trials, key=l)
-        det_score = l(best_trial)
-
-    return det_score, best_trial
 
 
 # Returns avg and longest diagonal line len for trial with greatest
 # determinism
 # Uses RQA without epochs (to avoid interrupting diagonal lines)
 def turn_taking_diagonal_stats(convo):
-    trials = turn_taking_rqa(convo)
-    
-    l = lambda trial: trial['results'][0].determinism
-    best_trial = max(trials, key=l)
-
-    avg_diag_len = best_trial['results'][0].average_diagonal_line
-    longest_diag_len = best_trial['results'][0].longest_diagonal_line
-    
-    return avg_diag_len, longest_diag_len
+    return epochless_rqa_stats(
+        turn_taking_rqa(convo),
+        lambda e: {
+            'average_diagonal_line': e.average_diagonal_line,
+            'longest_diagonal_line': e.longest_diagonal_line
+        },
+        lambda trials: max(
+            trials, key=lambda trial: trial['results'][0].determinism
+        )
+    )

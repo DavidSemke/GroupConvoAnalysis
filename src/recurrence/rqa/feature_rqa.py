@@ -71,8 +71,8 @@ def turn_taking_rqa(convo, epoch_type=None):
     return results
 
 
-def complete_speech_sampling_rqa(convo, epoch_type=None):
-    data_pts, _ = complete_speech_sampling_data_pts(convo)
+def complete_speech_sampling_rqa(convo, epoch_type=None, time_delay=1):
+    data_pts, _ = complete_speech_sampling_data_pts(convo, time_delay)
     rplot_folder = r'recurrence_plots\rqa\speech_sampling\complete'
 
     return speech_sampling_rqa(
@@ -80,8 +80,8 @@ def complete_speech_sampling_rqa(convo, epoch_type=None):
     )
 
 
-def binary_speech_sampling_rqa(convo, epoch_type=None):
-    data_pts = binary_speech_sampling_data_pts(convo)
+def binary_speech_sampling_rqa(convo, epoch_type=None, time_delay=1):
+    data_pts = binary_speech_sampling_data_pts(convo, time_delay)
     rplot_folder = r'recurrence_plots\rqa\speech_sampling\binary'
 
     return speech_sampling_rqa(
@@ -89,8 +89,12 @@ def binary_speech_sampling_rqa(convo, epoch_type=None):
     )
 
 
-def simult_binary_speech_sampling_rqa(convo, epoch_type=None):
-    data_pts = simult_binary_speech_sampling_data_pts(convo)
+def simult_binary_speech_sampling_rqa(
+        convo, epoch_type=None, time_delay=1
+):
+    data_pts = simult_binary_speech_sampling_data_pts(
+        convo, time_delay
+    )
     rplot_folder = (
         r'recurrence_plots\rqa\speech_sampling\simult_binary'
     )
