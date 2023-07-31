@@ -1,3 +1,7 @@
+# Stress position indexes:
+    # U = 0
+    # S = 1
+    # P = 2
 def stress_data_pts(stresses):
     data_pts = []
     position_to_index = {'U': 0, 'S': 1, 'P': 2}

@@ -71,7 +71,6 @@ def complete_speech_sampling_data_pts(convo, time_delay=1):
     return data_pts, speaker_data['primes']
 
 
-# time delay is the amount of time between samples
 def sample_position(pos, speaker_data):
     # if a sample remains 1, that means no utterance was
     # occurring at that moment (which is position_secs)

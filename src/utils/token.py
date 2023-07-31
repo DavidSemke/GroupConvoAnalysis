@@ -136,7 +136,8 @@ def content_word_count(convo, corpus):
             )
             first_word = False
         
-            if content: count+=1
+            if content: 
+                count+=1
     
     return count
 
@@ -161,14 +162,40 @@ def content_utterance_count(convo, corpus):
     return count
 
 
+def speaker_word_count(speaker, convo, corpus):
+    corpus = corpus.filter_utterances_by(
+        lambda u: (
+            u.conversation_id == convo.id 
+            and u.speaker.id == speaker.id
+        )
+    )
+
+    parser = TextParser()
+    corpus = parser.transform(corpus)
+
+    count = 0
+
+    for utt in corpus.iter_utterances():
+        
+        for tok_dict in [
+            tok_dict for parsed_dict in utt.meta['parsed'] 
+            for tok_dict in parsed_dict['toks']
+        ]:
+            
+            if not is_word(tok_dict): continue
+
+            count += 1
+
+    return count
+
+
 def lemmatize_word(tok_dict, lemmatizer):
     tok = tok_dict['tok']
     
     # if proper noun, no need to lemmatize
     is_proper_noun = tok_dict['tag'] == "NNP"
     
-    if is_proper_noun:
-        return tok
+    if is_proper_noun: return tok
 
     # if proper noun plural, remember capitalized letters
     # so they can be added back after lemmatization

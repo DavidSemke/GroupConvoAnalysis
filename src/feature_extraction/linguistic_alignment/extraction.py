@@ -37,9 +37,7 @@ def avg_idea_participation_percentage(convo, idea_flows_dict):
 # A score of 0 means that each speaker started an equal number of idea flows
 def idea_distribution_score(convo, idea_flows_dict):
     speaker_ids = convo.get_speaker_ids()
-    idea_count_dict = {}
-    for id in speaker_ids:
-        idea_count_dict[id] = 0
+    idea_count_dict = {id:0 for id in speaker_ids}
     
     # get counts of idea flows started for each speaker
     idea_flows = [idea_flow for key in idea_flows_dict

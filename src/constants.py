@@ -53,5 +53,3 @@ negation_words = [
     'scarcely','seldom','rarely','nothing','none',
     'nobody','nowhere'
 ]
-
-
