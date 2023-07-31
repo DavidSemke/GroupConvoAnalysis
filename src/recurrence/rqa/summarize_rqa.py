@@ -19,7 +19,7 @@ def plot_epoch_rqa_metric(
         raise Exception(
             'Feature RQA func must have epoch_type set to "sliding"'
         )
-
+    
     plt.title(title)
     plt.ylabel(xlabel)
     plt.xlabel(ylabel)
@@ -28,11 +28,16 @@ def plot_epoch_rqa_metric(
         metric_transformer = lambda vals: vals
         
     for trial in feature_rqa_func(*args):
-        vals = [metric_func(epoch) for epoch in trial['results']]
+        vals = [
+            tuple(metric_func(epoch).values())[0]
+            for epoch in trial['results']
+        ]
         y = metric_transformer(vals)
         x = range(len(y))
-        label = f's={trial["size"]},o={trial["overlap"]},'
-        + f'e={trial["embed"]}'
+        label = (
+            f's={trial["size"]},o={trial["overlap"]},'
+            + f'e={trial["embed"]}'
+        )
 
         plt.plot(x, y, label=label)
 
@@ -110,6 +115,9 @@ def convo_group_rqa_det_summary(convo_groups, feature_rqa_func):
         stats_dict = {stat:[] for stat in stats}
 
         for convo in convo_groups[key]:
+            print()
+            print('Convo ID -', convo.id)
+
             epochless_trials = feature_rqa_func(convo)
             frame_trials = feature_rqa_func(convo, 'frame')
             sliding_trials = feature_rqa_func(convo, 'sliding')
@@ -122,36 +130,25 @@ def convo_group_rqa_det_summary(convo_groups, feature_rqa_func):
             sliding_det = epoch_det_stats(
                 sliding_trials, sliding_aggregate_func
             )
-            avg_diag, longest_diag = epochless_diagonal_stats(epochless_trials)
+            avg_diag, longest_diag = epochless_diagonal_stats(
+                epochless_trials
+            )
 
             stats_dict['frame_dets'].append(frame_det)
             stats_dict['sliding_dets'].append(sliding_det)
             stats_dict['avg_diagonals'].append(avg_diag)
             stats_dict['longest_diagonals'].append(longest_diag)
+        
+        print()
+        print('Group Stats')
                 
+        for stat, val in stats_dict.items():
+            print()
+            print(stat, 'mean:', np.mean(val))
+            print(stat, 'var:', np.var(val))
+
         print()
-        print('Frame det mean:', np.mean(stats_dict['frame_dets']))
-        print('Frame det var:', np.var(stats_dict['frame_dets']))
-        print()
-        print('Sliding det mean:', np.mean(stats_dict['sliding_dets']))
-        print('Sliding det var:', np.var(stats_dict['sliding_dets']))
-        print()
-        print(
-            'Avg diagonal mean:', np.mean(stats_dict['avg_diagonals'])
-        )
-        print(
-            'Avg diagonal var:', np.var(stats_dict['avg_diagonals'])
-        )
-        print()
-        print(
-            'Longest diagonal mean:', 
-            np.mean(stats_dict['longest_diagonals'])
-        )
-        print(
-            'Longest diagonal var:', 
-            np.var(stats_dict['longest_diagonals'])
-        )
-        print()
+
 
 
 def epoch_det_stats(feature_rqa_trials, aggregate_func=np.mean):
@@ -214,6 +211,9 @@ def convo_group_rqa_lam_summary(convo_groups, feature_rqa_func):
         stats_dict = {stat:[] for stat in stats}
 
         for convo in convo_groups[key]:
+            print()
+            print('Convo ID -', convo.id)
+
             epochless_trials = feature_rqa_func(convo)
             frame_trials = feature_rqa_func(convo, 'frame')
             sliding_trials = feature_rqa_func(convo, 'sliding')
@@ -234,26 +234,16 @@ def convo_group_rqa_lam_summary(convo_groups, feature_rqa_func):
             stats_dict['longest_verticals'].append(longest_vert)
 
         print()
-        print('Frame lam mean:', np.mean(stats_dict['frame_lams']))
-        print('Frame lam var:', np.var(stats_dict['frame_lams']))
-        print()
-        print('Sliding lam mean:', np.mean(sliding_lam))
-        print('Sliding lam var:', np.var(sliding_lam))
-        print()
-        print('Avg vertical mean:', np.mean(stats_dict['avg_verticals']))
-        print('Avg vertical var:', np.var(stats_dict['avg_verticals']))
-        print()
-        print(
-            'Longest vertical mean:', 
-            np.mean(stats_dict['longest_verticals'])
-        )
-        print('Longest vertical var:', 
-              np.var(stats_dict['longest_verticals'])
-        )
+        print('Group Stats')
+                
+        for stat, val in stats_dict.items():
+            print()
+            print(stat, 'mean:', np.mean(val))
+            print(stat, 'var:', np.var(val))
+
         print()
 
 
-            
 def epoch_lam_stats(feature_rqa_trials, aggregate_func=np.mean):
     lam_score, trial =  epoch_rqa_lam(
         feature_rqa_trials, aggregate_func
@@ -273,8 +263,8 @@ def epoch_lam_stats(feature_rqa_trials, aggregate_func=np.mean):
     
     else:
         raise Exception(
-            'Parameter feature_rqa_trials must be trials produced by a '
-            + 'feature rqa func that uses epochs'
+            'Parameter feature_rqa_trials must be trials produced by '
+            + 'a feature rqa func that uses epochs'
         )
     
     return lam_score
