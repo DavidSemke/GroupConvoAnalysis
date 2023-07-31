@@ -6,6 +6,37 @@ from src.recurrence.rqa.extraction import (
 from src.recurrence.rqa.feature_rqa import (
     simult_binary_speech_sampling_rqa
 )
+from src.utils.token import speaker_word_count
+
+# Ranges from 0 to 1
+# A score of 0 means that no speaker spoke more words than another
+def speech_distribution_score(convo, corpus):
+    speaker_ids = convo.get_speaker_ids()
+    speaker_word_counts = {}
+
+    for id in speaker_ids:
+        speaker = convo.get_speaker(id)
+        speaker_word_counts[id] = speaker_word_count(
+            speaker, convo, corpus
+        )
+    
+    # convert counts to percentages
+    total_words = sum(speaker_word_counts.values())
+    speaker_word_percentages = speaker_word_counts
+    for key in speaker_word_percentages:
+        speaker_word_percentages[key] /= total_words/100
+
+    # compute percentage variance
+    percentages = list(speaker_word_percentages.values())
+    var = np.var(percentages)
+    
+    # compute variance where one percentages is 100%, others are 0%
+    p_count = len(percentages)
+    max_var_data_points = [0 for _ in range(p_count-1)] + [100]
+    max_var = np.var(max_var_data_points)
+
+    return round(var/max_var, 4)
+
 
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
