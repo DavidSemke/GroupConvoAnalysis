@@ -77,24 +77,19 @@ def extreme_group_speech_overlap_laminarity(corpus):
 
 if __name__ == '__main__':
     corpus = gap_corpus
-    convo_ids = [
-        '16.Yellow.1',
-        '2.Pink.1',
-        '20.Blue.1',
-        '4.Blue.1'
-    ]
     convos = [
         corpus.get_conversation(convo_id) 
-        for convo_id in convo_ids
+        for convo_id in corpus.get_conversation_ids()
     ]
 
     for convo in convos:
         feature_rqa_test(
-            'DYAD STRESS RQA', True, 
+            '_ RQA', True, 
             lambda e: {
-                'determinism': e.determinism
+                'determinism': e.determinism,
+                'recurrence rate': e.recurrence_rate
             },
-            dyad_stress_rqa, convo=convo, epoch_type='sliding'
+            simult_binary_speech_sampling_rqa, convo=convo
         )
     
 

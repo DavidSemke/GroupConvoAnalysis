@@ -1,4 +1,4 @@
-from convokit import TextParser
+from convokit import TextParser, Corpus
 from nltk.stem import WordNetLemmatizer
 
 def is_word(tok_dict):
@@ -107,6 +107,27 @@ def is_idea_utterance(utt, parser, lemmatizer):
         if idea: return True
     
     return False
+
+
+def word_count(utts):
+    corpus = Corpus(utterances=utts)
+    
+    parser = TextParser()
+    corpus = parser.transform(corpus)
+    
+    count = 0
+    
+    for utt in corpus.iter_utterances():
+        for tok_dict in [
+            tok_dict for parsed_dict in utt.meta['parsed'] 
+            for tok_dict in parsed_dict['toks']
+        ]:
+            
+            if not is_word(tok_dict): continue
+
+            count += 1
+    
+    return count
 
 
 def content_word_count(convo, corpus):

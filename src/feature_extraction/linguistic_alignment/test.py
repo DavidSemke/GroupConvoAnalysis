@@ -4,7 +4,7 @@ from src.constants import gap_corpus, gap_convos
 
 def main():
 
-    for convo in gap_convos:
+    for convo in [gap_corpus.get_conversation('14.Red.1')]:
         print()
         print(convo.id.upper())
         print()
@@ -33,6 +33,9 @@ def main():
         print(
             'Idea distribution score:', 
             idea_distribution_score(convo, idea_flows_dict)
+        )
+        print('Dyad exchange distribution score:',
+              dyad_exchange_distribution_score(convo)
         )
         print(
             'Speech rate convergence (frame = 10%):', 

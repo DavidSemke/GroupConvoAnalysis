@@ -1,5 +1,6 @@
 import numpy as np
 from convokit import Coordination
+from itertools import combinations
 from src.utils.timestamps import convert_to_secs
 from src.feature_extraction.linguistic_alignment.speech_flow import *
 from src.utils.filter_utterances import convo_frame
@@ -8,6 +9,8 @@ from src.recurrence.rqa.extraction import (
     epochless_rqa_stats
 )
 from src.recurrence.rqa.feature_rqa import turn_taking_rqa
+from src.utils.filter_utterances import strict_dyad_utterances
+from src.utils.token import word_count
 
 # Returns seconds
 # Median is used to avoid influence of outliers
@@ -59,8 +62,27 @@ def idea_distribution_score(convo, idea_flows_dict):
     
     # compute variance where one percentages is 100%, others are 0%
     p_count = len(percentages)
-    max_var_data_points = [0 for _ in range(p_count-1)] + [100]
-    max_var = np.var(max_var_data_points)
+    max_var = np.var([0 for _ in range(p_count-1)] + [100])
+
+    return round(var/max_var, 4)
+
+
+def dyad_exchange_distribution_score(convo):
+    speakers = list(convo.iter_speakers())
+    speaker_pairs = list(combinations(speakers, 2))
+    word_totals = []
+
+    for s1, s2 in speaker_pairs:
+        utts = strict_dyad_utterances(convo, s1, s2)
+        word_total = word_count(utts)
+        word_totals.append(word_total)
+    
+    total_sum = sum(word_totals)
+    word_percentages = [wt*100/total_sum for wt in word_totals]
+    var = np.var(word_percentages)
+
+    p_count = len(word_percentages)
+    max_var = np.var([0 for _ in range(p_count-1)] + [100])
 
     return round(var/max_var, 4)
 
@@ -129,6 +151,9 @@ def coordination_variances(convo, corpus):
     coord_to_var = np.var(list(coord_to_dict.values()))
 
     return round(coord_to_var, 6), round(coord_from_var, 6)
+
+
+
 
 
 # Returns the max mean for frame epoch laminarity and the trial that 

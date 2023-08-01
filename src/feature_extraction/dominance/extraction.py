@@ -32,8 +32,7 @@ def speech_distribution_score(convo, corpus):
     
     # compute variance where one percentages is 100%, others are 0%
     p_count = len(percentages)
-    max_var_data_points = [0 for _ in range(p_count-1)] + [100]
-    max_var = np.var(max_var_data_points)
+    max_var = np.var([0 for _ in range(p_count-1)] + [100])
 
     return round(var/max_var, 4)
 

@@ -107,7 +107,7 @@ def dyad_stress_rqa(convo, epoch_type=None):
     rplot_folder = r'recurrence_plots\rqa\stress\dyad'
     
     delay = 1
-    embeds=[2,4,6]
+    embeds=[9]
     results = []
     
     for pair in speaker_pairs:
