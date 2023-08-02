@@ -49,17 +49,17 @@ def plot_epoch_rqa_metric(
 # Parameter metrics_func takes an epoch as input and outputs RQA metric 
 # values of the epoch as a dict
 # If output is epochless, RQA output is handled as one big epoch
-def epoch_rqa_summary(rqa_output, epoch_type, metrics_func):
+def epoch_rqa_summary(feature_rqa_trials, epoch_type, metrics_func):
     
     if not epoch_type:
 
-        for i, trial in enumerate(rqa_output):
+        for i, trial in enumerate(feature_rqa_trials):
             print_trial_metadata(trial, i)
             summarize_epochs([trial['results'][0]], metrics_func)
     
     elif epoch_type in ('frame', 'sliding'):
 
-        for i, trial in enumerate(rqa_output):
+        for i, trial in enumerate(feature_rqa_trials):
             print_trial_metadata(trial, i)
             summarize_epochs(trial['results'], metrics_func)
 

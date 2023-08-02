@@ -4,7 +4,7 @@ from src.constants import gap_corpus, gap_convos
 
 def main():
 
-    for convo in [gap_corpus.get_conversation('14.Red.1')]:
+    for convo in gap_convos:
         print()
         print(convo.id.upper())
         print()

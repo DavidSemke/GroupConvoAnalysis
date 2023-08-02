@@ -1,7 +1,8 @@
 import numpy as np
-from src.feature_extraction.word_psych_properties.liwc import personality_matrix
+from src.feature_extraction.word_psych_properties.liwc import (
+    personality_matrix
+)
 from src.utils.stats import within_cluster_variance
-
 
 """
 aoa = age of acquisition

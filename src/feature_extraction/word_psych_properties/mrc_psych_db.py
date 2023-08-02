@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import numpy as np
 
+# Parameter ratings is the output from func query_mrc_db
 def avg_ratings(ratings):
     # cols and rows labels; each starts listing at col/row 0
     # 2 columns: propy_score_total, propy_word_total

@@ -10,65 +10,71 @@ from src.recurrence.data_pts.speech_sampling import (
 )
 from src.recurrence.data_pts.stresses import stress_data_pts
 from src.feature_extraction.rhythm.meter import *
-import numpy as np
 
-def idea_rqa(corpus, convo):
+def idea_rqa(corpus, convo, sparsity_check=False):
     data_pts, _ = idea_data_pts(convo, corpus)
     rplot_folder = r'recurrence_plots\rqa\ideas'
     delay = 1
     embeds = [1]
 
     return epochless_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder
+        data_pts, delay, embeds, convo.id, rplot_folder, sparsity_check
     )
 
 
-def letter_stream_rqa(convo):
+def letter_stream_rqa(convo, sparsity_check=False):
     data_pts = letter_data_pts(convo)
     rplot_folder = r'recurrence_plots\rqa\letter_stream'
     delay = 1
     embeds = [3]
 
     return epochless_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder
+        data_pts, delay, embeds, convo.id, rplot_folder, sparsity_check
     )
 
 
-def turn_taking_rqa(convo, epoch_type=None):
+def turn_taking_rqa(convo, epoch_type=None, sparsity_check=False):
     data_pts, _ = turn_taking_data_pts(convo)
     rplot_folder = r'recurrence_plots\rqa\turn-taking'
     delay = 1
     embeds = [4]
     
     return rqa_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type
+        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
+        sparsity_check
     )
 
 
-def complete_speech_sampling_rqa(convo, epoch_type=None, time_delay=1):
+def complete_speech_sampling_rqa(
+        convo, epoch_type=None, sparsity_check=False, time_delay=1
+):
     data_pts, _ = complete_speech_sampling_data_pts(convo, time_delay)
     rplot_folder = r'recurrence_plots\rqa\speech_sampling\complete'
     delay = 1
     embeds = [4]
     
     return rqa_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type
+        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
+        sparsity_check
     )
 
 
-def binary_speech_sampling_rqa(convo, epoch_type=None, time_delay=1):
+def binary_speech_sampling_rqa(
+        convo, epoch_type=None, sparsity_check=False, time_delay=1
+):
     data_pts = binary_speech_sampling_data_pts(convo, time_delay)
     rplot_folder = r'recurrence_plots\rqa\speech_sampling\binary'
     delay = 1
     embeds = [9]
     
     return rqa_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type
+        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
+        sparsity_check
     )
 
 
 def simult_binary_speech_sampling_rqa(
-        convo, epoch_type=None, time_delay=1
+        convo, epoch_type=None, sparsity_check=False, time_delay=1
 ):
     data_pts = simult_binary_speech_sampling_data_pts(
         convo, time_delay
@@ -80,11 +86,12 @@ def simult_binary_speech_sampling_rqa(
     embeds = [9]
     
     return rqa_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type
+        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
+        sparsity_check
     )
         
 
-def convo_stress_rqa(convo, epoch_type=None):
+def convo_stress_rqa(convo, epoch_type=None, sparsity_check=False):
     speakers = list(convo.iter_speakers())
     utt_stresses = speaker_subset_best_stresses(speakers, convo)
     stresses = convo_stresses(convo, utt_stresses)
@@ -96,11 +103,12 @@ def convo_stress_rqa(convo, epoch_type=None):
     embeds=[9]
 
     return rqa_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type
+        data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
+        sparsity_check
     )
 
 
-def dyad_stress_rqa(convo, epoch_type=None):
+def dyad_stress_rqa(convo, epoch_type=None, sparsity_check=False):
     speakers = list(convo.iter_speakers())
     speaker_pairs = list(combinations(speakers, 2))
 
@@ -118,8 +126,8 @@ def dyad_stress_rqa(convo, epoch_type=None):
         data_pts = stress_data_pts(stresses)
 
         trials = rqa_trials(
-            data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-            (s1.id, s2.id)
+            data_pts, delay, embeds, convo.id, rplot_folder, 
+            epoch_type, (s1.id, s2.id), sparsity_check
         )
         
         for trial in trials:
@@ -132,20 +140,20 @@ def dyad_stress_rqa(convo, epoch_type=None):
 
 
 def rqa_trials(
-        data_pts, delay, embeds, convo_id, rplot_folder, epoch_type=None,
-        speaker_id_pair=None
+        data_pts, delay, embeds, convo_id, rplot_folder, 
+        epoch_type=None, speaker_id_pair=None, sparsity_check=False
 ):
     
     if not epoch_type:
         trials = epochless_trials(
             data_pts, delay, embeds, convo_id, rplot_folder, 
-            speaker_id_pair
+            speaker_id_pair, sparsity_check
         )
     
     elif epoch_type == 'frame':
         frames = (10, 20)
         trials = frame_epochs_trials(
-            data_pts, frames, delay, embeds
+            data_pts, frames, delay, embeds, sparsity_check
         )
             
     elif epoch_type == 'sliding':
@@ -159,7 +167,7 @@ def rqa_trials(
             size_overlap_pairs.append((size, overlap))
                
         trials = sliding_epochs_trials(
-            data_pts, size_overlap_pairs, delay, embeds
+            data_pts, size_overlap_pairs, delay, embeds, sparsity_check
         )
 
     else:
@@ -173,7 +181,7 @@ def rqa_trials(
 
 def epochless_trials(
         data_pts, delay, embeds, convo_id, rplot_folder, 
-        speaker_ids=None
+        speaker_ids=None, sparsity_check=False
 ):
     rplot_name = f'rplot_{convo_id}_'
 
@@ -183,82 +191,112 @@ def epochless_trials(
         
         rplot_name = rplot_name[:-1] + '_'
     
-    results = []
+    trials = []
 
     for embed in embeds:
         trial_rplot_name = rplot_name + f'delay{delay}_embed{embed}.png'
         rplot_path = rf'{rplot_folder}\{trial_rplot_name}'
 
         out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
-        results.append(
-            {'delay': delay, 'embed': embed, 'results': out}
-        )
+        trial =  {'delay': delay, 'embed': embed, 'results': out}
+        trials.append(trial)
+
+        if not sparsity_check: continue
+
+        err_on_sparsity(trial)
     
-    return results
+    return trials
 
 
-def frame_epochs_trials(data_pts, frames, delay, embeds):
-    results = []
+def frame_epochs_trials(
+        data_pts, frames, delay, embeds, sparsity_check=False
+):
+    trials = []
 
     for frame in frames:
         for embed in embeds:  
             out = frame_epochs(data_pts, frame, delay, embed)
-            results.append(
-                {
+            trial = {
                     'frame': frame, 
                     'delay': delay, 
                     'embed': embed, 
                     'results': out
-                }
-            )
+            }
+            trials.append(trial)
+
+            if not sparsity_check: continue
+
+            err_on_sparsity(trial, 'frame')
     
-    return results
+    return trials
 
 
 def sliding_epochs_trials(
-        data_pts, size_overlap_pairs, delay, embeds
+        data_pts, size_overlap_pairs, delay, embeds, 
+        sparsity_check=False
 ):
-    results = []
+    trials = []
 
-    for pair in size_overlap_pairs:
-        size, overlap = pair
-
+    for size, overlap in size_overlap_pairs:
         for embed in embeds:  
             out = sliding_epochs(
                 data_pts, size, overlap, delay, embed
             )
-            results.append(
-                {
+            trial = {
                     'size': size,
                     'overlap': overlap, 
                     'delay': delay, 
                     'embed': embed, 
                     'results': out
-                }
-            )
+            }
+            trials.append(trial)
 
-            # rec_too_low = any(
-            #     [True if epoch.recurrence_rate < 0.001 else False 
-            #      for epoch in out]
-            # )
+            if not sparsity_check: continue
 
-            # if rec_too_low:
-            #     raise Exception(
-            #         'REC fell below 0.1%. Consider increasing '
-            #         + f'epoch size (={size}) or decreasing embedding ' 
-            #         + f'dimension (={embed})'
-            #     )
+            err_on_sparsity(trial, 'sliding')
 
-            # zero_det = any(
-            #     [True if epoch.determinism == 0 else False 
-            #      for epoch in out]
-            # )
+    return trials
 
-            # if zero_det:
-            #     raise Exception(
-            #         'Determinism fell to zero. Consider increasing '
-            #         + f'epoch size (={size}) or decreasing embedding ' 
-            #         + f'dimension (={embed})'
-            #     )
+
+def err_on_sparsity(
+        trial, epoch_type=None, min_rec_rate=0.001, min_det=0
+):
+    low_rec_rate_msg = (
+        f'Recurrence rate fell to {min_rec_rate}; consider ' 
+        + f'decreasing embedding dimension (={trial["embed"]})'
+    )
+    low_det_msg = (
+        f'Determinism fell to {min_det}; consider ' 
+        + f'decreasing embedding dimension (={trial["embed"]})'
+    )
+
+    if not epoch_type:
+        epochs = [trial['results'][0]]
+        
+    elif epoch_type == 'frame':
+        epochs = trial['results']
+        addon = f' or increasing frame (={trial["frame"]}%)'
+        low_rec_rate_msg += addon
+        low_det_msg += addon
+
+    elif epoch_type == 'sliding':
+        epochs = trial['results']
+        addon = f' or increasing epoch size (={trial["size"]})'
+        low_rec_rate_msg += addon
+        low_det_msg += addon
     
-    return results
+    rec_too_low = any(
+        [True if epoch.recurrence_rate <= min_rec_rate else False 
+        for epoch in epochs]
+    )
+
+    if rec_too_low:
+        raise Exception(low_rec_rate_msg)
+        
+    det_too_low = any(
+        [True if epoch.determinism <= min_det else False 
+        for epoch in epochs]
+    )
+
+    if det_too_low:
+        raise Exception(low_det_msg)

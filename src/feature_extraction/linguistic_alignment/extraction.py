@@ -153,9 +153,6 @@ def coordination_variances(convo, corpus):
     return round(coord_to_var, 6), round(coord_from_var, 6)
 
 
-
-
-
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
 def turn_taking_frame_det(convo):

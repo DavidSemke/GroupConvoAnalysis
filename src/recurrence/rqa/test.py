@@ -38,7 +38,7 @@ def plot_turn_taking_determinism(convo):
         turn_taking_rqa,
         convo, 'sliding',
         metric_func=lambda e: {
-                'determinism': e.determinism
+            'determinism': e.determinism
         }
     )
 
@@ -56,10 +56,7 @@ def epochless_turn_taking_determinism(convo):
 
 
 def extreme_group_turn_taking_determinism(corpus):
-    filter = lambda convo: (
-        len(convo.get_speaker_ids()) > 2
-        and len(turn_taking_data_pts(convo)[0]) >= 140
-    )
+    filter = lambda convo: len(convo.get_speaker_ids()) > 2
     extremes = extreme_convo_groups(corpus, 0.5, filter)
     groups = {'low': extremes[0], 'high': extremes[1]}
     
@@ -75,6 +72,24 @@ def extreme_group_speech_overlap_laminarity(corpus):
     )
 
 
+def extreme_group_speech_pause_laminarity(corpus):
+    extremes = extreme_convo_groups(corpus)
+    groups = {'low': extremes[0], 'high': extremes[1]}
+
+    convo_group_rqa_lam_summary(
+        groups, binary_speech_sampling_rqa
+    )
+
+
+def extreme_group_convo_stress_determinism(corpus):
+    extremes = extreme_convo_groups(corpus)
+    groups = {'low': extremes[0], 'high': extremes[1]}
+
+    convo_group_rqa_det_summary(
+        groups, convo_stress_rqa
+    )
+
+
 if __name__ == '__main__':
     corpus = gap_corpus
     convos = [
@@ -82,15 +97,8 @@ if __name__ == '__main__':
         for convo_id in corpus.get_conversation_ids()
     ]
 
-    for convo in convos:
-        feature_rqa_test(
-            '_ RQA', True, 
-            lambda e: {
-                'determinism': e.determinism,
-                'recurrence rate': e.recurrence_rate
-            },
-            simult_binary_speech_sampling_rqa, convo=convo
-        )
+    # extreme_group_speech_pause_laminarity(corpus)
+    extreme_group_convo_stress_determinism(corpus)
     
 
     
