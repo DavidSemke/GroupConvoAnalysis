@@ -17,9 +17,12 @@ gap_convos = [
 
 # UGI Corpus Constants
 
-ugi_corpus = Corpus('corpora/ugi-corpus/convokit_v2', utterance_end_index=100)
+ugi_corpus = Corpus('corpora/ugi-corpus/convokit_v2')
 
-ugi_convos = [ugi_corpus.get_conversation('1.Blue.1')]
+ugi_convos = [
+    ugi_corpus.get_conversation('1.Blue.1'),
+    ugi_corpus.get_conversation('7.Pink.1')
+]
 
 
 # Prosodic Constants

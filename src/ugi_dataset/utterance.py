@@ -1,5 +1,9 @@
 from src.ugi_dataset.line_processing import process_line_elements
-from src.ugi_dataset.utterance_periods import approx_utterance_periods
+from src.ugi_dataset.utterance_periods import (
+    approx_utterance_periods,
+    explode_shared_timestamps
+)
+from src.utils.timestamps import convert_to_secs
 import src.constants as const
 
 def utterance_metadata(transcripts_path, patts):
@@ -14,12 +18,14 @@ def utterance_metadata(transcripts_path, patts):
         with open(txt_path, 'r') as file:
             lines = file.readlines()
         
-        extract_utterances(lines, group_id, utt_metadata, patts)
+        # merge dicts
+        utt_metadata |= extract_utterances(lines, group_id, patts)
     
     return utt_metadata
 
 
-def extract_utterances(lines, group_id, utt_metadata, patts):
+def extract_utterances(lines, group_id, patts):
+    group_utt_metadata = {}
     lines = [l.strip() for l in lines if l.strip()]
     colored_utts = {color:0 for color in const.speaker_colors}
     first_loop = True
@@ -51,7 +57,7 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
             first_loop = False
         
         for utt_id, sent in utt_id_sent_pairs:
-            utt_metadata[utt_id] = {
+            group_utt_metadata[utt_id] = {
                 'id': utt_id,
                 'conversation_id': convo_id,
                 'text': sent,
@@ -64,8 +70,25 @@ def extract_utterances(lines, group_id, utt_metadata, patts):
             prior_utt_id = utt_id
         
         line_index += 1
+
+    # ensure utterances are chronologically ordered
+    # group_utt_list = list(group_utt_metadata.values())
+    # group_utt_list.sort(
+    #     key=lambda u: round(convert_to_secs(u['timestamp']), 1)
+    # )
+
+    # group_utt_list = explode_shared_timestamps(group_utt_list)
     
-    # add 'Duration' and 'End' fields to utt.meta property
-    approx_utterance_periods(utt_metadata)
-    
+    # Add 'Duration' and 'End' fields to utt.meta property
+    # Input is list of dicts from group_utt_metadata, so changes to the 
+    # dicts change dict group_utt_metadata
+    # approx_utterance_periods(group_utt_list)
+
+    # reconstruct utt metadata dict
+    # group_utt_metadata = {
+    #     utt['id']:utt for utt in group_utt_list
+    # }
+
     print(f"Utts for group {group_id} finished")
+
+    return group_utt_metadata

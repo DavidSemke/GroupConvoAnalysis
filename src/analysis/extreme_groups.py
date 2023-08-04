@@ -4,7 +4,7 @@ from src.feature_extraction.rhythm.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
 from src.feature_extraction.linguistic_alignment.extraction import *
 from src.utils.filter_convos import extreme_convo_groups
-from src.constants import gap_corpus
+from src.constants import gap_corpus, ugi_corpus
 
 """
 RQA features ignored here (recurrence folder explores)
@@ -51,14 +51,14 @@ def extreme_feature_summary(
 
 if __name__ == '__main__':
     # dominance
-    # extreme_feature_summary(
-    #     gap_corpus, speech_distribution_score, gap_corpus
-    # )
+    extreme_feature_summary(
+        ugi_corpus, speech_distribution_score, ugi_corpus
+    )
     # lin alignment
     # extreme_feature_summary(
     #     gap_corpus, speech_rate_convergence, 10
     # )
-    extreme_feature_summary(
-        gap_corpus, dyad_exchange_distribution_score,
-        convo_filter=lambda convo: len(convo.get_speaker_ids()) > 2 
-    )
+    # extreme_feature_summary(
+    #     gap_corpus, dyad_exchange_distribution_score,
+    #     convo_filter=lambda convo: len(convo.get_speaker_ids()) > 2 
+    # )

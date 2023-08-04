@@ -50,10 +50,12 @@ def create_utterances_jsonl(utt_metadata):
                 if k == "meta":
                     line += f'"{k}": {{'
 
-                    for meta_k, meta_v in v.items():
-                        line += f'"{meta_k}": "{meta_v}", '
+                    # for meta_k, meta_v in v.items():
+                    #     line += f'"{meta_k}": "{meta_v}", '
                     
-                    line = line[:-2] + '}, '
+                    # line = line[:-2] + '}, '
+
+                    line += '}, '
 
                 elif k == "reply-to" and v:
                     line += f'"{k}": "{v}", '
