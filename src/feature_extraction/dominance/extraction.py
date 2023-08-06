@@ -7,6 +7,42 @@ from src.recurrence.rqa.feature_rqa import (
     simult_binary_speech_sampling_rqa
 )
 from src.utils.token import speaker_word_count
+from src.utils.timestamps import convert_to_secs
+
+def speech_overlap_percentage(convo):
+    utts = convo.get_chronological_utterance_list()
+    overlap_time = 0
+    lower_bound = 0
+    curr_index = 0
+    next_index = 1
+    
+    while next_index < len(utts):
+        curr = utts[curr_index]
+        next = utts[next_index]
+        curr_end_secs = convert_to_secs(curr.meta["End"])
+        next_start_secs = convert_to_secs(next.timestamp)
+        next_end_secs = convert_to_secs(next.meta["End"])
+        
+        lower_bound = max(lower_bound, next_start_secs)
+
+        if curr_end_secs <= next_start_secs:
+            curr_index = next_index
+            
+        elif curr_end_secs < next_end_secs:
+            overlap_time += curr_end_secs - lower_bound
+            lower_bound = curr_end_secs
+            curr_index = next_index
+
+        elif next_end_secs > lower_bound:
+            overlap_time += next_end_secs - lower_bound
+            lower_bound = next_end_secs
+
+        next_index += 1
+    
+    total_time = convo.meta['Meeting Length in Minutes'] * 60
+
+    return round(overlap_time/total_time, 2)
+
 
 # Ranges from 0 to 1
 # A score of 0 means that no speaker spoke more words than another

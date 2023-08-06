@@ -12,6 +12,7 @@ def main():
         idea_flows_dict = idea_flows(convo, gap_corpus)
         
         print("Idea flows:")
+        
         for key in idea_flows_dict:
             for flow in idea_flows_dict[key]:
                 print()
@@ -25,14 +26,14 @@ def main():
         print()
         print(
             'Median idea discussion time:', 
-            median_idea_discussion_time(idea_flows_dict), 'secs'
+            median_idea_discussion_time_part(idea_flows_dict), 'secs'
         )
         print(
-            'Average idea participation percentage:', avg_idea_participation_percentage(convo, idea_flows_dict), '%'
+            'Average idea participation percentage:', avg_idea_participation_percentage_part(convo, idea_flows_dict), '%'
         )
         print(
             'Idea distribution score:', 
-            idea_distribution_score(convo, idea_flows_dict)
+            idea_distribution_score_part(convo, idea_flows_dict)
         )
         print('Dyad exchange distribution score:',
               dyad_exchange_distribution_score(convo)

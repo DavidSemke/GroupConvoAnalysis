@@ -80,6 +80,7 @@ def expiration_tick(utt, idea_flows_dict):
 def handle_idea_existence(tok, utt, convo, idea_flows_list):
     # idea_exists is true if idea is repeated
     idea_exists, index = binary_search(idea_flows_list, 'tok', tok)
+
     if idea_exists:
         idea_flow = idea_flows_list[index]
         expired = idea_flow['utts_before_expiry'] == 0
@@ -96,11 +97,13 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list):
             idea_flow['utt_ids'] = [utt.id]
             # reset expiry countdown since idea was reintroduced
             idea_flow['utts_before_expiry'] = len(convo.get_speaker_ids())
+        
         elif curr_speaker_is_participant:
             idea_flow['time_spent'] = add_timestamps(
                 idea_flow['time_spent'], utt.meta['Duration']
             )
             idea_flow['utt_ids'].append(utt.id)
+        
         else:
             idea_flow['time_spent'] = add_timestamps(
                 idea_flow['time_spent'], utt.meta['Duration']

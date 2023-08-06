@@ -6,7 +6,6 @@ for convo in gap_convos:
     print(convo.id.upper())
     print()
     
-    print("Speech overlap percentage:", speech_overlap_percentage(convo), "%")
     print("Contrast in formality, sentence level (WCV):", contrast_in_formality(convo, gap_corpus))
     print("Contrast in formality, word level (WCV):", contrast_in_formality(convo, gap_corpus, True))
 

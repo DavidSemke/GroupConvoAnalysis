@@ -3,6 +3,7 @@ from convokit import Coordination
 from itertools import combinations
 from src.utils.timestamps import convert_to_secs
 from src.feature_extraction.linguistic_alignment.speech_flow import *
+from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
 from src.utils.filter_utterances import convo_frame
 from src.recurrence.rqa.extraction import (
     epoch_rqa_det, 
@@ -12,9 +13,13 @@ from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 from src.utils.filter_utterances import strict_dyad_utterances
 from src.utils.token import word_count
 
-# Returns seconds
-# Median is used to avoid influence of outliers
-def median_idea_discussion_time(idea_flows_dict):
+def median_idea_discussion_time(convo, corpus):
+    flows_dict = idea_flows(convo, corpus)
+    
+    return median_idea_discussion_time_part(flows_dict)
+
+
+def median_idea_discussion_time_part(idea_flows_dict):
     times = [convert_to_secs(idea_flow['time_spent']) 
              for key in idea_flows_dict 
              for idea_flow in idea_flows_dict[key]]
@@ -22,7 +27,18 @@ def median_idea_discussion_time(idea_flows_dict):
     return np.median(times)
 
 
-def avg_idea_participation_percentage(convo, idea_flows_dict):
+def avg_idea_participation_percentage(convo, corpus):
+    flows_dict = idea_flows(convo, corpus)
+    avg_ipp = avg_idea_participation_percentage_part(
+        convo, flows_dict
+    )
+    
+    return avg_ipp
+
+
+def avg_idea_participation_percentage_part(
+        convo, idea_flows_dict
+):
     total_ideas = 0
     total_speakers = len(convo.get_speaker_ids())
     sum_of_fractions = 0
@@ -36,15 +52,26 @@ def avg_idea_participation_percentage(convo, idea_flows_dict):
     return round(100*sum_of_fractions/total_ideas, 1)
 
 
+def idea_distribution_score(convo, corpus):
+    flows_dict = idea_flows(convo, corpus)
+    score = idea_distribution_score_part(convo, flows_dict)
+    
+    return score
+
+
 # Ranges from 0 to 1
-# A score of 0 means that each speaker started an equal number of idea flows
-def idea_distribution_score(convo, idea_flows_dict):
+# A score of 0 means that each speaker started an equal number of 
+# idea flows
+def idea_distribution_score_part(convo, idea_flows_dict):
     speaker_ids = convo.get_speaker_ids()
     idea_count_dict = {id:0 for id in speaker_ids}
     
     # get counts of idea flows started for each speaker
-    idea_flows = [idea_flow for key in idea_flows_dict
-                      for idea_flow in idea_flows_dict[key]]
+    idea_flows = [
+        idea_flow for key in idea_flows_dict
+        for idea_flow in idea_flows_dict[key]
+    ]
+
     for idea_flow in idea_flows:
         # the speaker at index 0 of participant_ids started the flow
         participant_id = idea_flow['participant_ids'][0]
@@ -53,6 +80,7 @@ def idea_distribution_score(convo, idea_flows_dict):
     # convert counts to percentages
     total_idea_flows = len(idea_flows)
     idea_percentage_dict = idea_count_dict
+    
     for key in idea_percentage_dict:
         idea_percentage_dict[key] /= total_idea_flows/100
 

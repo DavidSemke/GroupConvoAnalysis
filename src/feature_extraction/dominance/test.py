@@ -8,7 +8,11 @@ def main():
         print()
         print(convo.id.upper())
         print()
-        
+
+        print(
+            "Speech overlap percentage:", 
+            speech_overlap_percentage(convo), "%"
+        )
         print(
             'Speech distribution score:',
             speech_distribution_score(convo, gap_corpus)
