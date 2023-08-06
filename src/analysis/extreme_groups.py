@@ -1,4 +1,5 @@
 from src.feature_extraction.dominance.extraction import *
+from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
 from src.feature_extraction.linguistic_alignment.extraction import *
 from src.feature_extraction.rhythm.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
@@ -17,13 +18,13 @@ RQA features ignored here (recurrence folder explores)
 # Parameter convo_filter takes a convo and returns True if convo is 
 # passable else False
 def extreme_feature_summary(
-        corpus, feature_func, *args, convo_filter=None
+        corpus, feature_func, *args, std_pad=1, convo_filter=None
 ):
     
     if not convo_filter:
         convo_filter = lambda _: True
 
-    extremes = extreme_convo_groups(corpus, filter=convo_filter)
+    extremes = extreme_convo_groups(corpus, std_pad, convo_filter)
     groups = {'low': extremes[0], 'high': extremes[1]}
 
     for key in groups:
@@ -51,9 +52,9 @@ def extreme_feature_summary(
 
 if __name__ == '__main__':
     # dominance
-    extreme_feature_summary(
-        ugi_corpus, speech_distribution_score, ugi_corpus
-    )
+    # extreme_feature_summary(
+    #     gap_corpus, speech_distribution_score, gap_corpus
+    # )
     # lin alignment
     # extreme_feature_summary(
     #     gap_corpus, speech_rate_convergence, 10
@@ -62,3 +63,7 @@ if __name__ == '__main__':
     #     gap_corpus, dyad_exchange_distribution_score,
     #     convo_filter=lambda convo: len(convo.get_speaker_ids()) > 2 
     # )
+
+    extreme_feature_summary(
+        gap_corpus, median_idea_discussion_time, gap_corpus
+    )

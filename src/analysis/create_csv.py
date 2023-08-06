@@ -1,97 +1,140 @@
 import csv
 from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
-from src.feature_extraction.word_psych_properties.psych_property_scores import speaker_psych_property_scores
+from src.feature_extraction.dominance.extraction import *
 from src.feature_extraction.linguistic_alignment.extraction import *
 from src.feature_extraction.politeness.extraction import *
+from src.feature_extraction.rhythm.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
 from src.constants import gap_corpus
 
 def main():
-    extraction_funcs = [
-        align_features,
-        polite_features,
-        psych_features
-    ]
-    
-    obsn_matrix, fields = observation_matrix(extraction_funcs, gap_corpus)
+    extraction_func_groups = {
+        # 'dom': [dom_features],
+        # 'align': [align_features],
+        # 'polite': [polite_features],
+        # 'rhythm': [rhythm_features],
+        'psych': [psych_features]
+    }
 
-    with open('csv/gap_corpus.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(fields)
-        writer.writerows(obsn_matrix)
+    for k, funcs in extraction_func_groups.items():
+        obsn_matrix, fields = observation_matrix(funcs, gap_corpus)
+
+        with open(f'csv/gap-{k}.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(fields)
+            writer.writerows(obsn_matrix)
+        
+        print()
+        print(k, 'features complete')
+        print()
 
 
-# returns
-# 1) obsn matrix
-# 2) column/feature names
 def observation_matrix(extraction_funcs, corpus):
-    
     obsn_matrix = []
     feat_names = []
-    loop_counter = 0
+    convo_count = 0
+
     for convo in corpus.iter_conversations():
-        
         obsn = []
+        
         for func in extraction_funcs:
             feats = func(convo, corpus)
-            obsn += list(feats.values())
+            obsn.extend(list(feats.values()))
             
-            if loop_counter != 0: continue
+            if convo_count != 0: continue
             
             feat_names += list(feats.keys())
         
         obsn_matrix.append(obsn)
-        loop_counter += 1
-        print(f"Convo {loop_counter} complete")
+        convo_count += 1
+        print(f'Convo {convo_count} complete')
     
     return obsn_matrix, feat_names
+
+
+def dom_features(convo, corpus):
+    vert_stats = speech_overlap_vertical_stats(convo)[0]
+
+    feats = {
+        'sd_score': speech_distribution_score(convo, corpus),
+        'so-flam': speech_overlap_frame_lam(convo)[0],
+        'so-slam': speech_overlap_sliding_lam(convo)[0],
+        'so-avg_vert': vert_stats['trapping_time'],
+        'so-longest_vert': vert_stats['longest_vertical_line'],
+    }
+
+    return feats
         
 
-# linguistic alignment
 def align_features(convo, corpus):
     flows_dict = idea_flows(convo, corpus)
+    coord_to, coord_from = coordination_variances(convo, corpus)
+    diag_stats = turn_taking_diagonal_stats(convo)[0]
     
     feats = {
-        'median idt': median_idea_discussion_time(flows_dict),
-        'avg ipp' : avg_idea_participation_percentage(convo, flows_dict),
-        'ids': idea_distribution_score(convo, flows_dict)
+        'median_idt': median_idea_discussion_time_part(flows_dict),
+        'avg_ip%' : avg_idea_participation_percentage_part(
+            convo, flows_dict
+        ),
+        'id_score': idea_distribution_score_part(convo, flows_dict),
+        'src-10': speech_rate_convergence(convo, 10),
+        'coord_var-to': coord_to,
+        'coord_var-from': coord_from,
+        'tt-fdet': turn_taking_frame_det(convo)[0],
+        'tt-sdet': turn_taking_sliding_det(convo)[0],
+        'tt-avg_diag': diag_stats['average_diagonal_line'],
+        'tt-longest_diag': diag_stats['longest_diagonal_line'],
     }
 
     return feats
 
 
-# politeness
 def polite_features(convo, corpus):
-    word_pos_ratio, word_neg_ratio = sentiment_ratios(convo, corpus, word_level=True)
+    word_pos_ratio, word_neg_ratio = sentiment_ratios(
+        convo, corpus, word_level=True
+    )
     sent_pos_ratio, sent_neg_ratio = sentiment_ratios(convo, corpus)
     
     feats = {
-        'sop': speech_overlap_percentage(convo),
         'cf-s': contrast_in_formality(convo, corpus),
         'cf-w': contrast_in_formality(convo, corpus, True),
-        'psr-s': sent_pos_ratio,
-        'psr-w': word_pos_ratio,
-        'nsr-s': sent_neg_ratio,
-        'nsr-w': word_neg_ratio
+        'pos_sr-s': sent_pos_ratio,
+        'pos_sr-w': word_pos_ratio,
+        'neg_sr-s': sent_neg_ratio,
+        'neg_sr-w': word_neg_ratio
     }
 
     return feats
 
 
-# word psych properties
+def rhythm_features(convo, _):
+    sp_vert_stats = speech_pause_vertical_stats(convo)[0]
+    cs_diag_stats = convo_stress_diagonal_stats(convo)[0]
+
+    feats = {
+        'cma': contrast_in_meter_affinity(convo),
+        'sp-flam': speech_pause_frame_lam(convo)[0],
+        'sp-slam': speech_pause_sliding_lam(convo)[0],
+        'sp-avg_vert': sp_vert_stats['trapping_time'],
+        'sp-longest_vert': sp_vert_stats['longest_vertical_line'],
+        'cs-flam': convo_stress_frame_det(convo)[0],
+        'cs-slam': convo_stress_sliding_det(convo)[0],
+        'cs-avg_vert': cs_diag_stats['average_diagonal_line'],
+        'cs-longest_vert': cs_diag_stats['longest_diagonal_line']
+    }
+
+    return feats
+
+
 def psych_features(convo, corpus):
-    ratings_matrix = []
-    for speaker in convo.iter_speakers():
-        scores = speaker_psych_property_scores(speaker, convo, corpus)
-        ratings_matrix.append(scores)
-    
-    vars = psych_property_score_variances(ratings_matrix)
+    vars = psych_property_score_variances(convo, corpus)
     
     feats = {
         'aoa': vars[0],
         'cnc': vars[1],
         'fam': vars[2],
-        'img': vars[3]
+        'img': vars[3],
+        'cp': constrast_in_personality(convo, corpus)
     }
 
     return feats
