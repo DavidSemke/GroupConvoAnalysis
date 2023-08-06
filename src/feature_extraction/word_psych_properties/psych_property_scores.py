@@ -3,6 +3,15 @@ from nltk.stem import WordNetLemmatizer
 from src.feature_extraction.word_psych_properties.mrc_psych_db import query_mrc_db, avg_ratings
 from src.utils.token import content_word, is_word, lemmatize_word
 
+def ratings_matrix(convo, corpus):
+    r_matrix = []
+    for speaker in convo.iter_speakers():
+        scores = speaker_psych_property_scores(speaker, convo, corpus)
+        r_matrix.append(scores)
+    
+    return r_matrix
+
+
 # uses speaker vocabulary to calculate scores
 def speaker_psych_property_scores(speaker, convo, corpus):
     # filter out utterances not included in convo and do not belong to speaker
@@ -37,7 +46,9 @@ def speaker_psych_property_scores(speaker, convo, corpus):
                 first_word = False
                 continue
 
-            content = content_word(tok_dict, parser, first_word)
+            content = content_word(
+                tok_dict, parser, lemmatizer, first_word
+            )
             first_word = False
 
             if content:

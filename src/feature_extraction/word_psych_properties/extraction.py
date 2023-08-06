@@ -1,4 +1,5 @@
 import numpy as np
+from src.feature_extraction.word_psych_properties.psych_property_scores import ratings_matrix
 from src.feature_extraction.word_psych_properties.liwc import (
     personality_matrix
 )
@@ -12,12 +13,12 @@ img = imageability
 """
 
 # get variance for each psych property (4 features)
-def psych_property_score_variances(ratings_matrix):
-    ratings_matrix = np.array(ratings_matrix)
-    
+def psych_property_score_variances(convo, corpus):
+    r_matrix = np.array(ratings_matrix(convo, corpus))
     vars = []
-    for i in range(len(ratings_matrix[0])):
-        vars.append(round(np.var(ratings_matrix[:, i]), 2))
+
+    for i in range(len(r_matrix[0])):
+        vars.append(round(np.var(r_matrix[:, i]), 2))
     
     return vars
 

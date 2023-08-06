@@ -1,12 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import numpy as np
 
+"""
+Note that a chrome driver must be downloaded and the path to the chrome
+driver must be added to the system PATH env variable.
+"""
+
 # Parameter ratings is the output from func query_mrc_db
 def avg_ratings(ratings):
-    # cols and rows labels; each starts listing at col/row 0
+    # Cols and rows labels; each starts listing at col/row 0
     # 2 columns: propy_score_total, propy_word_total
     # 4 rows: aoa, cnc, fam, img
     psych_prop_matrix = np.zeros((4, 2), dtype=int)
@@ -34,7 +40,7 @@ def avg_ratings(ratings):
     return avgs
 
 
-# returns list of lists, where a sublist has the following format:
+# Returns list of lists, where a sublist has the following format:
 # [word, age_of_acquisition, concreteness, familiarity, imageability]
 # '-' indicates no such psych value exists for the given word
 # ratings do not include duplicate words 
@@ -44,7 +50,9 @@ def query_mrc_db(word_list):
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     
     driver = webdriver.Chrome(options=options)
-    driver.get('https://websites.psychology.uwa.edu.au/school/mrcdatabase/uwa_mrc.htm')
+    driver.get(
+        'https://websites.psychology.uwa.edu.au/school/mrcdatabase/uwa_mrc.htm'
+    )
 
     # input to DB on main page
     section1_indexes = [3, 18, 20, 22]
@@ -83,8 +91,8 @@ def section2(driver, minmax_tuples):
         max_text_input.send_keys(max)
 
 
-# ignores capitalization - pronunication variability filters
-# starts at simple letter match
+# Ignores capitalization
+# Starts at simple letter match
 def section3(driver, pattern_tuples):
     # tuples have format (input_index, pattern)
     for (i, patt) in pattern_tuples:
@@ -94,12 +102,31 @@ def section3(driver, pattern_tuples):
 
 
 def submit(driver):
-    driver.find_element(By.XPATH, "//input[@type='submit' and @value='GO']").click()
+    driver.find_element(
+        By.XPATH, "//input[@type='submit' and @value='GO']"
+    ).click()
 
 
 def strip_results_from_HTML(driver):
-    wait = WebDriverWait(driver, timeout=10)
-    pre_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'pre')))
+    refreshes = 0
+
+    while refreshes < 5:
+        
+        try:
+            wait = WebDriverWait(driver, timeout=10)
+            pre_element = wait.until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'pre'))
+            )
+            break
+        
+        except TimeoutException:
+            print('Selenium timed out - retrying')
+            driver.refresh()
+            refreshes += 1
+    
+    if refreshes == 5:
+        raise Exception('Selenium timed out')
+    
     inner_html = pre_element.get_attribute('innerHTML')
     output = inner_html.split("<hr>", 1)[1].strip()
     rows = output.split('\n')
