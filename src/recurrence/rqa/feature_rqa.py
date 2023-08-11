@@ -18,7 +18,8 @@ def idea_rqa(corpus, convo, sparsity_check=False):
     embeds = [1]
 
     return epochless_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, sparsity_check
+        data_pts, delay, embeds, convo.id, rplot_folder, 
+        sparsity_check=sparsity_check
     )
 
 
@@ -29,7 +30,8 @@ def letter_stream_rqa(convo, sparsity_check=False):
     embeds = [3]
 
     return epochless_trials(
-        data_pts, delay, embeds, convo.id, rplot_folder, sparsity_check
+        data_pts, delay, embeds, convo.id, rplot_folder, 
+        sparsity_check=sparsity_check
     )
 
 
@@ -41,7 +43,7 @@ def turn_taking_rqa(convo, epoch_type=None, sparsity_check=False):
     
     return rqa_trials(
         data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-        sparsity_check
+        sparsity_check=sparsity_check
     )
 
 
@@ -55,7 +57,7 @@ def complete_speech_sampling_rqa(
     
     return rqa_trials(
         data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-        sparsity_check
+        sparsity_check=sparsity_check
     )
 
 
@@ -69,7 +71,7 @@ def binary_speech_sampling_rqa(
     
     return rqa_trials(
         data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-        sparsity_check
+        sparsity_check=sparsity_check
     )
 
 
@@ -87,7 +89,7 @@ def simult_binary_speech_sampling_rqa(
     
     return rqa_trials(
         data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-        sparsity_check
+        sparsity_check=sparsity_check
     )
         
 
@@ -104,7 +106,7 @@ def convo_stress_rqa(convo, epoch_type=None, sparsity_check=False):
 
     return rqa_trials(
         data_pts, delay, embeds, convo.id, rplot_folder, epoch_type,
-        sparsity_check
+        sparsity_check=sparsity_check
     )
 
 
@@ -151,18 +153,19 @@ def rqa_trials(
         )
     
     elif epoch_type == 'frame':
-        frames = [20]
+        frames = [100/3]
         trials = frame_epochs_trials(
             data_pts, frames, delay, embeds, sparsity_check
         )
             
     elif epoch_type == 'sliding':
+        size_fraction = 1/3
         overlap_fractions = [0.8]
         size_overlap_pairs = []
         
         for o_fraction in overlap_fractions:
             data_count = len(data_pts)
-            size = round(data_count * 0.25)
+            size = round(data_count * size_fraction)
             overlap = round(size * o_fraction)
             size_overlap_pairs.append((size, overlap))
                
@@ -266,7 +269,7 @@ def err_on_sparsity(
         + f'decreasing embedding dimension (={trial["embed"]})'
     )
     low_det_msg = (
-        f'Determinism fell to {min_det}; consider ' 
+        f'Determinism fell to {min_det} or is nan; consider ' 
         + f'decreasing embedding dimension (={trial["embed"]})'
     )
 
@@ -285,17 +288,28 @@ def err_on_sparsity(
         low_rec_rate_msg += addon
         low_det_msg += addon
     
+    # Property recurrence_rate can never be 0 in RQA, since recurrence 
+    # points of main diagonal are counted
+    l = lambda epoch: epoch.recurrence_rate <= min_rec_rate
     rec_too_low = any(
-        [True if epoch.recurrence_rate <= min_rec_rate else False 
-        for epoch in epochs]
+        (True if l(epoch) else False for epoch in epochs)
     )
 
     if rec_too_low:
         raise Exception(low_rec_rate_msg)
-        
+    
+    # Property determinism considers diagonals (ignoring the main 
+    # diagonal)
+    # Property determinism is 0 if no diagonals of length 2 exist
+    # If no diagonals of length 1 exist (single recurrence pts),
+    # determinism is assigned value nan
+    l = lambda epoch: (
+        epoch.determinism <= min_det
+        # check if nan
+        or epoch.determinism != epoch.determinism
+    )
     det_too_low = any(
-        [True if epoch.determinism <= min_det else False 
-        for epoch in epochs]
+        (True if l(epoch) else False for epoch in epochs)
     )
 
     if det_too_low:
