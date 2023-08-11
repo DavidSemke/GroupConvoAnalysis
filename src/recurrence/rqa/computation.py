@@ -71,12 +71,9 @@ def sliding_epochs(
 def fit_epochs(data_pts, size, overlap, position):
     # get excess data count that will be excluded from epochs
     data_count = len(data_pts)
-    epoch_count = data_count // (size - overlap)
-
-    if data_count % (size - overlap) < overlap:
-        epoch_count -= 1
-    
-    epoch_data_count = size * epoch_count - overlap * (epoch_count - 1)
+    leftovers = size - overlap
+    epoch_count = (data_count - overlap) // leftovers
+    epoch_data_count = leftovers * epoch_count + overlap
     excess_data_count = data_count - epoch_data_count
 
     # remove excess data
