@@ -151,19 +151,19 @@ def rqa_trials(
         )
     
     elif epoch_type == 'frame':
-        frames = (10, 20)
+        frames = [20]
         trials = frame_epochs_trials(
             data_pts, frames, delay, embeds, sparsity_check
         )
             
     elif epoch_type == 'sliding':
-        overlap_percentages = (60, 80)
+        overlap_fractions = [0.8]
         size_overlap_pairs = []
         
-        for op in overlap_percentages:
+        for o_fraction in overlap_fractions:
             data_count = len(data_pts)
             size = round(data_count * 0.25)
-            overlap = round(size * op/100)
+            overlap = round(size * o_fraction)
             size_overlap_pairs.append((size, overlap))
                
         trials = sliding_epochs_trials(
