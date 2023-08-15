@@ -2,6 +2,7 @@ import numpy as np
 import prosodic as pro
 from src.utils.timestamps import convert_to_secs, convert_to_timestamp
 
+
 """
 THESE METHODS DO NOT WORK PROPERLY - DEBUG IF DURATION AND END
 META DATA FIELDS DEEMED IMPORTANT

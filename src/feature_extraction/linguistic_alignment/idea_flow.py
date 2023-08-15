@@ -4,6 +4,7 @@ from src.utils.timestamps import add_timestamps
 from src.utils.search import binary_search
 from src.utils.token import is_word, idea_word
 
+
 """
 An idea flow is a string of utterances that contain a specific idea, 
 where an idea is a(n)

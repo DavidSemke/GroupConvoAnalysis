@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def epoch_rqa_lam(feature_rqa_trials, aggregate_func=np.mean):
     l = lambda trial: (
         aggregate_func(

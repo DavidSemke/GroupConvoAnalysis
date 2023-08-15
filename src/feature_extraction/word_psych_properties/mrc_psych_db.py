@@ -4,10 +4,13 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import numpy as np
+import time
+
 
 """
 Note that a chrome driver must be downloaded and the path to the chrome
-driver must be added to the system PATH env variable.
+driver must be added to the system PATH env variable in order to use
+these functions.
 """
 
 # Parameter ratings is the output from func query_mrc_db
@@ -47,8 +50,8 @@ def avg_ratings(ratings):
 def query_mrc_db(word_list):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    
+    options.add_experimental_option('excludeSwitches', ['enable-logging']) 
+
     driver = webdriver.Chrome(options=options)
     driver.get(
         'https://websites.psychology.uwa.edu.au/school/mrcdatabase/uwa_mrc.htm'
@@ -67,9 +70,9 @@ def query_mrc_db(word_list):
 
     # get results from resulting page
     ratings = strip_results_from_HTML(driver)
-    
-    driver.quit()
 
+    driver.quit()
+    
     return ratings
 
 
@@ -108,28 +111,14 @@ def submit(driver):
 
 
 def strip_results_from_HTML(driver):
-    refreshes = 0
-
-    while refreshes < 5:
-        
-        try:
-            wait = WebDriverWait(driver, timeout=10)
-            pre_element = wait.until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, 'pre'))
-            )
-            break
-        
-        except TimeoutException:
-            print('Selenium timed out - retrying')
-            driver.refresh()
-            refreshes += 1
-    
-    if refreshes == 5:
-        raise Exception('Selenium timed out')
-    
+    wait = WebDriverWait(driver, timeout=10)
+    pre_element = wait.until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'pre'))
+    )
     inner_html = pre_element.get_attribute('innerHTML')
     output = inner_html.split("<hr>", 1)[1].strip()
     rows = output.split('\n')
+    
     for i in range(len(rows)):
         rows[i] = rows[i].split()
     

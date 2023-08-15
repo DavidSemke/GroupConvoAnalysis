@@ -5,6 +5,7 @@ from pyrqa.neighbourhood import FixedRadius
 from pyrqa.computation import RQAComputation, RPComputation
 from pyrqa.image_generator import ImageGenerator
 
+
 # Makes the first and last frame % of the data_pts epochs and 
 # returns the epochs' RQA metric values
 # All epochs use the same delay and embedding dim

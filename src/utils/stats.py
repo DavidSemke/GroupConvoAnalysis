@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # uses Euclidean distance
 def within_cluster_variance(cluster):
     cluster = np.array(cluster)

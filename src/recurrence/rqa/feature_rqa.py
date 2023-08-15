@@ -11,6 +11,7 @@ from src.recurrence.data_pts.speech_sampling import (
 from src.recurrence.data_pts.stresses import stress_data_pts
 from src.feature_extraction.rhythm.meter import *
 
+
 def idea_rqa(corpus, convo, sparsity_check=False):
     data_pts, _ = idea_data_pts(convo, corpus)
     rplot_folder = r'recurrence_plots\rqa\ideas'

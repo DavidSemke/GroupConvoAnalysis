@@ -2,6 +2,7 @@ import re
 import nltk
 from src.utils.timestamps import convert_to_timestamp
 
+
 def process_line_elements(lines, line_index, patts):
     line = lines[line_index]
     secs, person_id, sents = parse_line(line, patts)

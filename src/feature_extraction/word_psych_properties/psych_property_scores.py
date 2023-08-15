@@ -3,11 +3,12 @@ from nltk.stem import WordNetLemmatizer
 from src.feature_extraction.word_psych_properties.mrc_psych_db import query_mrc_db, avg_ratings
 from src.utils.token import content_word, is_word, lemmatize_word
 
+
 def ratings_matrix(convo, corpus):
-    r_matrix = []
-    for speaker in convo.iter_speakers():
-        scores = speaker_psych_property_scores(speaker, convo, corpus)
-        r_matrix.append(scores)
+    r_matrix = [
+        speaker_psych_property_scores(speaker, convo, corpus)
+        for speaker in convo.iter_speakers()
+    ]
     
     return r_matrix
 

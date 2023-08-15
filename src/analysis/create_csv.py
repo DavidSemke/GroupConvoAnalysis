@@ -7,19 +7,28 @@ from src.feature_extraction.rhythm.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
 from src.constants import gap_corpus
 
+
 def main():
+    corpus = gap_corpus
+    corpus_id = 'gap'
     extraction_func_groups = {
-        # 'dom': [dom_features],
-        # 'align': [align_features],
-        # 'polite': [polite_features],
+        'dom': [dom_features],
+        'align': [align_features],
+        'polite': [polite_features]
         # 'rhythm': [rhythm_features],
-        'psych': [psych_features]
+        # 'psych': [psych_features]
     }
 
-    for k, funcs in extraction_func_groups.items():
-        obsn_matrix, fields = observation_matrix(funcs, gap_corpus)
+    csv_dump(corpus, corpus_id, extraction_func_groups)
+    # chained_csv_dumps(corpus, corpus_id, extraction_func_groups)
+   
 
-        with open(f'csv/gap-{k}.csv', 'w', newline='') as file:
+def csv_dump(corpus, corpus_id, extraction_func_groups):
+    
+    for k, funcs in extraction_func_groups.items():
+        obsn_matrix, fields = observation_matrix(corpus, funcs)
+
+        with open(f'csv/{corpus_id}-{k}.csv', 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(fields)
             writer.writerows(obsn_matrix)
@@ -29,27 +38,62 @@ def main():
         print()
 
 
-def observation_matrix(extraction_funcs, corpus):
+# Use this when it is unlikely that all conversations can be processed 
+# without error (e.g. when using selenium package)
+# Writes after extracting features from a convo
+# Parameter start_convo_index is where to start given a list of convos
+# from a corpus
+def chained_csv_dumps(
+    corpus, corpus_id, extraction_func_groups, start_convo_index=0
+):
+    
+    for k, funcs in extraction_func_groups.items():
+        convos = list(corpus.iter_conversations())[start_convo_index:]
+        is_first = start_convo_index == 0
+
+        for i, convo in enumerate(convos):
+            obsn, fields = observation(convo, corpus, funcs)
+
+            with open(f'csv/{corpus_id}-{k}.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+
+                if is_first:
+                    writer.writerow(fields)
+                    is_first = False
+                
+                writer.writerow(obsn)
+            
+            print('Convo', i, 'complete')
+        
+        print()
+        print(k, 'features complete')
+        print()
+
+
+def observation_matrix(corpus, extraction_funcs):
     obsn_matrix = []
-    feat_names = []
-    convo_count = 0
 
     for convo in corpus.iter_conversations():
-        obsn = []
-        
-        for func in extraction_funcs:
-            feats = func(convo, corpus)
-            obsn.extend(list(feats.values()))
-            
-            if convo_count != 0: continue
-            
-            feat_names += list(feats.keys())
+        obsn, feat_names = observation(
+            convo, corpus, extraction_funcs
+        )
         
         obsn_matrix.append(obsn)
-        convo_count += 1
-        print(f'Convo {convo_count} complete')
+        print(f'Convo {convo.id} complete')
     
     return obsn_matrix, feat_names
+
+
+def observation(convo, corpus, extraction_funcs):
+    obsn = []
+    feat_names = []
+        
+    for func in extraction_funcs:
+        feats = func(convo, corpus)
+        obsn.extend(list(feats.values()))
+        feat_names += list(feats.keys())
+    
+    return obsn, feat_names
 
 
 def dom_features(convo, corpus):

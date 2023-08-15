@@ -8,6 +8,7 @@ from itertools import combinations
 from src.recurrence.data_pts.stresses import stress_data_pts
 from src.feature_extraction.rhythm.meter import *
 
+
 def dyad_stress_crqa(convo, embeds=(2,4,6)):
     speakers = list(convo.iter_speakers())
     speaker_pairs = list(combinations(speakers, 2))

@@ -3,6 +3,7 @@ from src.utils.stats import within_cluster_variance
 from src.feature_extraction.politeness.sentiment import convo_sentiment_matrix
 from src.utils.token import content_word_count, content_utterance_count
 
+
 # calculates differences in politeness among speakers
 # if word_level=False, sentence level is used
 def contrast_in_formality(convo, corpus, word_level=False):

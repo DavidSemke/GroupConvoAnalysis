@@ -1,6 +1,7 @@
 import prosodic as pro
 from src.utils.timestamps import convert_to_secs
 
+
 def speech_rates(utts):
     rates = []
 

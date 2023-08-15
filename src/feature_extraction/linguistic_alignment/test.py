@@ -2,6 +2,7 @@ from extraction import *
 from idea_flow import idea_flows
 from src.constants import gap_corpus, gap_convos
 
+
 def main():
 
     for convo in gap_convos:

@@ -1,6 +1,7 @@
 import pandas as pd
 import src.constants as const
 
+
 def speaker_metadata(df, expert_ranking):
     speaker_meta = {}
 

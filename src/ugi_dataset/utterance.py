@@ -6,6 +6,7 @@ from src.ugi_dataset.utterance_periods import (
 from src.utils.timestamps import convert_to_secs
 import src.constants as const
 
+
 def utterance_metadata(transcripts_path, patts):
     utt_metadata = {}
 

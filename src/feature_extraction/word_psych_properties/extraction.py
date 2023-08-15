@@ -5,14 +5,13 @@ from src.feature_extraction.word_psych_properties.liwc import (
 )
 from src.utils.stats import within_cluster_variance
 
-"""
-aoa = age of acquisition
-cnc = concreteness
-fam = familiarity
-img = imageability
-"""
 
-# get variance for each psych property (4 features)
+# Get variance for each psych property (4 features)
+# The four psych properties are:
+    # aoa = age of acquisition
+    # cnc = concreteness
+    # fam = familiarity
+    # img = imageability
 def psych_property_score_variances(convo, corpus):
     r_matrix = np.array(ratings_matrix(convo, corpus))
     vars = []

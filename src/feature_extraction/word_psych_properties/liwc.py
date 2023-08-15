@@ -5,6 +5,7 @@ from src.utils.timestamps import convert_to_secs
 from src.utils.token import content_word, is_word
 import src.constants as const
 
+
 """
 A personality vector consists of feature values indicative of 
 personality. It is meant to capture the big 5 personality traits,
@@ -19,10 +20,9 @@ Inquiry and Word Count)
 """
 
 
-# each row of returned matrix is a personality vector
-# personality vectors correspond to speakers
+# Each row of returned matrix is a personality vector
+# Personality vectors correspond to speakers
 def personality_matrix(convo, corpus):
-
     corpus = corpus.filter_utterances_by(
         lambda u: u.conversation_id == convo.id
     )
@@ -36,12 +36,12 @@ def personality_matrix(convo, corpus):
     # initialize lemmatizer
     lemmatizer = WordNetLemmatizer()
 
-    personality_matrix = []
-    for speaker in convo.iter_speakers():
-        p_vector = speaker_personality_vector(
+    personality_matrix = [
+        speaker_personality_vector(
             speaker, convo, parser, lemmatizer
         )
-        personality_matrix.append(p_vector)
+        for speaker in convo.iter_speakers()
+    ]
     
     return np.array(personality_matrix)
 

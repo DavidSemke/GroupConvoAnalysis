@@ -1,8 +1,8 @@
 from convokit import TextParser, Corpus
 from nltk.stem import WordNetLemmatizer
 
+
 def is_word(tok_dict):
-    
     tok = tok_dict['tok']
 
     if not tok.isalnum(): return False
@@ -55,7 +55,6 @@ def is_content_tag(tag):
 
 
 def idea_word(tok_dict, parser, lemmatizer, started_sent):  
-    
     # exclude adverbs; adverbs are not idea words
     is_adverb = tok_dict['tag'][0:2] == 'RB'
     

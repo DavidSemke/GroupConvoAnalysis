@@ -12,6 +12,7 @@ from src.recurrence.rqa.feature_rqa import (
 )
 import numpy as np
 
+
 def contrast_in_meter_affinity(convo):
     affinity_matrix = []
 

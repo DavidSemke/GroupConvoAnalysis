@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from nolitsa import delay, dimension, noise
 
+
 '''
 Note that optimal delay/embedding values can only be found if time 
 series being analyzed is produced from a system exhibiting stationary

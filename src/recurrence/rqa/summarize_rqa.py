@@ -6,6 +6,7 @@ from src.recurrence.rqa.extraction import (
     epoch_rqa_det
 )
 
+
 # Parameter metric_func takes an epoch and returns a dict with one RQA 
 # metric value
 # Parameter metric_transformer maps a list of RQA metric values to a

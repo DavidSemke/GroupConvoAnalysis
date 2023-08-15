@@ -7,7 +7,7 @@ from summarize_rqa import (
 )
 from src.utils.filter_convos import extreme_convo_groups
 from src.constants import gap_corpus, gap_convos
-import numpy as np
+
 
 # Parameter feature_rqa_func is a non-helper function from 
 # module feature_rqa

@@ -1,5 +1,6 @@
 from src.utils.token import is_word
 
+
 def letter_data_pts(convo):
     data_pts = []
     letters = [chr(i) for i in range(97, 123)]

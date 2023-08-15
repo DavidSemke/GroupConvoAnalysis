@@ -3,6 +3,7 @@ from src.ugi_dataset.utterance import utterance_metadata
 from src.ugi_dataset.convo import convo_metadata
 from src.ugi_dataset.speaker import speaker_metadata
 
+
 def main():
     transcripts_path = r'corpora\ugi-corpus\transcripts'
     patts = {

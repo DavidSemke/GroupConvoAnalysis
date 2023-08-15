@@ -13,6 +13,7 @@ from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 from src.utils.filter_utterances import strict_dyad_utterances
 from src.utils.token import word_count
 
+
 def median_idea_discussion_time(convo, corpus):
     flows_dict = idea_flows(convo, corpus)
     

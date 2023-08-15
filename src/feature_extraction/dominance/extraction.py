@@ -9,6 +9,7 @@ from src.recurrence.rqa.feature_rqa import (
 from src.utils.token import speaker_word_count
 from src.utils.timestamps import convert_to_secs
 
+
 def speech_overlap_percentage(convo):
     utts = convo.get_chronological_utterance_list()
     overlap_time = 0

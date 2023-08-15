@@ -2,6 +2,7 @@ from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
 from src.utils.token import is_word, idea_word
 
+
 # returns (data_pts, vocab_words)
 # index of a word is the position of the word in vocab_words
 def idea_data_pts(convo, corpus):

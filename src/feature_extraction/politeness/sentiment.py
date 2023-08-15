@@ -1,6 +1,7 @@
 from convokit import PolitenessStrategies, TextParser
 import numpy as np
 
+
 def convo_sentiment_matrix(convo, corpus, word_level):
     # filter out utterances not included in convo
     corpus = corpus.filter_utterances_by(

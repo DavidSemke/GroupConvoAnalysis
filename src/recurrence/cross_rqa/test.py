@@ -1,6 +1,7 @@
 from src.recurrence.cross_rqa.computation import dyad_stress_crqa
 from src.constants import gap_convos
 
+
 def dyad_stress_crqa_test(verbose=False):
     for convo in gap_convos:
         print()
