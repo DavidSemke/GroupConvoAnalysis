@@ -45,8 +45,6 @@ def speech_overlap_percentage(convo):
     return round(overlap_time/total_time, 2)
 
 
-# Ranges from 0 to 1
-# A score of 0 means that no speaker spoke more words than another
 def speech_distribution_score(convo, corpus):
     speaker_ids = convo.get_speaker_ids()
     speaker_word_counts = {}
@@ -66,20 +64,18 @@ def speech_distribution_score(convo, corpus):
     # compute percentage variance
     percentages = list(speaker_word_percentages.values())
     var = np.var(percentages)
-    
-    # compute variance where one percentages is 100%, others are 0%
-    p_count = len(percentages)
-    max_var = np.var([0 for _ in range(p_count-1)] + [100])
 
-    return round(var/max_var, 4)
+    return round(var, 2)
 
 
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
 def speech_overlap_frame_lam(convo):
-    return epoch_rqa_lam(
+    lam, trial = epoch_rqa_lam(
         simult_binary_speech_sampling_rqa(convo, 'frame')
     )
+
+    return round(lam, 4), trial 
 
 
 # Returns the max aggregate score for laminarity diffs between 
@@ -89,17 +85,19 @@ def speech_overlap_frame_lam(convo):
 # Default aggregate function takes the mean of differences between
 # adjacent epochs (late epoch lam - early epoch lam)
 def speech_overlap_sliding_lam(convo):
-    return epoch_rqa_lam(
+    lam, trial = epoch_rqa_lam(
         simult_binary_speech_sampling_rqa(convo, 'sliding'), 
         lambda lams: np.mean(np.diff(lams))
     )
+
+    return round(lam, 4), trial
 
 
 # Returns avg and longest vertical line len for trial with greatest
 # laminarity (avg vertical line len = trapping time)
 # Uses RQA without epochs (to avoid interrupting vertical lines)
 def speech_overlap_vertical_stats(convo):
-    return epochless_rqa_stats(
+    stats, trial = epochless_rqa_stats(
         simult_binary_speech_sampling_rqa(convo),
         lambda e: {
             'trapping_time': e.trapping_time,
@@ -109,3 +107,6 @@ def speech_overlap_vertical_stats(convo):
             trials, key=lambda trial: trial['results'][0].laminarity
         )
     )
+    stats['trapping_time'] = round(stats['trapping_time'], 2)
+
+    return stats, trial

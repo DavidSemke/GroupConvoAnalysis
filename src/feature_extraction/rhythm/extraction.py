@@ -23,15 +23,17 @@ def contrast_in_meter_affinity(convo):
             list(affinity.values())
         )
             
-    return within_cluster_variance(affinity_matrix)
+    return round(within_cluster_variance(affinity_matrix), 2)
 
 
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
 def speech_pause_frame_lam(convo):
-    return epoch_rqa_lam(
+    lam, trial = epoch_rqa_lam(
         binary_speech_sampling_rqa(convo, 'frame')
     )
+
+    return round(lam, 4), trial
 
 
 # Returns the max aggregate score for laminarity diffs between 
@@ -41,17 +43,19 @@ def speech_pause_frame_lam(convo):
 # Default aggregate function takes the mean of differences between
 # adjacent epochs (late epoch lam - early epoch lam)
 def speech_pause_sliding_lam(convo):
-    return epoch_rqa_lam(
+    lam, trial = epoch_rqa_lam(
         binary_speech_sampling_rqa(convo, 'sliding'),
         lambda lams: np.mean(np.diff(lams))
     )
+
+    return round(lam, 4), trial
 
 
 # Returns avg and longest vertical line len for trial with greatest
 # laminarity (avg vertical line len = trapping time)
 # Uses RQA without epochs (to avoid interrupting vertical lines)
 def speech_pause_vertical_stats(convo):
-    return epochless_rqa_stats(
+    stats, trial = epochless_rqa_stats(
         binary_speech_sampling_rqa(convo),
         lambda e: {
             'trapping_time': e.trapping_time,
@@ -61,6 +65,10 @@ def speech_pause_vertical_stats(convo):
             trials, key=lambda trial: trial['results'][0].laminarity
         )
     )
+    stats['trapping_time'] = round(stats['trapping_time'], 2)
+
+    return stats, trial
+
 
 """
 The following feature extraction functions follow the same patterns
@@ -70,18 +78,22 @@ diagonal line stats concerning stress in speech.
 """
 
 def convo_stress_frame_det(convo):
-    return epoch_rqa_det(convo_stress_rqa(convo, 'frame'))
+    det, trial = epoch_rqa_det(convo_stress_rqa(convo, 'frame'))
+
+    return round(det, 4), trial
 
 
 def convo_stress_sliding_det(convo):
-    return epoch_rqa_det(
+    det, trial = epoch_rqa_det(
         convo_stress_rqa(convo, 'sliding'), 
         lambda dets: np.mean(np.diff(dets))
     )
 
+    return round(det, 4), trial
+
 
 def convo_stress_diagonal_stats(convo):
-    return epochless_rqa_stats(
+    stats, trial = epochless_rqa_stats(
         convo_stress_rqa(convo),
         lambda e: {
             'average_diagonal_line': e.average_diagonal_line,
@@ -91,21 +103,30 @@ def convo_stress_diagonal_stats(convo):
             trials, key=lambda trial: trial['results'][0].determinism
         )
     )
+    stats['average_diagonal_line'] = round(
+        stats['average_diagonal_line'], 2
+    )
+
+    return stats, trial
 
 
 def dyad_stress_frame_det(convo):
-    return epoch_rqa_det(dyad_stress_rqa(convo, 'frame'))
+    det, trial = epoch_rqa_det(dyad_stress_rqa(convo, 'frame'))
+
+    return round(det, 4), trial
 
 
 def dyad_stress_sliding_det(convo):
-    return epoch_rqa_det(
+    det, trial = epoch_rqa_det(
         dyad_stress_rqa(convo, 'sliding'), 
         lambda dets: np.mean(np.diff(dets))
     )
 
+    return round(det, 4), trial 
+
 
 def dyad_stress_diagonal_stats(convo):
-    return epochless_rqa_stats(
+    stats, trial =  epochless_rqa_stats(
         dyad_stress_rqa(convo),
         lambda e: {
             'average_diagonal_line': e.average_diagonal_line,
@@ -115,3 +136,8 @@ def dyad_stress_diagonal_stats(convo):
             trials, key=lambda trial: trial['results'][0].determinism
         )
     )
+    stats['average_diagonal_line'] = round(
+        stats['average_diagonal_line'], 2
+    )
+
+    return stats, trial

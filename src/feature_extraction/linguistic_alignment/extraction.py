@@ -25,7 +25,7 @@ def median_idea_discussion_time_part(idea_flows_dict):
              for key in idea_flows_dict 
              for idea_flow in idea_flows_dict[key]]
     
-    return np.median(times)
+    return round(np.median(times), 1)
 
 
 def avg_idea_participation_percentage(convo, corpus):
@@ -50,7 +50,7 @@ def avg_idea_participation_percentage_part(
                 idea_flow["total_participants"]/total_speakers)
             sum_of_fractions += participant_fraction
     
-    return round(100*sum_of_fractions/total_ideas, 1)
+    return round(100*sum_of_fractions/total_ideas, 2)
 
 
 def idea_distribution_score(convo, corpus):
@@ -60,9 +60,6 @@ def idea_distribution_score(convo, corpus):
     return score
 
 
-# Ranges from 0 to 1
-# A score of 0 means that each speaker started an equal number of 
-# idea flows
 def idea_distribution_score_part(convo, idea_flows_dict):
     speaker_ids = convo.get_speaker_ids()
     idea_count_dict = {id:0 for id in speaker_ids}
@@ -88,12 +85,8 @@ def idea_distribution_score_part(convo, idea_flows_dict):
     # compute percentage variance
     percentages = list(idea_percentage_dict.values())
     var = np.var(percentages)
-    
-    # compute variance where one percentages is 100%, others are 0%
-    p_count = len(percentages)
-    max_var = np.var([0 for _ in range(p_count-1)] + [100])
 
-    return round(var/max_var, 4)
+    return round(var, 2)
 
 
 def dyad_exchange_distribution_score(convo):
@@ -110,10 +103,7 @@ def dyad_exchange_distribution_score(convo):
     word_percentages = [wt*100/total_sum for wt in word_totals]
     var = np.var(word_percentages)
 
-    p_count = len(word_percentages)
-    max_var = np.var([0 for _ in range(p_count-1)] + [100])
-
-    return round(var/max_var, 4)
+    return round(var, 2)
 
 
 # Frame is the first and last x% of utterances considered
@@ -179,13 +169,15 @@ def coordination_variances(convo, corpus):
     coord_to_dict = coord.summarize(corpus).averages_by_speaker()
     coord_to_var = np.var(list(coord_to_dict.values()))
 
-    return round(coord_to_var, 6), round(coord_from_var, 6)
+    return round(coord_to_var, 5), round(coord_from_var, 5)
 
 
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
 def turn_taking_frame_det(convo):
-    return epoch_rqa_det(turn_taking_rqa(convo, 'frame'))
+    det, trial = epoch_rqa_det(turn_taking_rqa(convo, 'frame'))
+
+    return round(det, 4), trial
 
 
 # Returns the max aggregate score for determinism diffs between 
@@ -195,17 +187,19 @@ def turn_taking_frame_det(convo):
 # Default aggregate function takes the mean of differences between
 # adjacent epochs (late epoch det - early epoch det)
 def turn_taking_sliding_det(convo):
-    return epoch_rqa_det(
+    det, trial = epoch_rqa_det(
         turn_taking_rqa(convo, 'sliding'), 
         lambda dets: np.mean(np.diff(dets))
     )
+
+    return round(det, 4), trial
 
 
 # Returns avg and longest diagonal line len for trial with greatest
 # determinism
 # Uses RQA without epochs (to avoid interrupting diagonal lines)
 def turn_taking_diagonal_stats(convo):
-    return epochless_rqa_stats(
+    stats, trial = epochless_rqa_stats(
         turn_taking_rqa(convo),
         lambda e: {
             'average_diagonal_line': e.average_diagonal_line,
@@ -215,3 +209,8 @@ def turn_taking_diagonal_stats(convo):
             trials, key=lambda trial: trial['results'][0].determinism
         )
     )
+    stats['average_diagonal_line'] = round(
+        stats['average_diagonal_line'], 2
+    )
+
+    return stats, trial
