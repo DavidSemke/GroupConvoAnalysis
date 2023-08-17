@@ -42,14 +42,22 @@ def personality_matrix(convo, corpus):
         )
         for speaker in convo.iter_speakers()
     ]
+
+    personality_matrix = np.array(personality_matrix)
+
+    # normalize first column
+    total_convo_words = sum(personality_matrix[:, 0])
     
-    return np.array(personality_matrix)
+    for vector in personality_matrix:
+        vector[0] /= total_convo_words
+    
+    return personality_matrix
 
 
 def speaker_personality_vector(speaker, convo, parser, lemmatizer):
 
     # personality vector includes these features in this order:
-    speaking_time = 0
+    total_words = 0
     simple_words = 0
     first_pronouns_sing = 0
     third_pronouns = 0
@@ -57,15 +65,11 @@ def speaker_personality_vector(speaker, convo, parser, lemmatizer):
     neg_emotion_words = 0
     negations = 0
     
-    # total_words not included in the personality vector
-    total_words = 0
     for utt in convo.iter_utterances(
         lambda u: u.speaker.id == speaker.id
     ):
-        
-        speaking_time += convert_to_secs(utt.meta['Duration'])
-
         first_word = True
+        
         for tok_dict in [
             tok_dict for parsed_dict in utt.meta['parsed'] 
             for tok_dict in parsed_dict['toks']
@@ -102,7 +106,7 @@ def speaker_personality_vector(speaker, convo, parser, lemmatizer):
         neg_emotion_words += len(negatives)
 
     p_vector = [
-        speaking_time,
+        total_words,
         simple_words/total_words,
         first_pronouns_sing/total_words,
         third_pronouns/total_words,

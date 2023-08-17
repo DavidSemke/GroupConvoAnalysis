@@ -7,8 +7,8 @@ for convo in gap_convos:
     print(convo.id.upper())
     print()
     
-    print("Contrast in formality, sentence level (WCV):", contrast_in_formality(convo, gap_corpus))
-    print("Contrast in formality, word level (WCV):", contrast_in_formality(convo, gap_corpus, True))
+    print("Contrast in formality, sentence level (WCV):", sentiment_variance(convo, gap_corpus))
+    print("Contrast in formality, word level (WCV):", sentiment_variance(convo, gap_corpus, True))
 
     word_pos_ratio, word_neg_ratio = sentiment_ratios(convo, gap_corpus, word_level=True)
     sent_pos_ratio, sent_neg_ratio = sentiment_ratios(convo, gap_corpus)

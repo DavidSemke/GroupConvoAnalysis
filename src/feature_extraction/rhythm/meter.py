@@ -61,7 +61,6 @@ def convo_meter_affinity(convo, utt_filter=None, len_cutoff=6):
         # for all meters that provided a best parse for the utt
         for m in best_ms:
             utt_meter_counts[m] += 1
-            utt_stresses
             utt_stresses[utt.id][m] = meter_dict[m]['stress']
 
     utt_meter_percentages = utt_meter_counts
