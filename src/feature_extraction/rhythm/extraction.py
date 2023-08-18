@@ -1,4 +1,5 @@
 from src.feature_extraction.rhythm.meter import speaker_meter_affinity
+from src.utils.stats import within_cluster_variance
 from src.recurrence.rqa.extraction import (
     epoch_rqa_lam,
     epoch_rqa_det, 
@@ -10,9 +11,11 @@ from src.recurrence.rqa.feature_rqa import (
     dyad_stress_rqa
 )
 import numpy as np
-import src.constants as const
 
 
+# Returns variance in affinity for each meter being 
+# analyzed (whichever meters are present in constants.py)
+# as well as within cluster variance
 def meter_affinity_variances(convo):
     affinity_matrix = []
 
@@ -24,10 +27,12 @@ def meter_affinity_variances(convo):
     
     a_matrix = np.array(affinity_matrix)
     vars = [
-        round(np.var(a_matrix[:, i]), 2) for i in a_matrix.shape[1]
+        round(np.var(a_matrix[:, i]), 2) 
+        for i in range(a_matrix.shape[1])
     ]
+    wcv = round(within_cluster_variance(a_matrix), 2)
     
-    return vars
+    return vars, wcv
 
 
 # Returns the max mean for frame epoch laminarity and the trial that 

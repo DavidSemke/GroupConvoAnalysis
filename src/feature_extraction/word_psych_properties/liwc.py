@@ -42,16 +42,8 @@ def personality_matrix(convo, corpus):
         )
         for speaker in convo.iter_speakers()
     ]
-
-    personality_matrix = np.array(personality_matrix)
-
-    # normalize first column
-    total_convo_words = sum(personality_matrix[:, 0])
     
-    for vector in personality_matrix:
-        vector[0] /= total_convo_words
-    
-    return personality_matrix
+    return np.array(personality_matrix)
 
 
 def speaker_personality_vector(speaker, convo, parser, lemmatizer):
@@ -107,12 +99,12 @@ def speaker_personality_vector(speaker, convo, parser, lemmatizer):
 
     p_vector = [
         total_words,
-        simple_words/total_words,
-        first_pronouns_sing/total_words,
-        third_pronouns/total_words,
-        articles/total_words,
-        neg_emotion_words/total_words,
-        negations/total_words
+        simple_words,
+        first_pronouns_sing,
+        third_pronouns,
+        articles,
+        neg_emotion_words,
+        negations
     ]
 
     return p_vector
