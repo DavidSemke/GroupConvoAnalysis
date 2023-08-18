@@ -1,6 +1,5 @@
 from convokit import TextParser
 from nltk.stem import WordNetLemmatizer
-from src.utils.timestamps import add_timestamps
 from src.utils.search import binary_search
 from src.utils.token import is_word, idea_word
 
@@ -15,7 +14,7 @@ where an idea is a(n)
 
 # If parameter include_time is False, idea flow property time_spent
 # will not be calculated
-def idea_flows(convo, corpus, include_time=True):
+def idea_flows(convo, corpus):
     # filter out utterances not included in convo
     corpus = corpus.filter_utterances_by(
         lambda u: u.conversation_id == convo.id
@@ -52,8 +51,7 @@ def idea_flows(convo, corpus, include_time=True):
             if not idea: continue
 
             handle_idea_existence(
-                idea, utt, convo, idea_flows[tok_dict['tag'][0]], 
-                include_time
+                idea, utt, convo, idea_flows[tok_dict['tag'][0]]
             )
 
     # get rid of failed idea flows (only have 1 participant)
@@ -81,7 +79,7 @@ def expiration_tick(utt, idea_flows_dict):
             idea_flow['utts_before_expiry'] -= 1
     
 
-def handle_idea_existence(tok, utt, convo, idea_flows_list, include_time):
+def handle_idea_existence(tok, utt, convo, idea_flows_list):
     # idea_exists is true if idea is repeated
     idea_exists, index = binary_search(idea_flows_list, 'tok', tok)
 
@@ -97,29 +95,14 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list, include_time):
         repeat_speaker = utt.speaker.id in idea_flow['participant_ids']
         
         if idea_flow['total_participants'] == 1 and repeat_speaker:
-            
-            if include_time:
-                idea_flow['time_spent'] = utt.meta['Duration']
-            
             idea_flow['utt_ids'] = [utt.id]
             # reset expiry countdown since idea was reintroduced
             idea_flow['utts_before_expiry'] = len(convo.get_speaker_ids())
         
         elif repeat_speaker:
-
-            if include_time:
-                idea_flow['time_spent'] = add_timestamps(
-                    idea_flow['time_spent'], utt.meta['Duration']
-                )
             idea_flow['utt_ids'].append(utt.id)
         
         else:
-
-            if include_time:
-                idea_flow['time_spent'] = add_timestamps(
-                    idea_flow['time_spent'], utt.meta['Duration']
-                )
-
             idea_flow['utt_ids'].append(utt.id)
             idea_flow['participant_ids'].append(utt.speaker.id)
             idea_flow['total_participants'] += 1
@@ -136,9 +119,6 @@ def handle_idea_existence(tok, utt, convo, idea_flows_list, include_time):
             "utt_ids": [utt.id],
             "utts_before_expiry": len(convo.get_speaker_ids())
         }
-
-        if include_time:
-            idea_flow["time_spent"] = utt.meta['Duration']
 
         # insert idea flow
         idea_flows_list.insert(index, idea_flow)

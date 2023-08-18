@@ -1,7 +1,6 @@
 import numpy as np
 from convokit import Coordination
 from itertools import combinations
-from src.utils.timestamps import convert_to_secs
 from src.feature_extraction.linguistic_alignment.speech_flow import *
 from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
 from src.utils.filter_utterances import convo_frame
@@ -12,20 +11,6 @@ from src.recurrence.rqa.extraction import (
 from src.recurrence.rqa.feature_rqa import turn_taking_rqa
 from src.utils.filter_utterances import strict_dyad_utterances
 from src.utils.token import word_count
-
-
-def median_idea_discussion_time(convo, corpus):
-    flows_dict = idea_flows(convo, corpus)
-    
-    return median_idea_discussion_time_part(flows_dict)
-
-
-def median_idea_discussion_time_part(idea_flows_dict):
-    times = [convert_to_secs(idea_flow['time_spent']) 
-             for key in idea_flows_dict 
-             for idea_flow in idea_flows_dict[key]]
-    
-    return round(np.median(times), 1)
 
 
 def avg_idea_participation_percentage(convo, corpus):
