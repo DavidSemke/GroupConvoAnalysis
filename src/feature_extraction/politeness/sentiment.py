@@ -16,12 +16,11 @@ def convo_sentiment_matrix(convo, corpus, word_level):
     ps = PolitenessStrategies()
     corpus = ps.transform(corpus, markers=True)
 
-    sentiment_matrix = []
-    ids = convo.get_speaker_ids()
-    ids.sort()
-    for s_id in ids:
-        sentiment_vector = scoped_sentiment_vector(convo, s_id, word_level)
-        sentiment_matrix.append(sentiment_vector)
+    sentiment_matrix = [
+        scoped_sentiment_vector(convo, sid, word_level)
+        for sid in convo.get_speaker_ids()
+
+    ]
 
     return np.array(sentiment_matrix)
 

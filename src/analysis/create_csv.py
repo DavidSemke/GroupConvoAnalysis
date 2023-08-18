@@ -9,14 +9,15 @@ import src.constants as const
 
 
 def main():
-    corpus = const.ugi_corpus
-    corpus_id = 'ugi'
+    corpus = const.gap_corpus
+    corpus_id = 'gap'
     extraction_func_groups = {
-        # 'dom': [dom_features],
-        # 'align': [align_features],
-        # 'polite': [polite_features]
+        'dom': [dom_features],
+        'align': [align_features],
+        'polite': [polite_features]
         # 'rhythm': [rhythm_features],
-        'psych': [psych_features]
+        # 'psych': [psych_features],
+        # 'meta': [metadata_features]
     }
 
     csv_dump(corpus, corpus_id, extraction_func_groups)
@@ -96,32 +97,42 @@ def observation(convo, corpus, extraction_funcs):
     return obsn, feat_names
 
 
+def metadata_features(convo, _):
+    feats = {
+        'id': convo.id,
+        'size': convo.meta['Meeting Size'],
+        'total_mins': convo.meta['Meeting Length in Minutes'],
+        'ags': convo.meta['AGS']
+    }
+    
+    return feats
+
+
 def dom_features(convo, corpus):
-    # vert_stats = speech_overlap_vertical_stats(convo)[0]
+    vert_stats = speech_overlap_vertical_stats(convo)[0]
 
     feats = {
-        'sd_score': speech_distribution_score(convo, corpus)
-        # 'so-flam': speech_overlap_frame_lam(convo)[0],
-        # 'so-slam': speech_overlap_sliding_lam(convo)[0],
-        # 'so-avg_vert': vert_stats['trapping_time'],
-        # 'so-longest_vert': vert_stats['longest_vertical_line']
+        'sd_score': speech_distribution_score(convo, corpus),
+        'so-flam': speech_overlap_frame_lam(convo)[0],
+        'so-slam': speech_overlap_sliding_lam(convo)[0],
+        'so-avg_vert': vert_stats['trapping_time'],
+        'so-longest_vert': vert_stats['longest_vertical_line']
     }
 
     return feats
         
 
 def align_features(convo, corpus):
-    flows_dict = idea_flows(convo, corpus, include_time=False)
+    flows_dict = idea_flows(convo, corpus)
     coord_to, coord_from = coordination_variances(convo, corpus)
     diag_stats = turn_taking_diagonal_stats(convo)[0]
     
     feats = {
-        # 'median_idt': median_idea_discussion_time_part(flows_dict),
         'avg_ip%' : avg_idea_participation_percentage_part(
             convo, flows_dict
         ),
         'id_score': idea_distribution_score_part(convo, flows_dict),
-        # 'src-10': speech_rate_convergence(convo, 10),
+        'src-10': speech_rate_convergence(convo, 10),
         'coord_var-to': coord_to,
         'coord_var-from': coord_from,
         'tt-fdet': turn_taking_frame_det(convo)[0],
@@ -166,31 +177,35 @@ def rhythm_features(convo, _):
         'cs-longest_vert': cs_diag_stats['longest_diagonal_line']
     }
 
-    affinity_vars = meter_affinity_variances(convo)
+    vars, wcv = meter_affinity_variances(convo)
 
     for i, meter in enumerate(const.meters):
         key = meter + '_var'
-        feats[key] = affinity_vars[i]
+        feats[key] = vars[i]
+    
+    feats['meter_wcv'] = wcv
 
     return feats
 
 
 def psych_features(convo, corpus):
-    pps_vars = psych_property_score_variances(convo, corpus)
-    pt_vars = personality_trait_variances(convo, corpus)
+    pps_vars, pps_wcv = psych_property_score_variances(convo, corpus)
+    pt_vars, pt_wcv = personality_trait_variances(convo, corpus)
     
     feats = {
         'aoa_var': pps_vars[0],
         'cnc_var': pps_vars[1],
         'fam_var': pps_vars[2],
         'img_var': pps_vars[3],
-        'w_var': pt_vars[0],
+        'pps_wcv': pps_wcv,
+        'total_w_var': pt_vars[0],
         'simple_w_var': pt_vars[1],
         '1p_pron_sing_var': pt_vars[2],
         '3p_pron_var': pt_vars[3],
         'art_var': pt_vars[4],
         'neg_w_var': pt_vars[5],
-        'neg_var': pt_vars[6]
+        'neg_var': pt_vars[6],
+        'pt_wcv': pt_wcv
     }
 
     return feats

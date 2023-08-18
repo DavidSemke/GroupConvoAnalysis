@@ -34,6 +34,8 @@ def sentiment_ratios(convo, corpus, word_level=False):
         
     else:
         all_units = content_utterance_count(convo, corpus)
+    
+    pos_ratio = round(positive_unit_count/all_units, 4)
+    neg_ratio = round(negative_unit_count/all_units, 4)
 
-    return (round(positive_unit_count/all_units, 4), 
-            round(negative_unit_count/all_units, 4))
+    return pos_ratio, neg_ratio
