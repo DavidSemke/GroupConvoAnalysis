@@ -7,7 +7,7 @@ from src.recurrence.rqa.extraction import (
 )
 from src.recurrence.rqa.feature_rqa import (
     binary_speech_sampling_rqa,
-    convo_stress_rqa,
+    convo_stress_rqa_part,
     dyad_stress_rqa
 )
 import numpy as np
@@ -17,21 +17,22 @@ import numpy as np
 # analyzed (whichever meters are present in constants.py)
 # as well as within cluster variance
 def meter_affinity_variances(convo):
-    affinity_matrix = []
-
-    for speaker in convo.iter_speakers():
-        affinity, _ = speaker_meter_affinity(speaker, convo)
-        affinity_matrix.append(
-            list(affinity.values())
-        )
-    
-    a_matrix = np.array(affinity_matrix)
-    vars = [
-        round(np.var(a_matrix[:, i]), 2) 
-        for i in range(a_matrix.shape[1])
+    affinity_matrix = [
+        list(speaker_meter_affinity(speaker, convo)[0].values())
+        for speaker in convo.iter_speakers()
     ]
-    wcv = round(within_cluster_variance(a_matrix), 2)
     
+    return meter_affinity_variances_part(affinity_matrix)
+
+
+def meter_affinity_variances_part(affinity_matrix):
+    affinity_matrix = np.array(affinity_matrix)
+    vars = [
+        round(np.var(affinity_matrix[:, i]), 2) 
+        for i in range(affinity_matrix.shape[1])
+    ]
+    wcv = round(within_cluster_variance(affinity_matrix), 2)
+
     return vars, wcv
 
 
@@ -86,24 +87,26 @@ stats concerning speech pauses) except they extract determinism and
 diagonal line stats concerning stress in speech.
 """
 
-def convo_stress_frame_det(convo):
-    det, trial = epoch_rqa_det(convo_stress_rqa(convo, 'frame'))
+def convo_stress_frame_det(convo, data_pts):
+    det, trial = epoch_rqa_det(
+        convo_stress_rqa_part(convo, data_pts, 'frame')
+    )
 
     return round(det, 4), trial
 
 
-def convo_stress_sliding_det(convo):
+def convo_stress_sliding_det(convo, data_pts):
     det, trial = epoch_rqa_det(
-        convo_stress_rqa(convo, 'sliding'), 
+        convo_stress_rqa_part(convo, data_pts, 'sliding'), 
         lambda dets: np.mean(np.diff(dets))
     )
 
     return round(det, 4), trial
 
 
-def convo_stress_diagonal_stats(convo):
+def convo_stress_diagonal_stats(convo, data_pts):
     stats, trial = epochless_rqa_stats(
-        convo_stress_rqa(convo),
+        convo_stress_rqa_part(convo, data_pts),
         lambda e: {
             'average_diagonal_line': e.average_diagonal_line,
             'longest_diagonal_line': e.longest_diagonal_line
@@ -119,12 +122,23 @@ def convo_stress_diagonal_stats(convo):
     return stats, trial
 
 
+"""
+The following features are experimental and require reworking!!!
+"""
+
+
+# Returns the DET and trial of the dyad that scored the highest 
+# aggregated frame DET
+# Dyad related features are unreliable! (they assume that an utterance
+# is always a reply to the previous utterance)
 def dyad_stress_frame_det(convo):
     det, trial = epoch_rqa_det(dyad_stress_rqa(convo, 'frame'))
 
     return round(det, 4), trial
 
 
+# Returns the DET and trial of the dyad that scored the highest 
+# aggregated sliding DET
 def dyad_stress_sliding_det(convo):
     det, trial = epoch_rqa_det(
         dyad_stress_rqa(convo, 'sliding'), 
@@ -134,6 +148,8 @@ def dyad_stress_sliding_det(convo):
     return round(det, 4), trial 
 
 
+# Returns the diagonal stats and trial of the dyad that scored the
+# highest DET
 def dyad_stress_diagonal_stats(convo):
     stats, trial =  epochless_rqa_stats(
         dyad_stress_rqa(convo),

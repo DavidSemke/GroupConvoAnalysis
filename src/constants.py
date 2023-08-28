@@ -29,13 +29,8 @@ ugi_convos = [
 
 meters = [
     'iambic_meter1',
-    'iambic_meter2',
-    'kiparskyhanson_hopkins'
-    # 'kiparskyhanson_shakespeare',
-    # 'litlab',
-    # 'meter_arto',
-    # 'meter_ryan',
-    # 'strength_and_resolution'
+    'kiparskyhanson_hopkins',
+    'meter_ryan'
 ]
 
 # Lexical Constants

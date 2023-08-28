@@ -92,10 +92,10 @@ def extreme_group_convo_stress_determinism(corpus):
 
 if __name__ == '__main__':
     corpus = gap_corpus
-    convos = [
-        corpus.get_conversation(convo_id) 
-        for convo_id in corpus.get_conversation_ids()
-    ]
+    # convos = [
+    #     corpus.get_conversation(convo_id) 
+    #     for convo_id in corpus.get_conversation_ids()
+    # ]
 
     # extreme_group_speech_pause_laminarity(corpus)
     extreme_group_convo_stress_determinism(corpus)

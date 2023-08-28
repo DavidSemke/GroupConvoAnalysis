@@ -1,27 +1,35 @@
 import csv
-from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
 from src.feature_extraction.dominance.extraction import *
+from src.feature_extraction.linguistic_alignment.idea_flow import idea_flows
 from src.feature_extraction.linguistic_alignment.extraction import *
 from src.feature_extraction.politeness.extraction import *
+from src.feature_extraction.rhythm.meter import (
+    speaker_meter_affinity,
+    best_utterance_stresses,
+    convo_stresses
+)
+from src.recurrence.data_pts.stresses import stress_data_pts
 from src.feature_extraction.rhythm.extraction import *
 from src.feature_extraction.word_psych_properties.extraction import *
 import src.constants as const
 
 
+# Make sure to comment out features not compatible with the UGI corpus 
+# (any feature that relies on 'Duration'/'End' metadata fields)
 def main():
     corpus = const.gap_corpus
     corpus_id = 'gap'
     extraction_func_groups = {
-        'dom': [dom_features],
-        'align': [align_features],
-        'polite': [polite_features]
-        # 'rhythm': [rhythm_features],
+        # 'dom': [dom_features],
+        # 'align': [align_features]
+        # 'polite': [polite_features],
+        'rhythm': [rhythm_features]
         # 'psych': [psych_features],
         # 'meta': [metadata_features]
     }
 
-    csv_dump(corpus, corpus_id, extraction_func_groups)
-    # chained_csv_dumps(corpus, corpus_id, extraction_func_groups)
+    # csv_dump(corpus, corpus_id, extraction_func_groups)
+    chained_csv_dumps(corpus, corpus_id, extraction_func_groups)
    
 
 def csv_dump(corpus, corpus_id, extraction_func_groups):
@@ -132,7 +140,7 @@ def align_features(convo, corpus):
             convo, flows_dict
         ),
         'id_score': idea_distribution_score_part(convo, flows_dict),
-        'src-10': speech_rate_convergence(convo, 10),
+        # 'src-10': speech_rate_convergence(convo, 10),
         'coord_var-to': coord_to,
         'coord_var-from': coord_from,
         'tt-fdet': turn_taking_frame_det(convo)[0],
@@ -163,21 +171,43 @@ def polite_features(convo, corpus):
 
 
 def rhythm_features(convo, _):
+    meter_affinities = {
+        speaker.id: speaker_meter_affinity(speaker, convo)
+        for speaker in convo.iter_speakers()
+    }
+
+    # get stress data points for stress rqa
+    best_stresses = {}
+    
+    for sid, affinity in meter_affinities.items():
+        utt_stresses = best_utterance_stresses(affinity)
+        best_stresses[sid] = utt_stresses
+
+    stresses = convo_stresses(convo, best_stresses)
+    data_pts = stress_data_pts(stresses)
+
+    # extract features
+    cs_diag_stats = convo_stress_diagonal_stats(convo, data_pts)[0]
     sp_vert_stats = speech_pause_vertical_stats(convo)[0]
-    cs_diag_stats = convo_stress_diagonal_stats(convo)[0]
 
     feats = {
         'sp-flam': speech_pause_frame_lam(convo)[0],
         'sp-slam': speech_pause_sliding_lam(convo)[0],
         'sp-avg_vert': sp_vert_stats['trapping_time'],
         'sp-longest_vert': sp_vert_stats['longest_vertical_line'],
-        'cs-flam': convo_stress_frame_det(convo)[0],
-        'cs-slam': convo_stress_sliding_det(convo)[0],
+        'cs-flam': convo_stress_frame_det(convo, data_pts)[0],
+        'cs-slam': convo_stress_sliding_det(convo, data_pts)[0],
         'cs-avg_vert': cs_diag_stats['average_diagonal_line'],
         'cs-longest_vert': cs_diag_stats['longest_diagonal_line']
     }
 
-    vars, wcv = meter_affinity_variances(convo)
+    # get affinity matrix for meter_affinity_variances func
+    affinity_matrix = [
+        list(affinity[0].values())
+        for affinity in meter_affinities.values()
+    ]
+
+    vars, wcv = meter_affinity_variances_part(affinity_matrix)
 
     for i, meter in enumerate(const.meters):
         key = meter + '_var'

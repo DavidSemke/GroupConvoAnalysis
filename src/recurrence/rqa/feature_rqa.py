@@ -100,8 +100,20 @@ def convo_stress_rqa(convo, epoch_type=None, sparsity_check=False):
     stresses = convo_stresses(convo, utt_stresses)
     data_pts = stress_data_pts(stresses)
 
-    rplot_folder = r'recurrence_plots\rqa\stress\convo'
+    return convo_stress_rqa_part(
+        convo, data_pts, epoch_type, sparsity_check
+    )
 
+
+def convo_stress_rqa_part(
+        convo, data_pts, epoch_type=None, sparsity_check=False, 
+        plot=False
+):
+    rplot_folder = None
+    
+    if plot:
+        rplot_folder = r'recurrence_plots\rqa\stress\convo'
+    
     delay = 1
     embeds=[9]
 
@@ -187,19 +199,26 @@ def epochless_trials(
         data_pts, delay, embeds, convo_id, rplot_folder, 
         speaker_ids=None, sparsity_check=False
 ):
-    rplot_name = f'rplot_{convo_id}_'
-
-    if speaker_ids:
-        for sid in speaker_ids:
-            rplot_name += sid + '-'
-        
-        rplot_name = rplot_name[:-1] + '_'
+    rplot_path = None
     
+    if rplot_folder:
+        rplot_name = f'rplot_{convo_id}_'
+
+        if speaker_ids:
+            for sid in speaker_ids:
+                rplot_name += sid + '-'
+            
+            rplot_name = rplot_name[:-1] + '_'
+        
     trials = []
 
     for embed in embeds:
-        trial_rplot_name = rplot_name + f'delay{delay}_embed{embed}.png'
-        rplot_path = rf'{rplot_folder}\{trial_rplot_name}'
+
+        if rplot_folder:
+            trial_rplot_name = (
+                rplot_name + f'delay{delay}_embed{embed}.png'
+            )
+            rplot_path = rf'{rplot_folder}\{trial_rplot_name}'
 
         out = rqa(data_pts, delay, embed, rplot_path=rplot_path)
         trial =  {'delay': delay, 'embed': embed, 'results': out}
