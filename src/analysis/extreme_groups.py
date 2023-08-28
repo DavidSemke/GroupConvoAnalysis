@@ -9,7 +9,8 @@ from src.constants import gap_corpus, ugi_corpus
 
 
 """
-RQA features ignored here (recurrence folder explores)
+RQA features ignored here (recurrence folder explores those features).
+Extreme convo analysis uses extreme AGS (absolute group score) to find useful features.
 """
 
 # It is assumed that the first argument of the feature_func is 
@@ -60,11 +61,8 @@ if __name__ == '__main__':
     # extreme_feature_summary(
     #     gap_corpus, speech_rate_convergence, 10
     # )
-    # extreme_feature_summary(
-    #     gap_corpus, dyad_exchange_distribution_score,
-    #     convo_filter=lambda convo: len(convo.get_speaker_ids()) > 2 
-    # )
-
     extreme_feature_summary(
-        gap_corpus, median_idea_discussion_time, gap_corpus
+        gap_corpus, dyad_exchange_distribution_score,
+        convo_filter=lambda convo: len(convo.get_speaker_ids()) > 2 
     )
+    

@@ -25,6 +25,10 @@ def avg_idea_participation_percentage(convo, corpus):
 def avg_idea_participation_percentage_part(
         convo, idea_flows_dict
 ):
+    
+    if len(convo.get_speaker_ids()) < 3:
+        return np.nan
+    
     total_ideas = 0
     total_speakers = len(convo.get_speaker_ids())
     sum_of_fractions = 0
@@ -74,7 +78,13 @@ def idea_distribution_score_part(convo, idea_flows_dict):
     return round(var, 2)
 
 
+# Assumes the next utterance is a reply to the current utterance
+# Should be considered experimental
 def dyad_exchange_distribution_score(convo):
+
+    if len(convo.get_speaker_ids()) < 3:
+        return np.nan
+    
     speakers = list(convo.iter_speakers())
     speaker_pairs = list(combinations(speakers, 2))
     word_totals = []
@@ -160,6 +170,10 @@ def coordination_variances(convo, corpus):
 # Returns the max mean for frame epoch laminarity and the trial that 
 # achieved the max mean
 def turn_taking_frame_det(convo):
+
+    if len(convo.get_speaker_ids()) < 3:
+        return np.nan, None
+
     det, trial = epoch_rqa_det(turn_taking_rqa(convo, 'frame'))
 
     return round(det, 4), trial
@@ -172,6 +186,10 @@ def turn_taking_frame_det(convo):
 # Default aggregate function takes the mean of differences between
 # adjacent epochs (late epoch det - early epoch det)
 def turn_taking_sliding_det(convo):
+
+    if len(convo.get_speaker_ids()) < 3:
+        return np.nan, None
+    
     det, trial = epoch_rqa_det(
         turn_taking_rqa(convo, 'sliding'), 
         lambda dets: np.mean(np.diff(dets))
@@ -184,6 +202,15 @@ def turn_taking_sliding_det(convo):
 # determinism
 # Uses RQA without epochs (to avoid interrupting diagonal lines)
 def turn_taking_diagonal_stats(convo):
+
+    if len(convo.get_speaker_ids()) < 3:
+        stats = {
+            'average_diagonal_line': np.nan,
+            'longest_diagonal_line': np.nan
+        }
+
+        return stats, None
+    
     stats, trial = epochless_rqa_stats(
         turn_taking_rqa(convo),
         lambda e: {

@@ -5,7 +5,9 @@ from src.constants import gap_corpus, gap_convos
 
 def main():
 
-    for convo in gap_convos:
+    convos = [gap_corpus.get_conversation('10.Orange.1')]
+
+    for convo in convos:
         print()
         print(convo.id.upper())
         print()
@@ -26,11 +28,11 @@ def main():
 
         print()
         print(
-            'Median idea discussion time:', 
-            median_idea_discussion_time_part(idea_flows_dict), 'secs'
-        )
-        print(
-            'Average idea participation percentage:', avg_idea_participation_percentage_part(convo, idea_flows_dict), '%'
+            'Average idea participation percentage:', 
+            avg_idea_participation_percentage_part(
+                convo, idea_flows_dict
+            ), 
+            '%'
         )
         print(
             'Idea distribution score:', 
@@ -53,7 +55,7 @@ def main():
         )
         
         det, trial = turn_taking_frame_det(convo)
-        frame = trial["frame"]
+        frame = trial["frame"] if trial else None
         print(f'Turn taking frame DET (frame = {frame}):', det)
 
         det, trial = turn_taking_sliding_det(convo)
