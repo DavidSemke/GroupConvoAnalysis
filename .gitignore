@@ -1,6 +1,5 @@
 **/__pycache__
 **/.ipynb_checkpoints
-/csv
 **/__init__.py
 /recurrence_plots
 /test.py
