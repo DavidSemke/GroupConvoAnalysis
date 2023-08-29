@@ -30,6 +30,7 @@ ugi_convos = [
 meters = [
     'iambic_meter1',
     'kiparskyhanson_hopkins',
+    'meter_arto',
     'meter_ryan'
 ]
 

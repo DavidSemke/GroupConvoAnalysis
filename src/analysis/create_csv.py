@@ -17,8 +17,8 @@ import src.constants as const
 # Make sure to comment out features not compatible with the UGI corpus 
 # (any feature that relies on 'Duration'/'End' metadata fields)
 def main():
-    corpus = const.gap_corpus
-    corpus_id = 'gap'
+    corpus = const.ugi_corpus
+    corpus_id = 'ugi'
     extraction_func_groups = {
         # 'dom': [dom_features],
         # 'align': [align_features]
@@ -188,13 +188,13 @@ def rhythm_features(convo, _):
 
     # extract features
     cs_diag_stats = convo_stress_diagonal_stats(convo, data_pts)[0]
-    sp_vert_stats = speech_pause_vertical_stats(convo)[0]
+    # sp_vert_stats = speech_pause_vertical_stats(convo)[0]
 
     feats = {
-        'sp-flam': speech_pause_frame_lam(convo)[0],
-        'sp-slam': speech_pause_sliding_lam(convo)[0],
-        'sp-avg_vert': sp_vert_stats['trapping_time'],
-        'sp-longest_vert': sp_vert_stats['longest_vertical_line'],
+        # 'sp-flam': speech_pause_frame_lam(convo)[0],
+        # 'sp-slam': speech_pause_sliding_lam(convo)[0],
+        # 'sp-avg_vert': sp_vert_stats['trapping_time'],
+        # 'sp-longest_vert': sp_vert_stats['longest_vertical_line'],
         'cs-flam': convo_stress_frame_det(convo, data_pts)[0],
         'cs-slam': convo_stress_sliding_det(convo, data_pts)[0],
         'cs-avg_vert': cs_diag_stats['average_diagonal_line'],

@@ -3,6 +3,8 @@ import src.constants as const
 
 
 def main():
+    print()
+
     for convo in const.gap_convos:
 
         # print()
@@ -17,14 +19,18 @@ def main():
         # print('\tVARS:', vars)
         # print('\tWCV:', wcv)
 
+        print(f'{convo.id}- Meter Affinities')
+
         meter_affinities = [
             list(speaker_meter_affinity(speaker, convo)[0].values())
             for speaker in convo.iter_speakers()
         ]
 
         for affinity in meter_affinities:
-            print(affinity)
+            print(f'\t{affinity}')
+        
+        print()
 
-
+        
 if __name__ == '__main__':
     main()

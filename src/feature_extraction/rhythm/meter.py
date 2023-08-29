@@ -5,63 +5,64 @@ from src.utils.filter_utterances import is_dyad_utterance
 import src.constants as const
 
 
+# Parameter utt_percentage decides how many valid utterances will
+# be used (conisdering only those that are long enough)
+# Parameter utt_filter is a func that takes an utterance
+# as an argument and returns a boolean
 # Utterances with a word length less than len_cutoff are ignored
 # Divide by 0 if len_cutoff is too high
-# Parameter utt_filter is a boolean func that takes an utterance as 
-# an argument
+# Parameter len_split decides how many words an utt can have; if
+# longer than len_split, an utt is split into smaller portions which
+# are analyzed individually
 # Returns percentage of utts that each meter managed to get the best 
 # parse on and the stress sequences associated with the best parses 
 # for each utterance
 def convo_meter_affinity(
-        convo, utt_percentage=50, utt_filter=None, len_cutoff=6
+        convo, utt_percentage=100, utt_filter=None, len_cutoff=6,
+        len_split=10
 ):
     utt_meter_counts = {m:0 for m in const.meters}
     utt_stresses = {}
     total_utts = 0
     
     utt_filter = utt_filter or (lambda _: True)
-    utts = utterance_samples(
+    long_utts = long_utterance_samples(
         convo, utt_percentage, utt_filter, len_cutoff
     )
 
-    for utt in utts:
-        meter_dict = {}
+    for utt in long_utts:
+        words = utt.text.split()
+        word_len = len(words)
 
-        # parse utt using each meter in constants.py
-        for m in const.meters:
-            t = Text(utt.text, meter=m)
-            t.parse()
-            best_ps = t.bestParses()
+        # split utt into smaller pieces
+        split_count = word_len // len_split
+        splits = [
+            ' '.join(words[i:i+len_split])
+            for i in range(0, len_split*split_count, len_split)
+        ]
 
-            if not (best_ps and best_ps[0]): continue
+        excess_words = word_len % len_split
 
-            p = best_ps[0]
-            stress = p.str_stress()
-            viols_dict = p.violations()
-            viol_counts = list(viols_dict.values())
-            viol_count = int(sum(viol_counts))
-            viol_constraint_count = sum(
-                [1 for vc in viol_counts if vc]
-            )
+        if excess_words >= len_cutoff:
+            splits.append(' '.join(words[-excess_words:]))
+
+        utt_stresses[utt.id] = []
+
+        for idx, split in enumerate(splits):
+            meter_dict = meter_parse(split)
             
-            meter_dict[m] = {
-                'vc': viol_count,
-                'vcc': viol_constraint_count,
-                'stress': stress
-            }
-        
-        if not meter_dict: continue
-
-        total_utts += 1
-        utt_stresses[utt.id] = {}
-        best_ms = best_meters(meter_dict)
-        
-        # Increment meter count and the associated stress pattern
-        # for all meters that provided a best parse for the utt
-        for m in best_ms:
-            utt_meter_counts[m] += 1
-            utt_stresses[utt.id][m] = meter_dict[m]['stress']
-
+            if not meter_dict: continue
+            
+            total_utts += 1
+            utt_stresses[utt.id].append({})
+            best_ms = best_meters(meter_dict)
+            
+            # Increment meter count and the associated stress pattern
+            # for all meters that provided a best parse for the utt
+            for m in best_ms:
+                utt_meter_counts[m] += 1
+                utt_stresses[utt.id][idx][m] = meter_dict[m]['stress']
+    
     utt_meter_percentages = {
         k: utt_meter_counts[k]*100/total_utts for k in utt_meter_counts
     }
@@ -69,16 +70,46 @@ def convo_meter_affinity(
     return utt_meter_percentages, utt_stresses
 
 
-# Randomly choose utt_percentage % of utterances
-def utterance_samples(
+def meter_parse(text):
+    meter_dict = {}
+
+    # parse utt using each meter in constants.py
+    for m in const.meters:
+        t = Text(text, meter=m)
+        t.parse()
+        best_ps = t.bestParses()
+
+        if not (best_ps and best_ps[0]): continue
+
+        p = best_ps[0]
+        stress = p.str_stress()
+        viols_dict = p.violations()
+        viol_counts = list(viols_dict.values())
+        viol_count = int(sum(viol_counts))
+        viol_constraint_count = sum(
+            [1 for vc in viol_counts if vc]
+        )
+        
+        meter_dict[m] = {
+            'vc': viol_count,
+            'vcc': viol_constraint_count,
+            'stress': stress
+        }
+    
+    return meter_dict
+
+
+# Randomly choose utt_percentage % of utterances of min len
+def long_utterance_samples(
         convo, utt_percentage, utt_filter, len_cutoff
 ):
     long_utts = []
     
     for utt in convo.iter_utterances(utt_filter):
-        text = re_sub(' ?[^ \w]', '', utt.text).strip()
+        text = re_sub('[^ \w]', '', utt.text).strip()
+        word_len = len(text.split())
 
-        if len(text.split()) < len_cutoff: continue
+        if word_len < len_cutoff: continue
         
         utt.text = text
         long_utts.append(utt)
@@ -110,7 +141,7 @@ def best_meters(meter_dict):
 
 
 def speaker_meter_affinity(
-        speaker, convo, utt_percentage=50, utt_filter=None, 
+        speaker, convo, utt_percentage=100, utt_filter=None, 
         len_cutoff=6
 ):
     utt_filter = utt_filter or (lambda _: True)
@@ -122,7 +153,7 @@ def speaker_meter_affinity(
 
 
 def dyad_meter_affinity(
-        speaker1, speaker2, convo, utt_percentage=50, utt_filter=None, 
+        speaker1, speaker2, convo, utt_percentage=100, utt_filter=None, 
         len_cutoff=6
 ):
     utt_filter = utt_filter or (lambda _: True)
@@ -140,22 +171,24 @@ def best_utterance_stresses(meter_affinity):
     utt_meter_percentages, utt_stresses = meter_affinity
 
     meter_order = sorted(
-        utt_meter_percentages, key=utt_meter_percentages.get
+        utt_meter_percentages, key=utt_meter_percentages.get, 
+        reverse=True
     )
 
-    for uid, meter_dict in utt_stresses.items():
+    for uid, splits in utt_stresses.items():
+        reconstructed_stress = []
 
-        if len(list(meter_dict.keys())) == 1: continue
+        for meter_dict in splits:
+            best_meter = [m for m in meter_order if m in meter_dict][0]
+            reconstructed_stress.append(meter_dict[best_meter])
         
-        best_meter = [m for m in meter_order if m in meter_dict][0]
-        
-        utt_stresses[uid] = {best_meter: meter_dict[best_meter]}
+        utt_stresses[uid] = '|'.join(reconstructed_stress)
     
     return utt_stresses
 
 
 def speaker_subset_best_stresses(
-        speakers, convo, utt_percentage=50, utt_filter=None, 
+        speakers, convo, utt_percentage=100, utt_filter=None, 
         len_cutoff=6
 ):
     best_stresses = {}

@@ -1,3 +1,6 @@
+import random as rand
+
+
 # Returns the first and last frame % of the convo's utterances,
 # where utterances are in chronological order
 def convo_frame(convo, frame):
